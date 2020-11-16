@@ -1,13 +1,21 @@
 <?php
 
-$send = array("tituloPelicula"=>"Rápido y Furioso 2", 
+/*$send = array(
+            "idPelicula"=>5, 
+            "tituloPelicula"=>"Valientes", 
             "descripcionPelicula"=>"Es una pelicula de drama y acción.",
-            "generoPelicula"=>"Drama",
+            "generoPelicula"=>"Acción",
             "portadaPelicula"=>"https://drive.google.com/uc?export=view&id=1TEiJ0KXt2AiXq3ytg4EdQZlowDmqtwaO",
-            "stockPelicula"=>35,
+            "stockPelicula"=>75,
             "precioVentaPelicula"=>5.25,
             "precioAlquilerPelicula"=>10.25,
-            "disponibilidadPelicula"=>1);
+            "disponibilidadPelicula"=>1);*/
+            $send = array(
+                "idCliente"=>4,
+                "nombreCliente"=>"Alexander",
+                "apellidoCliente"=>"Melara",
+                "correoCliente"=>"moralsxavi@gmail.com",
+                "contraseñaCliente"=>"123");
 $json_data = json_encode($send);
 
 
@@ -26,5 +34,5 @@ $stream = stream_context_create([
         'verify_peer_name' => false
     ]
 ]);
-$data = file_get_contents("http://localhost/TPI_movies/Servidor/upload.php", false, $stream);
+$data = file_get_contents("http://localhost/TPI_movies/Servidor/readCliente.php", false, $stream);
 echo $data;

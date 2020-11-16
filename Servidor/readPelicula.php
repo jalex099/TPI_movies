@@ -3,4 +3,4 @@
 require_once("modelo/Peliculas.php");
 
 $peliculas = new Peliculas();
-echo json_encode($peliculas->getAll());
+echo json_encode($peliculas->read());

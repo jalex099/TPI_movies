@@ -9,51 +9,55 @@ class Peliculas extends Connect { //Clase de peliculas
 
 
     public function error(){
-        return "Error en la consulta a la base de datos";
+        return array("response"=>false);
     }
-    public function getAll(){
-        $sql = "SELECT idPelicula, tituloPelicula FROM " . self::TABLE_NAME;
+
+    public function ok(){
+        return array("response"=>true);
+    }
+
+
+    public function read(){
+        $sql = "SELECT * FROM " . self::TABLE_NAME;
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
             return json_encode($data);
         } else{
-            return error();
+            return $this->error();
         }
     }
 
-    public function getFilter($alfabeto){
-        $bandera = false;
-        $sql = "SELECT idPelicula, tituloPelicula FROM " . self::TABLE_NAME;
     
-        if($alfabeto != ""){
-            if(!$bandera)
-            {
-                $sql .= " WHERE";
-                $bandera = true;
-            } else{
-                $sql .= " AND";
-            }
-            $sql .= " tituloPelicula LIKE '{$alfabeto}%' ";
-        }
-        if ($result = $this->conn->query($sql)) {
-        $data = $result->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($data);
-        } else{
-            return error();
-        }
-    }
-    
-    public function upload($tituloPelicula, $descripcionPelicula, $generoPelicula, $portadaPelicula, $stockPelicula, $precioVentaPelicula, $precioAlquilerPelicula, $disponibilidadPelicula){
+    public function create($tituloPelicula, $descripcionPelicula, $generoPelicula, $portadaPelicula, $stockPelicula, $precioVentaPelicula, $precioAlquilerPelicula, $disponibilidadPelicula){
         $sql = "INSERT INTO " . self::TABLE_NAME. " (`tituloPelicula`, `descripcionPelicula`, 
         `generoPelicula`, `portadaPelicula`, `stockPelicula`, `precioVentaPelicula`, `precioAlquilerPelicula`, 
         `disponibilidadPelicula`) VALUES ('".$tituloPelicula."','".$descripcionPelicula."','".$generoPelicula."',
         '".$portadaPelicula."',".$stockPelicula.",".$precioVentaPelicula.",".$precioAlquilerPelicula.",
         ".$disponibilidadPelicula.")";
         if (!$result = $this->conn->query($sql)) {
-            return "Error al introducir pelicula";
+            return $this->error();
         }
 
-        return "Insertado!";
+        return $this->ok();
+    }
+
+    public function update($idPelicula, $tituloPelicula, $descripcionPelicula, $generoPelicula, $portadaPelicula, $stockPelicula, $precioVentaPelicula, $precioAlquilerPelicula, $disponibilidadPelicula){
+        $sql = "UPDATE " . self::TABLE_NAME." SET tituloPelicula = '".$tituloPelicula."', descripcionPelicula = '".$descripcionPelicula."',generoPelicula='".$generoPelicula."',portadaPelicula = 
+        '".$portadaPelicula."', stockPelicula=".$stockPelicula.",precioVentaPelicula=".$precioVentaPelicula.",precioAlquilerPelicula=".$precioAlquilerPelicula.", disponibilidadPelicula =".$disponibilidadPelicula." WHERE idPelicula = ".$idPelicula;
+        if (!$result = $this->conn->query($sql)) {
+            return $this->error();
+        }
+
+        return $this->ok();
+    }
+
+    public function delete($idPelicula){
+        $sql = "DELETE FROM " . self::TABLE_NAME." WHERE idPelicula =".$idPelicula;
+        if (!$result = $this->conn->query($sql)) {
+            return $this->error();
+        } else{
+            return $this->ok();
+        }
     }
 }
 
