@@ -1,6 +1,13 @@
 <?php
 
-$send = array("alfabeto"=>"a", "instrumento"=>"guitarra");
+$send = array("tituloPelicula"=>"Rápido y Furioso 2", 
+            "descripcionPelicula"=>"Es una pelicula de drama y acción.",
+            "generoPelicula"=>"Drama",
+            "portadaPelicula"=>"https://drive.google.com/uc?export=view&id=1TEiJ0KXt2AiXq3ytg4EdQZlowDmqtwaO",
+            "stockPelicula"=>35,
+            "precioVentaPelicula"=>5.25,
+            "precioAlquilerPelicula"=>10.25,
+            "disponibilidadPelicula"=>1);
 $json_data = json_encode($send);
 
 
@@ -19,5 +26,5 @@ $stream = stream_context_create([
         'verify_peer_name' => false
     ]
 ]);
-$data = file_get_contents("https://morales099.000webhostapp.com/Servidor/getFilter.php", false, $stream);
-var_dump($data);
+$data = file_get_contents("http://localhost/TPI_movies/Servidor/upload.php", false, $stream);
+echo $data;

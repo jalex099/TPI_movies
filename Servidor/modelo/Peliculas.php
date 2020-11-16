@@ -43,28 +43,17 @@ class Peliculas extends Connect { //Clase de peliculas
         }
     }
     
-    public function getDepartamentos(){
-        $sql = "SELECT nombre_departamento FROM departamento";
-        if ($result = $this->conn->query($sql)) {
-        $data = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+    public function upload($tituloPelicula, $descripcionPelicula, $generoPelicula, $portadaPelicula, $stockPelicula, $precioVentaPelicula, $precioAlquilerPelicula, $disponibilidadPelicula){
+        $sql = "INSERT INTO " . self::TABLE_NAME. " (`tituloPelicula`, `descripcionPelicula`, 
+        `generoPelicula`, `portadaPelicula`, `stockPelicula`, `precioVentaPelicula`, `precioAlquilerPelicula`, 
+        `disponibilidadPelicula`) VALUES ('".$tituloPelicula."','".$descripcionPelicula."','".$generoPelicula."',
+        '".$portadaPelicula."',".$stockPelicula.",".$precioVentaPelicula.",".$precioAlquilerPelicula.",
+        ".$disponibilidadPelicula.")";
+        if (!$result = $this->conn->query($sql)) {
+            return "Error al introducir pelicula";
         }
-    }
 
-    public function getMunicipios(){
-        $sql = "SELECT nombre_municipio FROM municipio";
-        if ($result = $this->conn->query($sql)) {
-        $data = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-        }
-    }
-
-    public function getRol(){
-        $sql = "SELECT rol_usuario FROM usuario GROUP BY rol_usuario";
-        if ($result = $this->conn->query($sql)) {
-        $data = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-        }
+        return "Insertado!";
     }
 }
 
