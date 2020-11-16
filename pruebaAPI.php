@@ -40,7 +40,7 @@ $result = $service->files->create(
 
 echo "    <img src='https://drive.google.com/uc?export=view&id=1ayUzMh0ZV4HfvjK-wUng3wKo2xYHTGOa' alt='image'>";
 
-var_dump($result);
+var_dump($result->id);
 }catch(Google_Service_Exception $gs){
  
   $m=json_decode($gs->getMessage());
