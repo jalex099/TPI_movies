@@ -1,19 +1,4 @@
 <?php
-/*
- * Copyright 2013 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 include_once 'API/vendor/autoload.php';
 
@@ -28,11 +13,11 @@ try{
 $service = new Google_Service_Drive($client);
 
 //ruta al archivo
-$file_path = 'wall.docx';
+$file_path = 'afk.png';
 
 //instacia de archivo
 $file = new Google_Service_Drive_DriveFile();
-$file->setName("wall.docx");
+$file->setName("afk.png");
 
 
 //id de la carpeta donde hemos dado el permiso a la cuenta de servicio 
@@ -49,11 +34,13 @@ $result = $service->files->create(
   )
 );
 
-echo '<a href="https://drive.google.com/open?id='.$result->id.'" target="_blank">'.$result->name.'</a>';
-echo "    <img src='https://drive.google.com/uc?export=view&id=1XAUHn4EWJRL55hu1J0-k3UiMyqC6De1Z' alt='image'>";
+//echo '<a href="https://drive.google.com/open?id='.$result->id.'" target="_blank">'.$result->name.'</a>';
+//echo "    <img src='https://drive.google.com/uc?export=view&id=1XAUHn4EWJRL55hu1J0-k3UiMyqC6De1Z' alt='image'>";
+//1ayUzMh0ZV4HfvjK-wUng3wKo2xYHTGOa
 
+echo "    <img src='https://drive.google.com/uc?export=view&id=1ayUzMh0ZV4HfvjK-wUng3wKo2xYHTGOa' alt='image'>";
 
-echo "    <img src='https://drive.google.com/uc?export=view&id=1G3zz2HpljuXOzJD_Qfa9zJZIMcqtdKGH' alt='image'>";
+var_dump($result);
 }catch(Google_Service_Exception $gs){
  
   $m=json_decode($gs->getMessage());
