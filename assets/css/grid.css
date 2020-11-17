@@ -1,13 +1,14 @@
-
-  .product-grid {
+/***************** GRID DEL CATALOGO****************/
+.product-grid {
     border-radius: 15px;
     text-align: center;
     overflow: hidden;
     position: relative;
-    box-shadow:0 0 40px -10px #000;
+    box-shadow: 0 0 40px -10px #000;
     border: 4px solid #383838;
-  }
-  .product-grid:before {
+}
+
+.product-grid:before {
     content: "";
     height: 100%;
     width: 100%;
@@ -16,26 +17,29 @@
     top: 0;
     z-index: 1;
     transition: all 0.3s ease 0s;
-  }
-  .product-grid:hover:before {
+}
+
+.product-grid:hover:before {
     background-color: rgba(0, 0, 0, 0.05);
-  }
-  .product-grid .product-image {
+}
+
+.product-grid .product-image {
     overflow: hidden;
     position: relative;
-  }
-  .product-grid .product-image a {
+}
+
+.product-grid .product-image a {
     display: flex;
     min-height: 250px;
     max-height: 300px;
-  }
+}
 
-  @media all and (max-width: 992px) {
+@media all and (max-width: 992px) {
     .product-grid .product-image a {
         min-height: 100px;
         max-height: 150px;
     }
-  }
+}
 
 .product-grid .product-image a img {
     margin: 0;
@@ -44,8 +48,9 @@
     height: 100%;
     object-fit: cover;
     position: absolute;
-  }
-  .product-discount-label {
+}
+
+.product-discount-label {
     color: #fff;
     background-color: #000;
     font-size: 13px;
@@ -55,8 +60,9 @@
     position: absolute;
     left: 15px;
     top: 15px;
-  }
-  .product-grid .social {
+}
+
+.product-grid .social {
     width: 100%;
     padding: 30px 0;
     margin: 0;
@@ -66,27 +72,33 @@
     left: 50%;
     top: 50%;
     z-index: 2;
-  }
-  .product-grid .social li {
+}
+
+.product-grid .social li {
     display: inline-block;
     opacity: 0;
     transform: translateY(300%);
     transition: all 0.5s ease 0s;
-  }
-  .product-grid .social li:nth-child(2) {
+}
+
+.product-grid .social li:nth-child(2) {
     transition-delay: 0.05s;
-  }
-  .product-grid .social li:nth-child(3) {
+}
+
+.product-grid .social li:nth-child(3) {
     transition-delay: 0.13s;
-  }
-  .product-grid .social li:nth-child(4) {
+}
+
+.product-grid .social li:nth-child(4) {
     transition-delay: 0.16s;
-  }
-  .product-grid:hover .social li {
+}
+
+.product-grid:hover .social li {
     opacity: 1;
     transform: translateY(0);
-  }
-  .product-grid .social li a {
+}
+
+.product-grid .social li a {
     color: #000;
     background-color: #fff;
     line-height: 40px;
@@ -98,61 +110,74 @@
     display: block;
     z-index: 2;
     transition: all 0.3s;
-  }
-  .product-grid .social li a:hover {
+}
+
+.product-grid .social li a:hover {
     color: #fff;
     background-color: #f13030;
-  }
-  .product-grid .product-content {
+}
+
+.product-grid .product-content {
     padding: 5px;
     position: relative;
     z-index: 2;
     background-color: #383838;
-  }
-  .product-grid .titl {
+}
+
+.product-grid .titl {
     font-size: 2vw;
     font-weight: 500;
     margin: 0;
-  }
-  .product-grid .titl a {
+}
+
+.product-grid .titl a {
     color: #ffffff;
     font-weight: 800;
-  }
-  .product-grid .titl a:hover {
+}
+
+.product-grid .titl a:hover {
     color: #f13030;
-  }
-  .product-grid .price {
+}
+
+.product-grid .price {
     color: #f13030;
     font-size: 1.5vw;
     font-weight: 600;
-  }
-  .product-grid .price span {
+}
+
+.product-grid .price span {
     color: #e4e4e4;
     margin: 0 0 0 5px;
     font-size: 1.5vw;
     font-weight: 300;
     display: inline-block;
-  }
+}
+
 @media all and (max-width: 990px) {
     .product-grid {
         margin-bottom: 30px;
     }
+
     .product-grid .product-image a {
         display: flex;
         min-height: 200px;
         max-height: 250px;
     }
+
     .product-grid .titl {
         font-size: 3vh;
     }
+
     .product-grid .price {
         font-size: 2vh;
     }
+
     .product-grid .price span {
         font-size: 2vh;
     }
 }
-.product-grid .social li a:after{
+
+.product-grid .social li a:after {
     content: attr(data-tip);
     color: #000;
     background: #fff;
@@ -201,7 +226,7 @@
     z-index: 3;
 }
 
-  .pocial {
+.pocial {
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -211,21 +236,24 @@
     border-radius: 5px;
     animation: new 0.5s linear infinite;
     margin-top: -50px;
-  }
-  .pocial a {
+}
+
+.pocial a {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-  }
-  @keyframes new {
+}
+
+@keyframes new {
     0% {
-      transform: scaleX(1);
+        transform: scaleX(1);
     }
+
     50% {
-      transform: scaleX(0.95);
+        transform: scaleX(0.95);
     }
+
     100% {
-      transform: scaleX(1);
+        transform: scaleX(1);
     }
-  }
-  
+}

@@ -1,7 +1,9 @@
+/***************** BOTONES PARA CONTROLES****************/
 /* Container para colocar botones en horizontal*/
 .btn__actions {
     width: 100%;
 }
+
 /* Container para colocar botones en horizontal*/
 
 #btn-like {
@@ -11,18 +13,18 @@
 
 /* Estilos de boton de alquiler*/
 .btn-account {
-    box-shadow: 0 1px 0  #e62d2d, 
-               0 2px 0 #d82a2a,
-               0 3px 0 #cc2727,
-               0 4px 0 #c02424,
-               0 5px 0 #b32121,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #e62d2d,
+        0 2px 0 #d82a2a,
+        0 3px 0 #cc2727,
+        0 4px 0 #c02424,
+        0 5px 0 #b32121,
+        0 6px 1px rgba(0, 0, 0, .1),
+        0 0 5px rgba(0, 0, 0, .1),
+        0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2),
+        0 5px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
     background: #f13030;
     color: #1d1d1d;
     cursor: pointer;
@@ -36,6 +38,7 @@
     width: 150px;
     position: relative;
 }
+
 /* Estilos de boton de alquiler*/
 
 /* Estilos de boton de alquiler, incluir icono*/
@@ -49,6 +52,7 @@
     opacity: 0;
     transform: translate(-50%, -50%);
 }
+
 /* Estilos de boton de alquiler, incluir icono*/
 
 /* Estilos de boton de alquiler, transicion*/
@@ -56,41 +60,43 @@
     background: #2c2c2c;
     transition: all 0.5s;
     border-radius: 10px;
-    box-shadow: 0 1px 0 #2b2b2b, 
-               0 2px 0 #272727,
-               0 3px 0 #202020,
-               0 4px 0 #181818,
-               0 5px 0 #0f0f0f,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #2b2b2b,
+        0 2px 0 #272727,
+        0 3px 0 #202020,
+        0 4px 0 #181818,
+        0 5px 0 #0f0f0f,
+        0 6px 1px rgba(0, 0, 0, .1),
+        0 0 5px rgba(0, 0, 0, .1),
+        0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2),
+        0 5px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
     color: #ffffff;
 }
+
 .btn-account:hover.btn-account::after {
     opacity: 1;
     transition: all 0.5s;
     color: #ffffff;
 }
+
 /* Estilos de boton de alquiler, transicion*/
 
 /* Estilos de boton de alquiler*/
 .btn-rent {
-    box-shadow: 0 1px 0  #e62d2d, 
-               0 2px 0 #d82a2a,
-               0 3px 0 #cc2727,
-               0 4px 0 #c02424,
-               0 5px 0 #b32121,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #e62d2d,
+        0 2px 0 #d82a2a,
+        0 3px 0 #cc2727,
+        0 4px 0 #c02424,
+        0 5px 0 #b32121,
+        0 6px 1px rgba(0, 0, 0, .1),
+        0 0 5px rgba(0, 0, 0, .1),
+        0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2),
+        0 5px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
     background: #f13030;
     color: #1d1d1d;
     cursor: pointer;
@@ -105,6 +111,7 @@
     position: relative;
     min-width: 150px;
 }
+
 /* Estilos de boton de alquiler*/
 
 /* Estilos de boton de alquiler, incluir icono*/
@@ -120,6 +127,7 @@
     opacity: 0;
     transform: translate(-50%, -50%);
 }
+
 /* Estilos de boton de alquiler, incluir icono*/
 
 /* Estilos de boton de alquiler, transicion*/
@@ -127,42 +135,44 @@
     background: #2c2c2c;
     transition: all 0.5s;
     border-radius: 10px;
-    box-shadow: 0 1px 0 #2b2b2b, 
-               0 2px 0 #272727,
-               0 3px 0 #202020,
-               0 4px 0 #181818,
-               0 5px 0 #0f0f0f,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #2b2b2b,
+        0 2px 0 #272727,
+        0 3px 0 #202020,
+        0 4px 0 #181818,
+        0 5px 0 #0f0f0f,
+        0 6px 1px rgba(0, 0, 0, .1),
+        0 0 5px rgba(0, 0, 0, .1),
+        0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2),
+        0 5px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
     padding: 0.5rem 4.5rem 0.5rem 0.5rem;
     color: #ffffff;
 }
+
 .btn-rent:hover.btn-rent::after {
     opacity: 1;
     transition: all 0.5s;
     color: #ffffff;
 }
+
 /* Estilos de boton de alquiler, transicion*/
 
 /* Estilos de boton de compra*/
 .btn-buy {
-    box-shadow: 0 1px 0 #72beab, 
-               0 2px 0 #6cb4a2,
-               0 3px 0 #64a897,
-               0 4px 0 #5d9c8c,
-               0 5px 0 #569182,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #72beab,
+        0 2px 0 #6cb4a2,
+        0 3px 0 #64a897,
+        0 4px 0 #5d9c8c,
+        0 5px 0 #569182,
+        0 6px 1px rgba(0, 0, 0, .1),
+        0 0 5px rgba(0, 0, 0, .1),
+        0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2),
+        0 5px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
     background: #84dcc6;
     color: #1d1d1d;
     cursor: pointer;
@@ -177,6 +187,7 @@
     position: relative;
     min-width: 150px;
 }
+
 /* Estilos de boton de compra*/
 
 /* Estilos de boton de compra, incluir icono*/
@@ -192,6 +203,7 @@
     opacity: 0;
     transform: translate(-50%, -50%);
 }
+
 /* Estilos de boton de compra, incluir icono*/
 
 /* Estilos de boton de compra, transicion*/
@@ -199,29 +211,32 @@
     background: #2c2c2c;
     transition: all 0.5s;
     border-radius: 10px;
-    box-shadow: 0 1px 0 #2b2b2b, 
-               0 2px 0 #272727,
-               0 3px 0 #202020,
-               0 4px 0 #181818,
-               0 5px 0 #0f0f0f,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #2b2b2b,
+        0 2px 0 #272727,
+        0 3px 0 #202020,
+        0 4px 0 #181818,
+        0 5px 0 #0f0f0f,
+        0 6px 1px rgba(0, 0, 0, .1),
+        0 0 5px rgba(0, 0, 0, .1),
+        0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2),
+        0 5px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
     padding: 0.5rem 4.5rem 0.5rem 0.5rem;
     color: #ffffff;
 }
+
 .btn-buy:hover.btn-buy::after {
     opacity: 1;
     transition: all 0.5s;
     color: #ffffff;
 }
+
 /* Estilos de boton de compra, transicion*/
 
 @media all and (max-width: 768px) {
+
     /* Cambiar disposicion de botones en dispositivos moviles*/
     .btn__actions {
         display: flex;
@@ -229,17 +244,20 @@
         align-items: center;
         justify-content: center;
     }
+
     /* Cambiar disposicion de botones en dispositivos moviles*/
 
     /* Cambiar margin al boton de compra*/
     .btn-buy {
         margin: 5px;
     }
+
     /* Cambiar margin al boton de compra*/
 
     /* Cambiar margin al boton de alquiler*/
     .btn-rent {
         margin: 5px;
     }
+
     /* Cambiar margin al boton de alquiler*/
 }
