@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
-ErrorDocument 404 http://localhost/usuarios/error/
+ErrorDocument 404 http://localhost/TPI_movies/error/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
