@@ -1,0 +1,106 @@
+/***************** BARRA DE OPCIONES****************/
+/* Estilos de menu de opciones con dropdown*/
+.menu {
+    position: absolute;
+    z-index: 1;
+    width:260px;
+    top: 75px;
+    right: 10px;
+    float: right;
+    margin:5px;
+    cursor:pointer
+}
+/* Estilos de menu de opciones con dropdown*/
+
+/* Estilos de menu de opciones con dropdown, titulo*/
+.title {
+    width:100%;
+    box-sizing:border-box;
+    background:#2c2c2c;
+    padding:14px;
+    border-radius:15px;
+    position:relative;
+    box-shadow:0 0 40px -10px #000;
+    color:aliceblue
+}
+/* Estilos de menu de opciones con dropdown, titulo*/
+
+/* Estilos de menu de opciones con dropdown, opciones*/
+.menu span {
+    float:right;
+    font-size:18px!important
+}
+/* Estilos de menu de opciones con dropdown, opciones*/
+
+/* Estilos de menu de opciones con dropdown, dropdown*/
+.dropdown {
+    width:100%;
+    background:#2c2c2c;
+    border-radius:15px;
+    box-shadow:0 0 40px -10px #000;
+    color:#8d8d8d;
+    margin-top:24px;
+    max-height:0;
+    overflow:hidden;
+    transition:all .5s
+}
+/* Estilos de menu de opciones con dropdown, dropdown*/
+
+/* Estilos de menu de opciones con dropdown, tamanio del dropdown*/
+.down {
+    max-height:150px
+}
+/* Estilos de menu de opciones con dropdown, tamanio del dropdown*/
+
+/* Estilos de menu de opciones con dropdown, flecha de burbuja*/
+.arrow {
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-bottom:10px solid #2c2c2c;
+    position:absolute;
+    right:20px;
+    bottom:-24px;
+    display:none
+}
+/* Estilos de menu de opciones con dropdown, flecha de burbuja*/
+
+/* Estilos de menu de opciones con dropdown, felcha en estado activo*/
+.arrow.gone {
+    display:block
+}
+/* Estilos de menu de opciones con dropdown, flecha en estado activo*/
+
+/* Estilos de menu de opciones con dropdown, opciones*/
+.menu p {
+    border-radius: 15px;
+    padding:15px 14px;
+    font-size: 18px;
+    margin:0;
+    transition:all .1s
+}
+/* Estilos de menu de opciones con dropdown, opciones*/
+
+/* Estilos de menu de opciones con dropdown, transicion sobre opciones*/
+.menu p:hover {
+    background:#f13030;
+    transform:scale(1.05);
+    color:rgba(255,255,255,0.8);
+    box-shadow:0 0 30px -10px #000;
+}
+/* Estilos de menu de opciones con dropdown, transicion sobre opciones*/
+
+@media all and (max-width: 768px) {
+    .content-float {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu {
+        margin-top: -35px;
+        top: initial;
+        right: initial;
+    }
+}
