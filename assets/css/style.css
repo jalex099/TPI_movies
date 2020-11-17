@@ -194,24 +194,6 @@ body {
 
 /* Contenedor de texto, descripcion*/
 
-#res-info {
-    padding: 5% auto;
-}
-
-.to {
-    width: 100%;
-    height: 100%;
-}
-
-.grid-container {
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-top: 68px;
-    margin-bottom: 20px;
-    width: 100%;
-    height: auto;
-}
-
 /* Caja para posicionar titulo en inferior y a la izquierda*/
 .box-tittle {
     z-index: 0;

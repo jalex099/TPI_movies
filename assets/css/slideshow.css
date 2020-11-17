@@ -1,7 +1,7 @@
 /***************** SLIDE DE IMAGENES****************/
 /* Estilos del contenedor de imagenes*/
 .picture {
-    background: linear-gradient(0deg, #1a1a1ab0 0%, #1a1a1ab0 100%), url("http://localhost/usuarios/assets/images/bg.jpg");
+    background: linear-gradient(0deg, #1a1a1ab0 0%, #1a1a1ab0 100%), url("http://localhost/TPI_movies/assets/images/bg.jpg");
     background-position: center;
     background-size: cover;
     display: flex;

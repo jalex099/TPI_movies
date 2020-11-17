@@ -74,7 +74,7 @@ $("#btn-like").click(function () {
 // ---------ANIMACION PARA CAMBIAR ESTADO DEL BOTON DE LIKE-----------
 
 // ---------ANIMACION CON SWIPER PARA SLIDESHOW DE HOME-----------
-var swiper = new Swiper(".blog-slider", {
+var swiper = new Swiper(".picture-slider", {
   spaceBetween: 30, //Asignamos el espacio entre elementos
   effect: "fade", //Asignamos un efecto de desvanecimiento
   loop: true, //Ponemos el bucle activo
@@ -84,7 +84,7 @@ var swiper = new Swiper(".blog-slider", {
   },
 
   pagination: { //Para lograr cambiar la paginacion, o los botones para navegar entre slides
-    el: ".blog-slider__pagination",
+    el: ".picture-slider__pagination",
     clickable: true,
   },
 });
@@ -127,17 +127,17 @@ function navAnimation() {
 }
 $(document).ready(function () { //Funcion para ejecutar animacion al cargar la pagina
   setTimeout(function () {
-    test();
-  }, 500);
+    navAnimation();
+  }, 600);
 });
 $(window).on("resize", function () { //Funcion para ejecutar animacion al hacer click
   setTimeout(function () {
-    test();
+    navAnimation();
   }, 500);
 });
 $(".navbar-toggler").click(function () { //Funcion para poder ejecutar animacion en navbar movil
   setTimeout(function () {
-    test();
+    navAnimation();
   });
 });
 // ---------ANIMACION DE NAVBAR CON DISEÑO RESPONSIVO-----------

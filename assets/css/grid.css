@@ -1,4 +1,13 @@
 /***************** GRID DEL CATALOGO****************/
+.grid {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 68px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+}
+
 .product-grid {
     border-radius: 15px;
     text-align: center;
@@ -60,6 +69,10 @@
     position: absolute;
     left: 15px;
     top: 15px;
+}
+
+#res-info {
+    padding: 5% auto;
 }
 
 .product-grid .social {
@@ -124,18 +137,18 @@
     background-color: #383838;
 }
 
-.product-grid .titl {
+.product-grid .product-title {
     font-size: 2vw;
     font-weight: 500;
     margin: 0;
 }
 
-.product-grid .titl a {
+.product-grid .product-title a {
     color: #ffffff;
     font-weight: 800;
 }
 
-.product-grid .titl a:hover {
+.product-grid .product-title a:hover {
     color: #f13030;
 }
 
@@ -164,7 +177,7 @@
         max-height: 250px;
     }
 
-    .product-grid .titl {
+    .product-grid .product-title {
         font-size: 3vh;
     }
 
