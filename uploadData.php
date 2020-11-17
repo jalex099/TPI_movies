@@ -1,6 +1,12 @@
 <?php
-
-$link=""; //variable que se mandara al backend como la url de la imagen
+$tituloPelicula;
+$descripcionPelicula;
+$generoPelicula;
+$stockPelicula;
+$precioVentaPelicula;
+$precioAlquilerPelicula;
+$disponibilidadPelicula;
+$portadaPelicula=""; //variable que se mandara al backend como la url de la imagen
 
 if (!empty($_FILES)) {
   $url = './img/';
@@ -43,8 +49,7 @@ if (!empty($_FILES)) {
           'uploadType' => 'media',
         )
       );
-      $link = 'https://drive.google.com/uc?export=view&id='.$result->id;
-      header("Location: Ejercicio8.php");
+      $portadaPelicula = 'https://drive.google.com/uc?export=view&id='.$result->id;
       //echo '<a href="https://drive.google.com/open?id='.$result->id.'" target="_blank">'.$result->name.'</a>';
       //echo "    <img src='https://drive.google.com/uc?export=view&id=1XAUHn4EWJRL55hu1J0-k3UiMyqC6De1Z' alt='image'>";
 
@@ -60,6 +65,46 @@ if (!empty($_FILES)) {
   } else{
     echo "Tipo de archivo no permitido";
   }
+}
+
+if(!empty($_POST)){
+  $tituloPelicula = $_POST['tituloPelicula'];
+  $descripcionPelicula = $_POST['descripcionPelicula'];
+  $generoPelicula = $_POST['generoPelicula'];
+  $stockPelicula = $_POST['stockPelicula'];
+  $precioVentaPelicula = $_POST['precioVentaPelicula'];
+  $precioAlquilerPelicula = $_POST['precioAlquilerPelicula'];
+  $disponibilidadPelicula = $_POST['disponibilidadPelicula'];
+
+  $data= array(
+    "tituloPelicula" => $tituloPelicula,
+    "descripcionPelicula" => $descripcionPelicula,
+    "generoPelicula" => $generoPelicula,
+    "portadaPelicula" => $portadaPelicula,
+    "stockPelicula" => $stockPelicula,
+    "precioVentaPelicula" => $precioVentaPelicula,
+    "precioAlquilerPelicula" => $precioAlquilerPelicula,
+    "disponibilidadPelicula" => $disponibilidadPelicula
+  );
+
+  $json_data = json_encode($data);
+  $stream = stream_context_create([
+    'http' => [
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n" .
+                    "Accept: application/json\r\n" .
+                    "Connection: close\r\n" .
+                    "Content-length: " . strlen($json_data) . "\r\n",
+        'protocol_version' => 1.1,
+        'content' => $json_data
+    ],
+    'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false
+    ]
+]);
+$receive = file_get_contents("http://localhost/TPI_movies/Servidor/createPelicula.php", false, $stream);
+echo $receive;
 }
 
  ?>
