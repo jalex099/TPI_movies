@@ -1,5 +1,5 @@
 <main class="principal">
-    <div class="container">
+    <div class="content">
         <form action="<?=BASE_DIR."User/showUser"?>" method="POST" class="form">
             <h2>Lista de Usuarios</h2>
 
