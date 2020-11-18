@@ -49,6 +49,7 @@ if (!empty($_FILES)) {
           'uploadType' => 'media',
         )
       );
+      var_dump($result);
       $portadaPelicula = 'https://drive.google.com/uc?export=view&id='.$result->id;
       //echo '<a href="https://drive.google.com/open?id='.$result->id.'" target="_blank">'.$result->name.'</a>';
       //echo "    <img src='https://drive.google.com/uc?export=view&id=1XAUHn4EWJRL55hu1J0-k3UiMyqC6De1Z' alt='image'>";
@@ -66,7 +67,7 @@ if (!empty($_FILES)) {
     echo "Tipo de archivo no permitido";
   }
 }
-
+/*
 if(!empty($_POST)){
   $tituloPelicula = $_POST['tituloPelicula'];
   $descripcionPelicula = $_POST['descripcionPelicula'];
@@ -105,6 +106,6 @@ if(!empty($_POST)){
 ]);
 $receive = file_get_contents("http://localhost/TPI_movies/Servidor/createPelicula.php", false, $stream);
 echo $receive;
-}
+}*/
 
  ?>

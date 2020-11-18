@@ -24,15 +24,15 @@ $fechaActual=$fecha."/".$mes."/".$anio;
           <form class="" action="uploadData.php" method="post" enctype="multipart/form-data" target="_blank">
             <div class="form-group w-50 mx-auto">
               <label for="img">Titulo:</label>
-              <input type="text" name="tituloPelicula" value="" class="form-control-file"required>
+              <input type="text" name="tituloPelicula" value="" class="form-control-file">
             </div>
             <div class="form-group w-50 mx-auto">
               <label for="img">Descripcion:</label>
-              <input type="text" name="descripcionPelicula" value="" class="form-control-file"required>
+              <input type="text" name="descripcionPelicula" value="" class="form-control-file">
             </div>
             <div class="form-group w-50 mx-auto">
             <label for="img">Genero:</label>
-              <select name="generoPelicula" id="" required>
+              <select name="generoPelicula" id="" >
                 <option value="Drama">Drama</option>
                 <option value="Romance">Romance</option>
                 <option value="Amor">Amor</option>
@@ -43,23 +43,23 @@ $fechaActual=$fecha."/".$mes."/".$anio;
             </div>
             <div class="form-group w-50 mx-auto">
               <label for="img">Portada:</label>
-              <input type="file" name="subirArchivo" value="" class="form-control-file" id="img" required>
+              <input type="file" name="subirArchivo" value="" class="form-control-file" id="img" >
             </div>
             <div class="form-group w-50 mx-auto">
               <label for="img">Stock:</label>
-              <input type="number" name="stockPelicula" value="" class="form-control-file"required>
+              <input type="number" name="stockPelicula" value="" class="form-control-file">
             </div>
             <div class="form-group w-50 mx-auto">
               <label for="img">Precio venta:</label>
-              <input type="number" step='0.01' value='0.00' placeholder='0.00' name="precioVentaPelicula" value="" class="form-control-file"required>
+              <input type="number" step='0.01' value='0.00' placeholder='0.00' name="precioVentaPelicula" value="" class="form-control-file">
             </div>
             <div class="form-group w-50 mx-auto">
               <label for="img">Precio Alquiler:</label>
-              <input type="number" step='0.01' value='0.00' placeholder='0.00' name="precioAlquilerPelicula" value="" class="form-control-file"required>
+              <input type="number" step='0.01' value='0.00' placeholder='0.00' name="precioAlquilerPelicula" value="" class="form-control-file">
             </div>
             <div class="form-group w-50 mx-auto">
             <label for="img">Disponibilidad:</label>
-              <select name="disponibilidadPelicula" id="" required>
+              <select name="disponibilidadPelicula" id="" >
                 <option value="1">1</option>
                 <option value="2">0</option>
               </select>
