@@ -1,5 +1,7 @@
 <?php
 $name = $_GET['action']; //Obtenemos el nombre del controlador
+
+$rol = "cliente"; //Prueba para modos de vista
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +90,7 @@ $name = $_GET['action']; //Obtenemos el nombre del controlador
                         <?php } ?>
                         <a class="nav-link" href="<?= BASE_DIR; ?>Home/showHome"><i class="fas fa-home"></i>Inicio</a>
                     </li>
-                    <?php if ($name == "showMovies") /* Activar elemento al estar en vista catalogo*/ { ?>
+                    <?php if ($name == "showMovies" || $name == "preview") /* Activar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item">
@@ -96,7 +98,9 @@ $name = $_GET['action']; //Obtenemos el nombre del controlador
                         <a class="nav-link" href="<?= BASE_DIR; ?>Movie/showMovies"><i
                                 class="fas fa-film"></i>Catálogo</a>
                     </li>
-                    <?php if ($name == "add") /* Activar elemento al estar en vista agregar*/ { ?>
+                    <?php
+                    if ($rol == "administrador") { //Mostrar elemento solo si es administrador
+                    if ($name == "add") /* Activar elemento al estar en vista agregar*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista agregar*/ { ?>
                     <li class="nav-item">
@@ -104,7 +108,20 @@ $name = $_GET['action']; //Obtenemos el nombre del controlador
                         <a class="nav-link" href="<?= BASE_DIR; ?>Movie/add"><i
                                 class="fas fa-calendar-plus"></i>Nueva</a>
                     </li>
-                    <?php if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
+                    <?php
+                    }
+                    if ($rol == "cliente") { //Mostrar elemento solo si es cliente
+                    if ($name == "cart") /* Activar elemento al estar en vista carrito*/ { ?>
+                    <li class="nav-item active">
+                        <?php } else /* Desactivar elemento al estar en vista carrito*/ { ?>
+                    <li class="nav-item">
+                        <?php } ?>
+                        <a class="nav-link" href="<?= BASE_DIR; ?>User/cart"><i
+                                class="fas fa-shopping-cart"></i>Carrito</a>
+                    </li>
+                    <?php
+                    }
+                    if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista login*/ { ?>
                     <li class="nav-item">

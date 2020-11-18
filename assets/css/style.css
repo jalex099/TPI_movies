@@ -52,6 +52,16 @@ body {
     box-shadow: 0 0 40px -10px #000;
 }
 
+.cart-plain {
+    margin-top: 60px;
+    min-height: 100vh;
+}
+
+.cart-row:hover {
+    transition: all ease-in 0.3s;
+    background-color: #e6e6e6;
+}
+
 /* Contenedor de texto*/
 
 /* Contenedor de background con imagen*/

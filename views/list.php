@@ -20,7 +20,7 @@
                         <!-- Tarjeta para mostrar pelicula, contenedor de imagen-->
                         <div class="product-image">
                             <!-- Tarjeta para mostrar pelicula, contenedor de enlace de la pelicula-->
-                            <a href="#">
+                            <a href="<?= BASE_DIR; ?>Movie/preview">
                                 <!-- Tarjeta para mostrar pelicula, imagen e la pelicula-->
                                 <img class="pic-1" src="<?= BASE_DIR; ?>assets/images/cover.jpg">
                                 <!-- /Tarjeta para mostrar pelicula, imagen e la pelicula-->
@@ -38,7 +38,7 @@
                         <div class="product-content text-truncate">
                             <!-- Tarjeta para mostrar pelicula, titulo de pelicula-->
                             <h3 class="product-title">
-                                <a href="#"><?= $list["tituloPelicula"]; ?></a>
+                                <a href="<?= BASE_DIR; ?>Movie/preview"><?= $list["tituloPelicula"]; ?></a>
                             </h3>
                             <!-- /Tarjeta para mostrar pelicula, titulo de pelicula-->
                             <!-- Tarjeta para mostrar pelicula, precio de venta y alquiler-->
@@ -49,7 +49,7 @@
                         <!-- /Tarjeta para mostrar pelicula, contenedor de informacion-->
                         <!-- Tarjeta para mostrar pelicula, botones de acciones-->
                         <ul class="social">
-                            <li><a href="" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="<?= BASE_DIR; ?>Movie/preview" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
                             <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i class="fa fa-heart"></i></a></li>
                             <li><a href="" data-toggle="tooltip" data-placement="top" title="Comprar"><i class="fa fa-shopping-cart"></i></a></li>
                             <li><a href="" data-toggle="tooltip" data-placement="top" title="Alquilar"><i class="fas fa-video"></i></a></li>
