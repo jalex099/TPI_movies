@@ -22,7 +22,7 @@
                             <!-- Tarjeta para mostrar pelicula, contenedor de enlace de la pelicula-->
                             <a href="<?= BASE_DIR; ?>Movie/preview">
                                 <!-- Tarjeta para mostrar pelicula, imagen e la pelicula-->
-                                <img class="pic-1" src="<?= $list["portadaPelicula"];?>"><?= $list["portadaPelicula"];?>
+                                <img class="pic-1" src="<?= $list["portadaPelicula"];?>">
                                 <!-- /Tarjeta para mostrar pelicula, imagen e la pelicula-->
                             </a>
                             <!-- /Tarjeta para mostrar pelicula, contenedor de enlace de la pelicula-->
