@@ -1,7 +1,7 @@
 <?php
 $name = $_GET['action']; //Obtenemos el nombre del controlador
 
-$rol = "cliente"; //Prueba para modos de vista
+$rol = "administrador"; //Prueba para modos de vista
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +90,7 @@ $rol = "cliente"; //Prueba para modos de vista
                         <?php } ?>
                         <a class="nav-link" href="<?= BASE_DIR; ?>Home/showHome"><i class="fas fa-home"></i>Inicio</a>
                     </li>
-                    <?php if ($name == "showMovies" || $name == "preview") /* Activar elemento al estar en vista catalogo*/ { ?>
+                    <?php if ($name == "showMovies" || $name == "preview" || $name == "modify" || $name == "eliminate") /* Activar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item">
@@ -129,12 +129,12 @@ $rol = "cliente"; //Prueba para modos de vista
                         <a class="nav-link" href="<?= BASE_DIR; ?>User/login"><i class="fas fa-user"></i>Iniciar
                             Sesión</a>
                     </li>
-                    <?php if ($name == "modify") /* Activar elemento al cerrar sesion*/ { ?>
+                    <?php if ($name == "logout") /* Activar elemento al cerrar sesion*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en sesion activa*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
-                        <a class="nav-link" href="<?= BASE_DIR; ?>Movie/modify"><i class="fas fa-door-open"></i>Cerrar
+                        <a class="nav-link" href="<?= BASE_DIR; ?>User/logout"><i class="fas fa-door-open"></i>Cerrar
                             Sesión</a>
                     </li>
                 </ul>

@@ -3,18 +3,20 @@
     <!-- Contenedor adaptativo para la grilla-->
     <div class="container-fluid">
         <!-- Elemento de fila automatizada, con columnas predeterminadas para cada tamano-->
-        <div class="row row-cols-2 row-cols-sm-4 row-cols-md-5 justify-content-md-center">
+        <div class="row justify-content-md-center">
             <?php
             //Obtenemos el json desde la url
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
             $data = json_decode($data, true); //Lo decodificamos para hacerlo json
             $data = json_decode($data, true); //Lo decodificamos de nuevo para hacerlo array
 
+            $count = 0;
+
             //Recorremos el arreglo por medio de un foreach asociativo
             foreach ($data as $row => $list) {
             ?>
                 <!-- Columna nueva para elemento pelicula-->
-                <div class="col">
+                <div class="col-6 col-md-3 col-xl-2">
                     <!-- Tarjeta para mostrar pelicula-->
                     <div class="product-grid">
                         <!-- Tarjeta para mostrar pelicula, contenedor de imagen-->
