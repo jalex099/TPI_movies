@@ -245,19 +245,18 @@
         justify-content: center;
     }
 
-    /* Cambiar disposicion de botones en dispositivos moviles*/
-
     /* Cambiar margin al boton de compra*/
     .btn-buy {
         margin: 5px;
     }
-
-    /* Cambiar margin al boton de compra*/
 
     /* Cambiar margin al boton de alquiler*/
     .btn-rent {
         margin: 5px;
     }
 
-    /* Cambiar margin al boton de alquiler*/
+    /* Cambiar margin al boton de cuenta*/
+    .btn-account {
+        margin: 10px 0px;
+    }
 }

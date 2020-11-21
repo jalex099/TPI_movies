@@ -1,3 +1,37 @@
+<div class="filter">
+    <form action="">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 col-md-4 col-xl-3">
+                    <div class="field">
+                    <select name="type" id="" required>
+                        <option disabled selected value=""></option>
+                        <option value="Albabéticamente">Alfabéticamente</option>
+                        <option value="Polularidad">Popularidad</option>
+                    </select>
+                    <label>Filtro</label>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-xl-3">
+                    <div class="field">
+                    <select name="order" id="" required>
+                        <option disabled selected value=""></option>
+                        <option value="Ascendente">Ascendente</option>
+                        <option value="Descendente">Descendente</option>
+                    </select>
+                    <label>Orden</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 col-xl-2">
+                    <div class="field">
+                        <input class="btn-account" type="submit" value="Filtrar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <!-- Contenedor principal del grid-->
 <div class="grid">
     <!-- Contenedor adaptativo para la grilla-->
