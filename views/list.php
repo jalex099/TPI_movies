@@ -10,6 +10,21 @@
             $data = json_decode($data, true); //Lo decodificamos para hacerlo json
             $data = json_decode($data, true); //Lo decodificamos de nuevo para hacerlo array
 
+            /*function array_sort_by(&$arrIni, $col, $order)
+            {
+                $arrAux = array();
+                foreach ($arrIni as $key=> $row)
+                {
+                    $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+                    $arrAux[$key] = strtolower($arrAux[$key]);
+                }
+                array_multisort($arrAux, $order, $arrIni);
+            }
+
+            $order = SORT_DESC;
+
+            array_sort_by($data, 'tituloPelicula', $order);*/
+
             //Recorremos el arreglo por medio de un foreach asociativo
             foreach ($data as $row => $list) {
                 $id = $list["idPelicula"];
