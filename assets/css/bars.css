@@ -85,6 +85,11 @@
     margin: 0;
     transition: all .1s
 }
+.menu a {
+    width: 260px;
+    color: #8d8d8d;
+    text-decoration: none;
+}
 
 /* Estilos de menu de opciones con dropdown, opciones*/
 
@@ -92,7 +97,7 @@
 .menu p:hover {
     background: #f13030;
     transform: scale(1.05);
-    color: rgba(255, 255, 255, 0.8);
+    color: #ffffffcc;
     box-shadow: 0 0 30px -10px #000;
 }
 

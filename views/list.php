@@ -10,10 +10,9 @@
             $data = json_decode($data, true); //Lo decodificamos para hacerlo json
             $data = json_decode($data, true); //Lo decodificamos de nuevo para hacerlo array
 
-            $count = 0;
-
             //Recorremos el arreglo por medio de un foreach asociativo
             foreach ($data as $row => $list) {
+                $id = $list["idPelicula"];
             ?>
                 <!-- Columna nueva para elemento pelicula-->
                 <div class="col-6 col-md-3 col-xl-2">
@@ -22,7 +21,7 @@
                         <!-- Tarjeta para mostrar pelicula, contenedor de imagen-->
                         <div class="product-image">
                             <!-- Tarjeta para mostrar pelicula, contenedor de enlace de la pelicula-->
-                            <a href="<?= BASE_DIR; ?>Movie/preview">
+                            <a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>">
                                 <!-- Tarjeta para mostrar pelicula, imagen e la pelicula-->
                                 <img class="pic-1" src="<?= $list["portadaPelicula"];?>">
                                 <!-- /Tarjeta para mostrar pelicula, imagen e la pelicula-->
@@ -40,7 +39,7 @@
                         <div class="product-content text-truncate">
                             <!-- Tarjeta para mostrar pelicula, titulo de pelicula-->
                             <h3 class="product-title">
-                                <a href="<?= BASE_DIR; ?>Movie/preview"><?= $list["tituloPelicula"]; ?></a>
+                                <a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>"><?= $list["tituloPelicula"]; ?></a>
                             </h3>
                             <!-- /Tarjeta para mostrar pelicula, titulo de pelicula-->
                             <!-- Tarjeta para mostrar pelicula, precio de venta y alquiler-->
@@ -51,7 +50,7 @@
                         <!-- /Tarjeta para mostrar pelicula, contenedor de informacion-->
                         <!-- Tarjeta para mostrar pelicula, botones de acciones-->
                         <ul class="social">
-                            <li><a href="<?= BASE_DIR; ?>Movie/preview" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
                             <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i class="fa fa-heart"></i></a></li>
                             <li><a href="" data-toggle="tooltip" data-placement="top" title="Comprar"><i class="fa fa-shopping-cart"></i></a></li>
                             <li><a href="" data-toggle="tooltip" data-placement="top" title="Alquilar"><i class="fas fa-video"></i></a></li>

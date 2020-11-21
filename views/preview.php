@@ -1,21 +1,24 @@
     <main class="principal">
         <div class="content">
             <?php 
-                $data = file_get_contents("https://morales099.000webhostapp.com/Servidor/getAll.php");
-                $data = json_decode($data, true); //Lo codificamos a json
-                $data = json_decode($data, true); //Lo codificamos a json
-                
-                foreach($data as $row=>$list){
-                    if($list["idPelicula"] == 1) {
+            //Obtenemos el json desde la url
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+            $data = json_decode($data, true); //Lo decodificamos de nuevo para hacerlo array
+
+            $targetId = $_GET["id"];
+            
+            foreach($data as $row=>$list){
+                if($list["idPelicula"] == $targetId) {
             ?>
 
             <div class="content-bg">
-                <img src="<?=BASE_DIR;?>assets/images/cover.jpg" alt="background">
+                <img src="<?= $list["portadaPelicula"];?>" alt="background">
             </div>
 
             <div id="res-content" class="content__left">
                 <div class="content-image">
-                    <img src="<?=BASE_DIR;?>assets/images/cover.jpg" alt="cover">
+                    <img src="<?= $list["portadaPelicula"];?>" alt="cover">
                 </div>
             </div>
 
@@ -26,9 +29,9 @@
                             <div class="arrow"></div>
                         </div>
                         <div class="dropdown">
-                            <p>Modificar <span class="fas fa-tools"></span></p>
-                            <p>Quitar <span class="fas fa-times-circle"></span></p>
-                            <p>Eliminar <span class="fas fa-trash"></span></p>
+                            <a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $targetId; ?>"><p>Modificar<span class="fas fa-tools"></span></p></a>
+                            <a href="<?= BASE_DIR; ?>Movie/remove&id=<?= $targetId; ?>"><p>Quitar <span class="fas fa-times-circle"></span></p></a>
+                            <a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $targetId; ?>"><p>Eliminar <span class="fas fa-trash"></span></p></a>
                         </div>
                     </div>
                 </div>
