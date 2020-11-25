@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2020 a las 08:25:56
+-- Tiempo de generación: 25-11-2020 a las 23:18:42
 -- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.2.31
+-- Versión de PHP: 7.2.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_peliculas`
 --
+CREATE DATABASE IF NOT EXISTS `db_peliculas` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `db_peliculas`;
 
 -- --------------------------------------------------------
 
@@ -27,13 +29,26 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `tblalquileres`
 --
 
+DROP TABLE IF EXISTS `tblalquileres`;
 CREATE TABLE `tblalquileres` (
   `idAlquiler` int(11) NOT NULL,
   `fechaAlquiler` date NOT NULL,
-  `devolucionAlquiler` date NOT NULL,
+  `fechaEsperadaAlquiler` date DEFAULT NULL,
   `idCliente` int(11) NOT NULL,
-  `idPelicula` int(11) NOT NULL
+  `idPelicula` int(11) NOT NULL,
+  `estadoAlquiler` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tblalquileres`
+--
+
+INSERT INTO `tblalquileres` (`idAlquiler`, `fechaAlquiler`, `fechaEsperadaAlquiler`, `idCliente`, `idPelicula`, `estadoAlquiler`) VALUES
+(1, '2020-08-25', '2020-11-28', 1, 5, 1),
+(6, '2020-08-25', '2020-11-26', 1, 5, 1),
+(7, '2020-08-25', '2020-11-30', 1, 5, 1),
+(8, '2020-08-25', '2020-11-30', 1, 5, 1),
+(9, '2020-08-25', '2020-11-22', 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -41,6 +56,7 @@ CREATE TABLE `tblalquileres` (
 -- Estructura de tabla para la tabla `tblclientes`
 --
 
+DROP TABLE IF EXISTS `tblclientes`;
 CREATE TABLE `tblclientes` (
   `idCliente` int(11) NOT NULL,
   `nombreCliente` varchar(50) NOT NULL,
@@ -49,12 +65,35 @@ CREATE TABLE `tblclientes` (
   `contraseñaCliente` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tblclientes`
+--
+
+INSERT INTO `tblclientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `correoCliente`, `contraseñaCliente`) VALUES
+(1, 'Enrique', 'Mendez', 'mendez@gmail.com', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbldetallealquiler`
+--
+
+DROP TABLE IF EXISTS `tbldetallealquiler`;
+CREATE TABLE `tbldetallealquiler` (
+  `idDetalleAlquiler` int(11) NOT NULL,
+  `idAlquiler` int(11) NOT NULL,
+  `fechaDevolucionDetalleAlquiler` date NOT NULL,
+  `totalDetalleAlquiler` decimal(10,2) NOT NULL,
+  `multaDetalleAlquiler` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbllikes`
 --
 
+DROP TABLE IF EXISTS `tbllikes`;
 CREATE TABLE `tbllikes` (
   `idLike` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
@@ -67,6 +106,7 @@ CREATE TABLE `tbllikes` (
 -- Estructura de tabla para la tabla `tblpeliculas`
 --
 
+DROP TABLE IF EXISTS `tblpeliculas`;
 CREATE TABLE `tblpeliculas` (
   `idPelicula` int(11) NOT NULL,
   `tituloPelicula` varchar(50) NOT NULL,
@@ -121,6 +161,7 @@ INSERT INTO `tblpeliculas` (`idPelicula`, `tituloPelicula`, `descripcionPelicula
 -- Estructura de tabla para la tabla `tblusuarios`
 --
 
+DROP TABLE IF EXISTS `tblusuarios`;
 CREATE TABLE `tblusuarios` (
   `idUsuario` int(11) NOT NULL,
   `nombreUsuario` varchar(50) NOT NULL,
@@ -136,6 +177,7 @@ CREATE TABLE `tblusuarios` (
 -- Estructura de tabla para la tabla `tblventas`
 --
 
+DROP TABLE IF EXISTS `tblventas`;
 CREATE TABLE `tblventas` (
   `idVenta` int(11) NOT NULL,
   `catidadVenta` int(11) NOT NULL,
@@ -153,14 +195,22 @@ CREATE TABLE `tblventas` (
 --
 ALTER TABLE `tblalquileres`
   ADD PRIMARY KEY (`idAlquiler`),
-  ADD UNIQUE KEY `idCliente` (`idCliente`),
-  ADD UNIQUE KEY `idPelicula` (`idPelicula`);
+  ADD KEY `idCliente_2` (`idCliente`),
+  ADD KEY `idCliente` (`idCliente`) USING BTREE,
+  ADD KEY `idPelicula` (`idPelicula`) USING BTREE;
 
 --
 -- Indices de la tabla `tblclientes`
 --
 ALTER TABLE `tblclientes`
   ADD PRIMARY KEY (`idCliente`);
+
+--
+-- Indices de la tabla `tbldetallealquiler`
+--
+ALTER TABLE `tbldetallealquiler`
+  ADD PRIMARY KEY (`idDetalleAlquiler`),
+  ADD KEY `idAlquiler` (`idAlquiler`);
 
 --
 -- Indices de la tabla `tbllikes`
@@ -198,13 +248,19 @@ ALTER TABLE `tblventas`
 -- AUTO_INCREMENT de la tabla `tblalquileres`
 --
 ALTER TABLE `tblalquileres`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `tblclientes`
 --
 ALTER TABLE `tblclientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tbldetallealquiler`
+--
+ALTER TABLE `tbldetallealquiler`
+  MODIFY `idDetalleAlquiler` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbllikes`
@@ -240,6 +296,12 @@ ALTER TABLE `tblventas`
 ALTER TABLE `tblalquileres`
   ADD CONSTRAINT `tblalquileres_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `tblclientes` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tblalquileres_ibfk_2` FOREIGN KEY (`idPelicula`) REFERENCES `tblpeliculas` (`idPelicula`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tbldetallealquiler`
+--
+ALTER TABLE `tbldetallealquiler`
+  ADD CONSTRAINT `detalle-alquiler` FOREIGN KEY (`idAlquiler`) REFERENCES `tblalquileres` (`idAlquiler`);
 
 --
 -- Filtros para la tabla `tbllikes`
