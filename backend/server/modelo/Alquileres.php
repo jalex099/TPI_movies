@@ -18,10 +18,10 @@ class Alquileres extends Connect { //Clase de alquileres
 
 
     public function read(){
-        $sql = "SELECT * FROM " . self::TABLE_NAME;
+        $sql = "SELECT * FROM " . self::TABLE_NAME." WHERE estadoAlquiler = 1";
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($data);
+            return $data;
         } else{
             return $this->error();
         }
@@ -48,10 +48,10 @@ class Alquileres extends Connect { //Clase de alquileres
     }
 
     
-    public function create($fechaAlquiler, $idCliente, $idPelicula){
-        $sql = "INSERT INTO " . self::TABLE_NAME. " (`fechaAlquiler`, 
+    public function create($fechaAlquiler, $fechaEsperadaAlquiler, $idCliente, $idPelicula){
+        $sql = "INSERT INTO " . self::TABLE_NAME. " (`fechaAlquiler`,  `fechaEsperadaAlquiler`,
         `idCliente`, `idPelicula`, `estadoAlquiler`) 
-        VALUES ('".$fechaAlquiler."',".$idCliente.",".$idPelicula.",
+        VALUES ('".$fechaAlquiler."','".$fechaEsperadaAlquiler."',".$idCliente.",".$idPelicula.",
         1)";
         if ($result = $this->conn->query($sql)) {
             return $this->readSpecific();
