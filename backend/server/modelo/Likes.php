@@ -21,7 +21,7 @@ class Likes extends Connect { //Clase de likes
         $sql = "SELECT * FROM " . self::TABLE_NAME." WHERE idCliente = ".$idCliente;
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($data);
+            return $data;
         } else{
             return $this->error();
         }

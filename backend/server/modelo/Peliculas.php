@@ -21,7 +21,7 @@ class Peliculas extends Connect { //Clase de peliculas
         $sql = "SELECT * FROM " . self::TABLE_NAME;
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($data);
+            return $data;
         } else{
             return $this->error();
         }

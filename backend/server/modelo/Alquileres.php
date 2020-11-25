@@ -31,7 +31,7 @@ class Alquileres extends Connect { //Clase de alquileres
         $sql = "SELECT * FROM " . self::TABLE_NAME." WHERE idCliente = ".$idCliente;
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($data);
+            return $data;
         } else{
             return $this->error();
         }
@@ -41,7 +41,7 @@ class Alquileres extends Connect { //Clase de alquileres
         $sql = "SELECT * FROM " . self::TABLE_NAME." order by idAlquiler desc limit 1";
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($data);
+            return $data;
         } else{
             return $this->error();
         }
@@ -54,7 +54,7 @@ class Alquileres extends Connect { //Clase de alquileres
         VALUES ('".$fechaAlquiler."',".$idCliente.",".$idPelicula.",
         1)";
         if ($result = $this->conn->query($sql)) {
-            return json_encode($this->readSpecific());
+            return $this->readSpecific();
         } else{
             return $this->error();
         }
