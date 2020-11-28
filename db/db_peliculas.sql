@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2020 a las 23:18:42
+-- Tiempo de generación: 28-11-2020 a las 02:42:52
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -29,7 +29,6 @@ USE `db_peliculas`;
 -- Estructura de tabla para la tabla `tblalquileres`
 --
 
-DROP TABLE IF EXISTS `tblalquileres`;
 CREATE TABLE `tblalquileres` (
   `idAlquiler` int(11) NOT NULL,
   `fechaAlquiler` date NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE `tblalquileres` (
 --
 
 INSERT INTO `tblalquileres` (`idAlquiler`, `fechaAlquiler`, `fechaEsperadaAlquiler`, `idCliente`, `idPelicula`, `estadoAlquiler`) VALUES
-(1, '2020-08-25', '2020-11-28', 1, 5, 1),
+(1, '2020-08-25', '2020-11-28', 1, 5, 0),
 (6, '2020-08-25', '2020-11-26', 1, 5, 1),
 (7, '2020-08-25', '2020-11-30', 1, 5, 1),
 (8, '2020-08-25', '2020-11-30', 1, 5, 1),
@@ -56,7 +55,6 @@ INSERT INTO `tblalquileres` (`idAlquiler`, `fechaAlquiler`, `fechaEsperadaAlquil
 -- Estructura de tabla para la tabla `tblclientes`
 --
 
-DROP TABLE IF EXISTS `tblclientes`;
 CREATE TABLE `tblclientes` (
   `idCliente` int(11) NOT NULL,
   `nombreCliente` varchar(50) NOT NULL,
@@ -78,7 +76,6 @@ INSERT INTO `tblclientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `cor
 -- Estructura de tabla para la tabla `tbldetallealquiler`
 --
 
-DROP TABLE IF EXISTS `tbldetallealquiler`;
 CREATE TABLE `tbldetallealquiler` (
   `idDetalleAlquiler` int(11) NOT NULL,
   `idAlquiler` int(11) NOT NULL,
@@ -93,7 +90,6 @@ CREATE TABLE `tbldetallealquiler` (
 -- Estructura de tabla para la tabla `tbllikes`
 --
 
-DROP TABLE IF EXISTS `tbllikes`;
 CREATE TABLE `tbllikes` (
   `idLike` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
@@ -106,7 +102,6 @@ CREATE TABLE `tbllikes` (
 -- Estructura de tabla para la tabla `tblpeliculas`
 --
 
-DROP TABLE IF EXISTS `tblpeliculas`;
 CREATE TABLE `tblpeliculas` (
   `idPelicula` int(11) NOT NULL,
   `tituloPelicula` varchar(50) NOT NULL,
@@ -124,7 +119,7 @@ CREATE TABLE `tblpeliculas` (
 --
 
 INSERT INTO `tblpeliculas` (`idPelicula`, `tituloPelicula`, `descripcionPelicula`, `generoPelicula`, `portadaPelicula`, `stockPelicula`, `precioVentaPelicula`, `precioAlquilerPelicula`, `disponibilidadPelicula`) VALUES
-(1, 'Titanic', 'Jack (DiCaprio), un joven artista, en una partida de cartas gana un pasaje para América, en el Titanic, el trasatlántico más grande y seguro jamás construido. A bordo, conoce a Rose (Kate Winslet), una joven de una buena familia venida a menos que va a contraer un matrimonio de conveniencia con Cal (Billy Zane), un millonario engreído a quien sólo interesa el prestigioso apellido de su prometida. Jack y Rose se enamoran, pero Cal y la madre de Rose ponen todo tipo de trabas a su relación. Inesperadamente, un inmenso iceberg pone en peligro la vida de los pasajeros.', 'Romance', 'https://drive.google.com/uc?export=view&id=1Jzfc01c9p6MuWS9IBGbrAGSUbjPxLo7G', 10, '35.00', '20.00', 2),
+(1, 'Titanic', 'Jack (DiCaprio), un joven artista, en una partida de cartas gana un pasaje para América, en el Titanic, el trasatlántico más grande y seguro jamás construido. A bordo, conoce a Rose (Kate Winslet), una joven de una buena familia venida a menos que va a contraer un matrimonio de conveniencia con Cal (Billy Zane), un millonario engreído a quien sólo interesa el prestigioso apellido de su prometida. Jack y Rose se enamoran, pero Cal y la madre de Rose ponen todo tipo de trabas a su relación. Inesperadamente, un inmenso iceberg pone en peligro la vida de los pasajeros.', 'Romance', 'https://drive.google.com/uc?export=view&id=1Jzfc01c9p6MuWS9IBGbrAGSUbjPxLo7G', 24, '35.00', '20.00', 1),
 (2, 'John Wick', 'En Nueva York, John Wick, un asesino a sueldo retirado, vuelve otra vez a la acción para vengarse de los gángsters que le quitaron todo.', 'Accion', 'https://drive.google.com/uc?export=view&id=1bKvitb7lAfipy5ywHtsoRGO3xwPXvZjT', 46, '37.00', '14.00', 1),
 (3, ' Sonic. La película', 'Una comedia de aventuras de acción real en donde Sonic el descarado erizo azul basado en la famosa serie de videojuegos de Sega, una de las más vendidas en todo el mundo, vivirá aventuras y desventuras cuando conoce a su amigo humano y policía, Tom Wachowski (James Marsden). Sonic y Tom unen sus fuerzas para detener al malvado Dr. Robotnik (Jim Carrey), que intenta atrapar a Sonic con el fin de emplear sus inmensos poderes para dominar el mundo.', 'Accion', 'https://drive.google.com/uc?export=view&id=19Vcugi_cZEMLfc0zvIQLfJSkG5Vxlb3S', 39, '35.00', '17.00', 1),
 (4, 'Vengadores Endgame', 'La mitad de la vida en el universo está desintegrada y las filas de los Vengadores fracturadas, tras los devastadores acontecimientos puestos en marcha por Thanos, el Titán Loco, en \"Vengadores: Infinity War\".  Ahora, los superhéroes que sobrevivieron encabezados por el Capitán América, deberán poner en práctica un plan definitivo, sin importar las consecuencias que pueda tener. Un plan que podría acabar con el villano definitivamente, deshacer sus terribles acciones y restablecer el orden en el universo de una vez por todas.', 'Accion', 'https://drive.google.com/uc?export=view&id=1I7KQ7sZVi1Io2FNS-ifyW78cEusCMivb', 35, '33.00', '14.00', 1),
@@ -146,9 +141,9 @@ INSERT INTO `tblpeliculas` (`idPelicula`, `tituloPelicula`, `descripcionPelicula
 (20, 'El corredor del laberinto: La cura mortal', 'En el final épico de la saga de El Corredor del Laberinto, Tomás lidera al grupo de Clarianos fugitivos en su misión más peligrosa y definitiva. Para salvar a sus amigos, tendrán que volver a colarse en la legendaria Ciudad, un laberinto vigilado por CRUEL que puede convertirse en la trampa más mortal. Cualquiera que salga vivo tendrá las respuestas a las preguntas que los Clarianos han estado intentando averiguar desde que llegaron al laberinto por primera vez.', 'Accion', 'https://drive.google.com/uc?export=view&id=1cCuvd52ZxbASVHgPsn7Jbc-M7DVCpG_t', 38, '42.00', '19.00', 1),
 (21, 'Operación: Huracán', 'En 1992, un giro cruel del destino se cobra la vida del caza tormentas y padre devoto Bruce Rutledge, dejando a sus dos hijos, Will y Breeze, a merced de la naturaleza.  25 años más tarde, Will es un meteorólogo del gobierno que sigue al Huracán Tammy, la tormenta más feroz de la historia de Estados Unidos, que se dirige a Gulfport (Alabama). Durante la evacuación de la población local, el Departamento del Tesoro estadounidense corre a contrarreloj para destruir 600 millones de dólares en billetes antiguos antes de que llegue Tammy, pero no son los únicos que tienen planes para ese dinero…', 'Drama', 'https://drive.google.com/uc?export=view&id=12Mfex3KsYLh5hrKMVpcIQaV65sH7L5pr', 35, '33.00', '15.00', 1),
 (22, 'Deadpool 2', 'Tras sobrevivir a un ataque bovino casi mortal, un desfigurado cocinero (Wade Wilson) lucha por cumplir su sueño de convertirse en el camarero buenorro de First Dates mientras aprende a arreglárselas después de perder el sentido del gusto. Buscando algo picante en su vida (y también un condensador de fluzo), Wade deberá luchar contra ninjas, yakuzas y una manada de canes sexualmente agresivos mientras viaja alrededor del mundo para descubrir la importancia de la familia, la amistad y el sabor, encontrando un nuevo gusto por la aventura y ganándose la codiciada taza de ‘Mejor Amante del Mundo’.', 'Comedia', 'https://drive.google.com/uc?export=view&id=1Q1n3ThjtHn3uIZ2-fHJfB7tKzWPUlttR', 36, '39.00', '18.00', 1),
-(23, 'La primera purga: La noche de las bestias', 'LA PRIMERA PURGA: LA NOCHE DE LAS BESTIAS es la nueva entrega de la saga La Purga. La historia narra el inicio de este macabro experimento sociológico convertido en tradición anual. Una purga para mantener los actos criminales acotados temporalmente a una noche al año.  Para mantener durante el resto del año la tasa de criminalidad por debajo del 1%, los Nuevos Padres Fundadores de América ponen a prueba una teoría sociológica que da rienda suelta a todo tipo de agresiones durante una noche en una comunidad aislada. Pero cuando la violencia de los opresores se encuentra con la ira de los marginados, el vandalismo explota más allá de esas fronteras “experimentales” para extenderse por todo el país.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1HZ0T7zvrpiF-8a-WeTrN7Wtve1aiFbBT', 39, '43.00', '19.00', 2),
+(23, 'La primera purga: La noche de las bestias', 'LA PRIMERA PURGA: LA NOCHE DE LAS BESTIAS es la nueva entrega de la saga La Purga. La historia narra el inicio de este macabro experimento sociológico convertido en tradición anual. Una purga para mantener los actos criminales acotados temporalmente a una noche al año.  Para mantener durante el resto del año la tasa de criminalidad por debajo del 1%, los Nuevos Padres Fundadores de América ponen a prueba una teoría sociológica que da rienda suelta a todo tipo de agresiones durante una noche en una comunidad aislada. Pero cuando la violencia de los opresores se encuentra con la ira de los marginados, el vandalismo explota más allá de esas fronteras “experimentales” para extenderse por todo el país.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1HZ0T7zvrpiF-8a-WeTrN7Wtve1aiFbBT', 39, '43.00', '19.00', 1),
 (24, 'La Monja', 'Una joven monja de clausura de una abadía de Rumanía se quita la vida. Para investigar lo sucedido, el Vaticano envía a un sacerdote con un pasado tormentoso y a una novicia a punto de tomar sus votos. Juntos van a descubrir el profano secreto de la orden. Y arriesgan no solo sus vidas sino también su fe y sus almas al enfrentarse a una fuerza maléfica que se encarna en la misma monja endemoniada que aterrorizó a los espectadores en \"Expediente Warren: El caso Enfield\". La abadía se convierte así en un aterrador campo de batalla entre vivos y condenados.  Hardy dirige \"La Monja\" a partir de un guión de Gary Dauberman (\"It\"). La historia es obra de James Wan y Gary Dauberman. Los productores ejecutivos son Gary Dauberman, Todd Williams y Michael Clear.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1zVXeq8kzYVl9xk4RujodELDzDlJJYQCd', 38, '39.00', '18.00', 1),
-(25, 'Venom', 'Nueva entrega del universo \"Marvel\". En esta ocasión el protagonista será \"Venom\" (Veneno), uno de los más despiadados y peligrosos supervillanos, y uno de los principales enemigos de Spider-Man.', 'Accion', 'https://drive.google.com/uc?export=view&id=1kBailaraDOARvPbeGw3g6w96E-3ngBeG', 37, '36.00', '17.00', 2),
+(25, 'Venom', 'Nueva entrega del universo \"Marvel\". En esta ocasión el protagonista será \"Venom\" (Veneno), uno de los más despiadados y peligrosos supervillanos, y uno de los principales enemigos de Spider-Man.', 'Accion', 'https://drive.google.com/uc?export=view&id=1kBailaraDOARvPbeGw3g6w96E-3ngBeG', 37, '36.00', '17.00', 1),
 (26, 'Human Nature', 'La más grande de las revoluciones del siglo XXI es biológica y no digital. Un avance llamado CRISPR abre la puerta a la curación de las enfermedades, a la remodelación de la biosfera y al diseño de nuestros propios hijos. Una exploración provocativa de sus implicaciones de largo alcance, a través de los ojos de los científicos que lo descubrieron.', 'Drama', 'https://drive.google.com/uc?export=view&id=1WaXsPW7RLRpjoOldfcwW9UjzFyDW98UK', 35, '33.00', '13.00', 1),
 (27, 'Los Últimos Días del Crimen', 'En un futuro no muy lejano, como respuesta final al terrorismo y al crimen, el gobierno de los Estados Unidos planea emitir una señal que haga imposible que alguien cometa actos ilegales a sabiendas. Graham Brick, un delincuente de poca monta, decide unirse a un famoso gánster y a una hacker de la Dark Web, para cometer un último gran golpe que pasará a la historia.  ‘Los últimos días del crimen’ está basada en la novela gráfica de Rick Remender y Greg Tocchini (Radical Publishing)', 'Accion', 'https://drive.google.com/uc?export=view&id=1LBgmBJjqJ9n34rZCImNk6yR_9HzEcgdd', 37, '35.00', '15.00', 2),
 (28, 'Voces (2020)', 'Sara, Daniel y su hijo de 9 años llegan a la casa en la que pretenden comenzar una nueva vida, sin saber que esa propiedad ha sido conocida desde siempre en los alrededores como \"la casa de las voces\". El niño, Eric, es el primero en advertir que tras cada puerta se ocultan extraños sonidos y se intuyen voces que parece que intentan comunicarse con la familia. Lo que achacan en principio a un producto de la imaginación de Eric se convierte rápidamente en una inquietante realidad también para sus padres. ¿Hay realmente voces en la casa? Y de ser así, ¿De dónde vienen? ¿Quiénes son? ¿Qué quieren?', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1tddGnCwNMCw2pglNqiOEM2oAxzqD68U7', 36, '41.00', '18.00', 1),
@@ -161,7 +156,6 @@ INSERT INTO `tblpeliculas` (`idPelicula`, `tituloPelicula`, `descripcionPelicula
 -- Estructura de tabla para la tabla `tblusuarios`
 --
 
-DROP TABLE IF EXISTS `tblusuarios`;
 CREATE TABLE `tblusuarios` (
   `idUsuario` int(11) NOT NULL,
   `nombreUsuario` varchar(50) NOT NULL,
@@ -177,7 +171,6 @@ CREATE TABLE `tblusuarios` (
 -- Estructura de tabla para la tabla `tblventas`
 --
 
-DROP TABLE IF EXISTS `tblventas`;
 CREATE TABLE `tblventas` (
   `idVenta` int(11) NOT NULL,
   `catidadVenta` int(11) NOT NULL,
