@@ -18,7 +18,7 @@ class Peliculas extends Connect { //Clase de peliculas
 
 
     public function read(){
-        $sql = "SELECT * FROM " . self::TABLE_NAME;
+        $sql = "SELECT * FROM " . self::TABLE_NAME." WHERE disponibilidadPelicula=1 AND stockPelicula>0";
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
             return $data;
