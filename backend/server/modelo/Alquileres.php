@@ -67,7 +67,7 @@ class Alquileres extends Connect { //Clase de alquileres
         }
     }
 
-    public function subtract($idPelicula){
+    public function substract($idPelicula){
         $sql = " UPDATE " . self::TABLE_NAME_PELICULAS." SET stockPelicula= stockPelicula-1 WHERE idPelicula = ".$idPelicula;
         if ($result = $this->conn->query($sql)) {
             return true;

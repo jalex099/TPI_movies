@@ -11,7 +11,11 @@
             "precioAlquilerPelicula"=>10.25,
             "disponibilidadPelicula"=>1);*/
             $send = array(
-                "idCliente"=>2);
+                "cantidadVenta"=>3,
+                "fechaVenta"=>"2020-08-19",
+                "idCliente"=>1,
+                "idPelicula"=>24
+            );
 $json_data = json_encode($send);
 
 
@@ -30,5 +34,5 @@ $stream = stream_context_create([
         'verify_peer_name' => false
     ]
 ]);
-$data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneVenta.php", false, $stream);
+$data = file_get_contents("http://localhost/TPI_movies/backend/server/createVenta.php", false, $stream);
 echo $data;

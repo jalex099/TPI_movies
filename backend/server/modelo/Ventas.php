@@ -48,16 +48,8 @@ class Ventas extends Connect { //Clase de ventas
         }
     }
 
-    public function estadoAlquiler($idAlquiler){
-        $sql = "UPDATE " . self::TABLE_NAME." SET `estadoAlquiler`=0 WHERE idAlquiler=".$idAlquiler;
-        if ($result = $this->conn->query($sql)) {
-            return true;
-        } else{
-            return false;
-        }
-    }
     public function readSpecific(){
-        $sql = "SELECT * FROM " . self::TABLE_NAME." order by idAlquiler desc limit 1";
+        $sql = "SELECT * FROM " . self::TABLE_NAME." order by idVenta desc limit 1";
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
             return $data;
@@ -66,17 +58,8 @@ class Ventas extends Connect { //Clase de ventas
         }
     }
 
-    public function subtract($idPelicula){
-        $sql = " UPDATE " . self::TABLE_NAME_PELICULAS." SET stockPelicula= stockPelicula-1 WHERE idPelicula = ".$idPelicula;
-        if ($result = $this->conn->query($sql)) {
-            return true;
-        } else{
-            return false;
-        }
-    }
-
-    public function add($idPelicula){
-        $sql = " UPDATE " . self::TABLE_NAME_PELICULAS." SET stockPelicula= stockPelicula+1 WHERE idPelicula = ".$idPelicula;
+    public function substract($idPelicula,$cantidadVenta){
+        $sql = " UPDATE " . self::TABLE_NAME_PELICULAS." SET stockPelicula= stockPelicula-".$cantidadVenta." WHERE idPelicula = ".$idPelicula;
         if ($result = $this->conn->query($sql)) {
             return true;
         } else{
@@ -85,13 +68,12 @@ class Ventas extends Connect { //Clase de ventas
     }
 
     
-    public function create($fechaAlquiler, $fechaEsperadaAlquiler, $idCliente, $idPelicula){
-        $sql = "INSERT INTO " . self::TABLE_NAME. " (`fechaAlquiler`,  `fechaEsperadaAlquiler`,
-        `idCliente`, `idPelicula`, `estadoAlquiler`) 
-        VALUES ('".$fechaAlquiler."','".$fechaEsperadaAlquiler."',".$idCliente.",".$idPelicula.",
-        1)";
+    public function create($cantidadVenta, $fechaVenta, $idCliente, $idPelicula){
+        $sql = "INSERT INTO " . self::TABLE_NAME. " (`cantidadVenta`,  `fechaVenta`,
+        `idCliente`, `idPelicula`) 
+        VALUES (".$cantidadVenta.",'".$fechaVenta."',".$idCliente.",".$idPelicula.")";
         if ($result = $this->conn->query($sql)) {
-            $this->substract($idPelicula);
+            $this->substract($idPelicula, $cantidadVenta);
             return $this->readSpecific();
             
         } else{
