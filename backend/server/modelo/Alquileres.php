@@ -84,11 +84,9 @@ class Alquileres extends Connect { //Clase de alquileres
         VALUES ('".$fechaAlquiler."','".$fechaEsperadaAlquiler."',".$idCliente.",".$idPelicula.",
         1)";
         if ($result = $this->conn->query($sql)) {
-            if($this->substract($idPelicula)){
-                return $this->readSpecific();
-            }else{
-                return $this->error();
-            }
+            $this->substract($idPelicula);
+            return $this->readSpecific();
+            
         } else{
             return $this->error();
         }
@@ -99,11 +97,8 @@ class Alquileres extends Connect { //Clase de alquileres
         `totalDetalleAlquiler`, `multaDetalleAlquiler`) 
         VALUES (".$idAlquiler.",'".$fechaDevolucionAlquiler."',".$totalDetalleAlquiler.",".$multaDetalleAlquiler.")";
         if ($result = $this->conn->query($sql)) {
-            if($this->add($idPelicula)){
-                return $this->ok();
-            }else{
-                return $this->error();
-            }
+            $this->add($idPelicula);
+            return $this->ok();
         } else{
             return $this->error();
         }
