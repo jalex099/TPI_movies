@@ -49,6 +49,14 @@ class Alquileres extends Connect { //Clase de alquileres
         }
     }
 
+    public function estadoAlquiler($idAlquiler){
+        $sql = "UPDATE " . self::TABLE_NAME." SET `estadoAlquiler`=0 WHERE idAlquiler=".$idAlquiler;
+        if ($result = $this->conn->query($sql)) {
+            return true;
+        } else{
+            return false;
+        }
+    }
     public function readSpecific(){
         $sql = "SELECT * FROM " . self::TABLE_NAME." order by idAlquiler desc limit 1";
         if ($result = $this->conn->query($sql)) {
@@ -98,6 +106,7 @@ class Alquileres extends Connect { //Clase de alquileres
         VALUES (".$idAlquiler.",'".$fechaDevolucionAlquiler."',".$totalDetalleAlquiler.",".$multaDetalleAlquiler.")";
         if ($result = $this->conn->query($sql)) {
             $this->add($idPelicula);
+            $this->estadoAlquiler($idAlquiler);
             return $this->ok();
         } else{
             return $this->error();
