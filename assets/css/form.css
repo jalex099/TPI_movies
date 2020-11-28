@@ -302,6 +302,12 @@
 }
 
 /* Estilos de input, select, textarea, inputs medianos al contener datos validos*/
+form .field input:read-only,
+form .field-row .field-md input:read-only,
+form .field-row .field-sm input:read-only,
+form .field-auto textarea:read-only {
+    border-color: #84dcc6;
+}
 form .field input:valid,
 form .field-row .field-md input:valid,
 form .field-row .field-sm input:valid,
@@ -351,6 +357,15 @@ form .field select:focus~label {
 }
 
 /* Estilos de label flotante al ser validos en input, input medianos, select*/
+form .field input:read-only~label,
+form .field-row .field-md input:read-only~label,
+form .field-row .field-sm input:read-only~label {
+    top: 0%;
+    font-size: 16px;
+    color: #84dcc6;
+    background: #2c2c2c;
+    transform: translateY(-50%);
+}
 form .field input:valid~label,
 form .field-row .field-md input:valid~label,
 form .field-row .field-sm input:valid~label,
@@ -372,6 +387,13 @@ form .field-auto textarea:focus~label {
 }
 
 /* Estilos de label flotante al ser validos en textarea*/
+form .field-auto textarea:read-only~label {
+    top: 0%;
+    font-size: 16px;
+    color: #84dcc6;
+    background: #2c2c2c;
+    transform: translateY(-70%);
+}
 form .field-auto textarea:valid~label {
     top: 0%;
     font-size: 16px;

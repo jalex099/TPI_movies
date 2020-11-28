@@ -1,5 +1,5 @@
 <div class="filter">
-    <form action="">
+    <form action="<?= BASE_DIR; ?>Movie/showMovies" method="post">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6 col-md-4 col-xl-3">
@@ -16,8 +16,8 @@
                     <div class="field">
                     <select name="order" id="" required>
                         <option disabled selected value=""></option>
-                        <option value="Ascendente">Ascendente</option>
-                        <option value="Descendente">Descendente</option>
+                        <option value="SORT_ASC">Ascendente</option>
+                        <option value="SORT_DESC">Descendente</option>
                     </select>
                     <label>Orden</label>
                     </div>
@@ -39,26 +39,6 @@
         <!-- Elemento de fila automatizada, con columnas predeterminadas para cada tamano-->
         <div class="row justify-content-md-center">
             <?php
-            //Obtenemos el json desde la url
-            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
-            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
-            $data = json_decode($data, true); //Lo decodificamos de nuevo para hacerlo array
-
-            /*function array_sort_by(&$arrIni, $col, $order)
-            {
-                $arrAux = array();
-                foreach ($arrIni as $key=> $row)
-                {
-                    $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
-                    $arrAux[$key] = strtolower($arrAux[$key]);
-                }
-                array_multisort($arrAux, $order, $arrIni);
-            }
-
-            $order = SORT_DESC;
-
-            array_sort_by($data, 'tituloPelicula', $order);*/
-
             //Recorremos el arreglo por medio de un foreach asociativo
             foreach ($data as $row => $list) {
                 $id = $list["idPelicula"];

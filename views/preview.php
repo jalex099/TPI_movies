@@ -4,7 +4,6 @@
             //Obtenemos el json desde la url
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
             $data = json_decode($data, true); //Lo decodificamos para hacerlo json
-            $data = json_decode($data, true); //Lo decodificamos de nuevo para hacerlo array
 
             $targetId = $_GET["id"];
             
