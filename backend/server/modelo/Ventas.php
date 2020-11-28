@@ -39,7 +39,7 @@ class Ventas extends Connect { //Clase de ventas
     }
 
     public function readOneSpecific($idVenta){
-        $sql = "SELECT * FROM " . self::TABLE_NAME." WHERE idAlquiler = ".$idAlquiler;
+        $sql = "SELECT * FROM " . self::TABLE_NAME." WHERE idVenta = ".$idVenta;
         if ($result = $this->conn->query($sql)) {
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
             return $data;
@@ -76,19 +76,6 @@ class Ventas extends Connect { //Clase de ventas
             $this->substract($idPelicula, $cantidadVenta);
             return $this->readSpecific();
             
-        } else{
-            return $this->error();
-        }
-    }
-
-    public function detailAlquiler($idAlquiler, $fechaDevolucionAlquiler, $totalDetalleAlquiler, $multaDetalleAlquiler){
-        $sql = "INSERT INTO " . self::TABLE_NAME_DETAIL. " (`idAlquiler`,  `fechaDevolucionAlquiler`,
-        `totalDetalleAlquiler`, `multaDetalleAlquiler`) 
-        VALUES (".$idAlquiler.",'".$fechaDevolucionAlquiler."',".$totalDetalleAlquiler.",".$multaDetalleAlquiler.")";
-        if ($result = $this->conn->query($sql)) {
-            $this->add($idPelicula);
-            $this->estadoAlquiler($idAlquiler);
-            return $this->ok();
         } else{
             return $this->error();
         }
