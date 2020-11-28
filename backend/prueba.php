@@ -11,7 +11,7 @@
             "precioAlquilerPelicula"=>10.25,
             "disponibilidadPelicula"=>1);*/
             $send = array(
-                "idVenta"=>3,
+                "correoUsuario"=>"moralsxavi@gmail.com"
             );
 $json_data = json_encode($send);
 
@@ -31,5 +31,5 @@ $stream = stream_context_create([
         'verify_peer_name' => false
     ]
 ]);
-$data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneSpecificVenta.php", false, $stream);
+$data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneUsuario.php", false, $stream);
 echo $data;
