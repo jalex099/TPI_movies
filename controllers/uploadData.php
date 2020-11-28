@@ -9,7 +9,7 @@ $disponibilidadPelicula;
 $portadaPelicula=""; //variable que se mandara al backend como la url de la imagen
 
 if (!empty($_FILES)) {
-  $url = './img/';
+  $url = './API/img/';
   $url_temp = $url.basename($_FILES['subirArchivo']['name']);
 
   $tipoArchivo = strtolower(pathinfo($url_temp, PATHINFO_EXTENSION));
@@ -51,9 +51,6 @@ if (!empty($_FILES)) {
       );
       var_dump($result);
       $portadaPelicula = 'https://drive.google.com/uc?export=view&id='.$result->id;
-      //echo '<a href="https://drive.google.com/open?id='.$result->id.'" target="_blank">'.$result->name.'</a>';
-      //echo "    <img src='https://drive.google.com/uc?export=view&id=1XAUHn4EWJRL55hu1J0-k3UiMyqC6De1Z' alt='image'>";
-
       }catch(Google_Service_Exception $gs){
       
         $m=json_decode($gs->getMessage());
