@@ -16,8 +16,8 @@
                     <div class="field">
                     <select name="order" id="" required>
                         <option disabled selected value=""></option>
-                        <option value="SORT_ASC">Ascendente</option>
-                        <option value="SORT_DESC">Descendente</option>
+                        <option value="Ascendente">Ascendente</option>
+                        <option value="Descendente">Descendente</option>
                     </select>
                     <label>Orden</label>
                     </div>

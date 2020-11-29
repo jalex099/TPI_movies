@@ -6,7 +6,7 @@ class Movie //Modelo de Movie
         $movieDir = "list.php"; //Asignar nombre del archivo
         return $movieDir; //Retornar nombre del archivo
     }
-    function array_sort_by($arrIni, $col, $order)
+    public function array_sort_by(&$arrIni, $col, $order)
     {
         $arrAux = array();
         foreach ($arrIni as $key=> $row)
@@ -18,7 +18,14 @@ class Movie //Modelo de Movie
     }
     public function getFilter($data, $type, $order) //Metodo para devolver nombre de la vista de catalogo con filtro
     {
-        $this->array_sort_by($data, 'tituloPelicula', $order = SORT_ASC);
+        if($type == "Albabéticamente") { //Si es por orden alfabetico
+            if($order == "Ascendente") { //Si es por orden ascendente
+                $this->array_sort_by($data, 'tituloPelicula', SORT_ASC);
+            }
+            else { //Si no por orden descendente
+                $this->array_sort_by($data, 'tituloPelicula', SORT_DESC);
+            }
+        }
 
         return $data; //Retornar nombre del archivo
     }

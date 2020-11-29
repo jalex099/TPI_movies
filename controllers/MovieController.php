@@ -11,7 +11,7 @@ class MovieController //Clase controlador para acciones de Movie
         $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
         $data = json_decode($data, true); //Lo decodificamos para hacerlo json
 
-        if(!empty($_POST)) {
+        if($_POST) {
             if($_POST["type"] == "" && $_POST["order"] == "") {
                 $data = $data;
             }
