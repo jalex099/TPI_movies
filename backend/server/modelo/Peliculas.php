@@ -27,6 +27,16 @@ class Peliculas extends Connect { //Clase de peliculas
         }
     }
 
+    public function readAll(){
+        $sql = "SELECT * FROM " . self::TABLE_NAME;
+        if ($result = $this->conn->query($sql)) {
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        } else{
+            return $this->error();
+        }
+    }
+
     
     public function create($tituloPelicula, $descripcionPelicula, $generoPelicula, $portadaPelicula, $stockPelicula, $precioVentaPelicula, $precioAlquilerPelicula, $disponibilidadPelicula){
         $sql = "INSERT INTO " . self::TABLE_NAME. " (`tituloPelicula`, `descripcionPelicula`, 
