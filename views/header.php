@@ -1,7 +1,16 @@
 <?php
+require_once "userTemp.php";
+
 $name = $_GET['action']; //Obtenemos el nombre del controlador
 
-$rol = "administrador"; //Prueba para modos de vista
+if(!isset($name) || empty($name)) {
+    if($logStatus == "logIn") {
+        $name = "logout";
+    }
+    else if($logStatus == "logOut") {
+        $name = "login";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +108,7 @@ $rol = "administrador"; //Prueba para modos de vista
                                 class="fas fa-film"></i>Catálogo</a>
                     </li>
                     <?php
-                    if ($rol == "administrador") { //Mostrar elemento solo si es administrador
+                    if ($userType == "Administrador") { //Mostrar elemento solo si es administrador
                     if ($name == "add") /* Activar elemento al estar en vista agregar*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista agregar*/ { ?>
@@ -110,7 +119,7 @@ $rol = "administrador"; //Prueba para modos de vista
                     </li>
                     <?php
                     }
-                    if ($rol == "cliente") { //Mostrar elemento solo si es cliente
+                    if ($userType == "Cliente") { //Mostrar elemento solo si es cliente
                     if ($name == "cart") /* Activar elemento al estar en vista carrito*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista carrito*/ { ?>
@@ -121,7 +130,8 @@ $rol = "administrador"; //Prueba para modos de vista
                     </li>
                     <?php
                     }
-                    if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
+                    if($logStatus == "LogOut") {
+                        if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista login*/ { ?>
                     <li class="nav-item">
@@ -129,7 +139,10 @@ $rol = "administrador"; //Prueba para modos de vista
                         <a class="nav-link" href="<?= BASE_DIR; ?>User/login"><i class="fas fa-user"></i>Iniciar
                             Sesión</a>
                     </li>
-                    <?php if ($name == "logout") /* Activar elemento al cerrar sesion*/ { ?>
+                    <?php
+                    } 
+                    else if($logStatus == "LogIn") {
+                        if ($name == "logout") /* Activar elemento al cerrar sesion*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en sesion activa*/ { ?>
                     <li class="nav-item">
@@ -137,6 +150,7 @@ $rol = "administrador"; //Prueba para modos de vista
                         <a class="nav-link" href="<?= BASE_DIR; ?>User/logout"><i class="fas fa-door-open"></i>Cerrar
                             Sesión</a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
             <!-- /NavBar, lista de items en menu-->

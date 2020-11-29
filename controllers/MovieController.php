@@ -10,6 +10,7 @@ class MovieController //Clase controlador para acciones de Movie
         //Obtenemos el json desde la url
         $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
         $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+        //var_dump($data);
 
         if($_POST) {
             $idDisponibilidad;
