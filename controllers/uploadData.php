@@ -66,15 +66,15 @@ if (!empty($_FILES)) {
 }
 
 if(!empty($_POST)){
-    $tituloPelicula = $_POST['title'];
-    $descripcionPelicula = $_POST['description'];
-    $generoPelicula = $_POST['genre'];
-    $stockPelicula = $_POST['quantity'];
-    $precioVentaPelicula = $_POST['priceBuy'];
-    $precioAlquilerPelicula = $_POST['priceRent'];
-    $disponibilidadPelicula = $_POST['avaliable'];
+    $tituloPelicula = $_POST['tituloPelicula'];
+    $descripcionPelicula = $_POST['descripcionPelicula'];
+    $generoPelicula = $_POST['generoPelicula'];
+    $stockPelicula = $_POST['stockPelicula'];
+    $precioVentaPelicula = $_POST['precioVentaPelicula'];
+    $precioAlquilerPelicula = $_POST['precioAlquilerPelicula'];
+    $disponibilidadPelicula = $_POST['disponibilidadPelicula'];
 
-    $data= array(
+    $data = array(
         "tituloPelicula" => $tituloPelicula,
         "descripcionPelicula" => $descripcionPelicula,
         "generoPelicula" => $generoPelicula,
@@ -102,7 +102,7 @@ if(!empty($_POST)){
         ]
     ]);
 
-    $receive = file_get_contents("http://localhost/TPI_movies/Servidor/createPelicula.php", false, $stream);
+    $receive = file_get_contents("http://localhost/TPI_movies/backend/server/createPelicula.php", false, $stream);
     echo $receive;
 
     if($receive.array("response"=>true)) {

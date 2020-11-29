@@ -1,7 +1,7 @@
 <?php
     $name = $_GET['action']; //Obtenemos el nombre de la accion en la URL
 
-    $dataP = file_get_contents("http://localhost/TPI_movies/backend/server/readCliente.php");
+    /*$dataP = file_get_contents("http://localhost/TPI_movies/backend/server/readCliente.php");
     echo $dataP;
     $dataP = json_decode($dataP, true); //Lo decodificamos para hacerlo json
 
@@ -9,7 +9,7 @@
         echo $list["idCliente"];
         echo $list["nombreCliente"];
         echo $list["apellidoCliente"];
-    };
+    };*/
 ?>
 
 <!-- Contenedor principal para el contenido-->
@@ -45,7 +45,11 @@
         ?>
 
         <!-- Formulario, para modificar peliculas o eliminar-->
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" target="_blank">
+        <?php if($name == "modify") { ?>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" target="_blank">
+        <?php } if($name == "eliminate") { ?>
+            <form action="<?= BASE_DIR; ?>Movie/eliminateMovie" method="post" enctype="multipart/form-data" target="_blank">
+        <?php } ?>
             <!-- Input para ingresar titulo de pelicula-->            
             <div class="field">
                 <input name="title" type="text"
@@ -209,21 +213,21 @@
             ?>
             <!-- Input para ingresar titulo de pelicula-->
             <div class="field">
-                <input name="title" type="text" required>
+                <input name="tituloPelicula" type="text" required>
                 <label>Título</label>
             </div>
             <!-- /Input para ingresar titulo de pelicula-->
 
             <!-- Input para ingresar descripcion de pelicula-->
             <div class="field-auto">
-                <textarea name="description" cols="30" rows="2" required></textarea>
+                <textarea name="descripcionPelicula" cols="30" rows="2" required></textarea>
                 <label>Descripción</label>
             </div>
             <!-- /Input para ingresar descripcion de pelicula-->
             
             <!-- Select para ingresar genero de pelicula-->
             <div class="field">
-                <select name="genre" id="" required>
+                <select name="generoPelicula" id="" required>
                     <option disabled selected value=""></option>
                     <option value="Drama">Drama</option>
                     <option value="Romance">Romance</option>
@@ -238,7 +242,7 @@
 
             <!-- Input para ingresar cantidad de existencias de pelicula-->
             <div class="field">
-                <input name="quantity" type="text" required>
+                <input name="stockPelicula" type="text" required>
                 <label>Cantidad</label>
             </div>
             <!-- /Input para ingresar cantidad de existencias de pelicula-->
@@ -246,14 +250,14 @@
             <div class="field-row">
                 <!-- Input para ingresar precio por alquiler de pelicula-->
                 <div class="field-md">
-                    <input name="priceRent" type="text" required>
+                    <input name="precioAlquilerPelicula" type="text" required>
                     <label>Precio Alquiler</label>
                 </div>
                 <!-- /Input para ingresar precio por alquiler de pelicula-->
 
                 <!-- Input para ingresar precio por compra de pelicula-->
                 <div class="field-sm">
-                    <input name="priceBuy" type="text" required>
+                    <input name="precioVentaPelicula" type="text" required>
                     <label>Precio Compra</label>
                 </div>
                 <!-- /Input para ingresar precio por compra de pelicula-->
@@ -261,7 +265,7 @@
 
             <!-- Input para ingresar disponibilidad de pelicula-->
             <div class="field">
-                <select name="avaliable" id="" required>
+                <select name="disponibilidadPelicula" id="" required>
                     <option disabled selected value=""></option>
                     <option value="1">Disponible</option>
                     <option value="2">No disponible</option>
