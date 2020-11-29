@@ -29,7 +29,7 @@ if (!empty($_FILES)) {
       $service = new Google_Service_Drive($client);
 
       //ruta al archivo
-      $file_path = "img/".$_FILES['subirArchivo']['name'];
+      $file_path = "./API/img/".$_FILES['subirArchivo']['name'];
 
       //instacia de archivo
       $file = new Google_Service_Drive_DriveFile();
