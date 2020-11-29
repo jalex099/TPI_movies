@@ -22,8 +22,7 @@
                         <span class="picture-slider__code">INFO 2</span>
                         <div class="picture-slider__title">Accede</div>
                         <div class="picture-slider__text">Si ya eres parte de nuestra comunidad, solo tienes que acceder
-                            para
-                            poder tener acceso al catálogo de películas</div>
+                            para poder tener acceso al catálogo de películas</div>
                         <a href="<?= BASE_DIR; ?>User/login" class="picture-slider__button">Iniciar Sesión</a>
                     </div>
                 </div>
@@ -34,10 +33,10 @@
                     </div>
                     <div class="picture-slider__content">
                         <span class="picture-slider__code">INFO 3</span>
-                        <div class="picture-slider__title">Compras</div>
-                        <div class="picture-slider__text">Si ya eres miembro y tienes compras pendientes pues te
-                            dirigiremos hasta tu carrito con tus artículos</div>
-                        <a href="<?= BASE_DIR; ?>User/register" class="picture-slider__button">Ver Carrito</a>
+                        <div class="picture-slider__title">Únete</div>
+                        <div class="picture-slider__text">Se aún no formas parte de nuestra comunidad, regístrate ahora
+                            mismo para disfrutar de todo el contenido</div>
+                        <a href="<?= BASE_DIR; ?>User/register" class="picture-slider__button">Registrarse</a>
                     </div>
                 </div>
 

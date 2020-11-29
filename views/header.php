@@ -1,5 +1,8 @@
 <?php
 require_once "userTemp.php";
+$superUser = new UserTemp();
+$userType = $superUser->getUserType();
+$logStatus = $superUser->getLogStatus();
 
 $name = $_GET['action']; //Obtenemos el nombre del controlador
 
@@ -120,13 +123,13 @@ if(!isset($name) || empty($name)) {
                     <?php
                     }
                     if ($userType == "Cliente") { //Mostrar elemento solo si es cliente
-                    if ($name == "cart") /* Activar elemento al estar en vista carrito*/ { ?>
+                    if ($name == "return") /* Activar elemento al estar en vista carrito*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista carrito*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
-                        <a class="nav-link" href="<?= BASE_DIR; ?>User/cart"><i
-                                class="fas fa-shopping-cart"></i>Carrito</a>
+                        <a class="nav-link" href="<?= BASE_DIR; ?>User/return"><i
+                                class="fas fa-tv"></i>Devoluciones</a>
                     </li>
                     <?php
                     }

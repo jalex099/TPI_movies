@@ -1,5 +1,8 @@
 <?php
-require_once "userTemp.php";
+//$logStatus = "LogIn";
+//$logStatus = "LogOut";
+//$userType = "Administrador";
+//$userType = "Cliente";
 ?>
 
 <div class="filter">
@@ -12,7 +15,7 @@ require_once "userTemp.php";
                             <option disabled selected value=""></option>
                             <option value="Albabéticamente">Alfabéticamente</option>
                             <option value="Popularidad">Popularidad</option>
-                            <?php if($userType == "Administrador") { ?>
+                            <?php echo $userType; if($userType == "Administrador") { ?>
                             <option value="Disponibilidad">Disponibilidad</option>
                             <?php } ?>
                         </select>

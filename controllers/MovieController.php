@@ -4,11 +4,20 @@ class MovieController //Clase controlador para acciones de Movie
     public function showMovies() //Metodo para mostrar vista de catalogo
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
+        require_once "./views/userTemp.php";
+        $superUser = new UserTemp();
+        $userType = $superUser->getUserType();
+
         $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
         $showMovies = $movie->showMovies(); //Obtenemos el nombre de la vista
 
         //Obtenemos el json desde la url
-        $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+        if($userType == "Administrador") {
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
+        }
+        else {
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+        }
         $data = json_decode($data, true); //Lo decodificamos para hacerlo json
         //var_dump($data);
 
