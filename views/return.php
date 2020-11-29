@@ -7,6 +7,8 @@
 
                         <!-- Shopping cart table -->
                         <div class="table-responsive">
+                        <a href="<?= BASE_DIR; ?>User/return" class="picture-slider__button py-2">Alquileres</a>
+                        <a href="<?= BASE_DIR; ?>User/shopping" class="picture-slider__button py-2">Compras</a>
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
@@ -51,9 +53,7 @@
                                             </div>
                                         </th>
                                         <td class="border-0 align-middle"><strong>$<?= $list["precioVentaPelicula"]; ?></strong></td>
-                                        <td class="border-0 align-middle"><strong>
-                                            <input type="number" step="1" min="1" max="<?= $list["stockPelicula"]; ?>" name="" id="">
-                                        </strong></td>
+                                        <td class="border-0 align-middle"><strong><?= $list["stockPelicula"]; ?></strong></td>
                                         <td class="border-0 align-middle"><strong>$<?= $subTotal; ?></strong></td>
                                         <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
                                     </tr>

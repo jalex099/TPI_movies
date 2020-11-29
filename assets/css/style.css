@@ -57,7 +57,9 @@ body {
     margin-top: 60px;
     min-height: 100vh;
 }
-
+.cart-row {
+    color: #111111;
+}
 .cart-row:hover {
     transition: all ease-in 0.3s;
     background-color: #e6e6e6;

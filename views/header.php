@@ -123,9 +123,9 @@ if(!isset($name) || empty($name)) {
                     <?php
                     }
                     if ($userType == "Cliente") { //Mostrar elemento solo si es cliente
-                    if ($name == "return") /* Activar elemento al estar en vista carrito*/ { ?>
+                        if ($name == "return") /* Activar elemento al estar en vista devoluciones*/ { ?>
                     <li class="nav-item active">
-                        <?php } else /* Desactivar elemento al estar en vista carrito*/ { ?>
+                        <?php } else /* Desactivar elemento al estar en vista devoluciones*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
                         <a class="nav-link" href="<?= BASE_DIR; ?>User/return"><i

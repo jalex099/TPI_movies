@@ -33,10 +33,6 @@
         <!-- /Titulo del formulario-->
 
         <?php 
-        //Obtenemos el json desde la url
-        $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
-        $data = json_decode($data, true); //Lo decodificamos para hacerlo json
-
         if($name == "modify" || $name == "eliminate") {
             $targetId = $_GET["id"];
         
@@ -73,17 +69,18 @@
             <!-- /Input para ingresar descripcion de pelicula-->
             <?php
             if($name != "eliminate") { //Muestra el genero como un select en caso que no sea la vista para eliminar
+                $select = $list["generoPelicula"];
             ?>
             <!-- Select para ingresar genero de pelicula-->
             <div class="field">
                 <select name="genre" id="" required>
-                    <option disabled selected value=""></option>
-                    <option value="Drama">Drama</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Amor">Amor</option>
-                    <option value="Accion">Acción</option>
-                    <option value="Comedia">Comedia</option>
-                    <option value="Suspenso">Suspenso</option>
+                    <option disabled <?php if($select == "") { ?> selected <?php } ?> value=""></option>
+                    <option <?php if($select == "Drama") { ?> selected <?php } ?> value="Drama">Drama</option>
+                    <option <?php if($select == "Romance") { ?> selected <?php } ?> value="Romance">Romance</option>
+                    <option <?php if($select == "Documental") { ?> selected <?php } ?> value="Documental">Documental</option>
+                    <option <?php if($select == "Accion") { ?> selected <?php } ?> value="Accion">Acción</option>
+                    <option <?php if($select == "Comedia") { ?> selected <?php } ?> value="Comedia">Comedia</option>
+                    <option <?php if($select == "Suspenso") { ?> selected <?php } ?> value="Suspenso">Suspenso</option>
                 </select>
                 <label>Género</label>
             </div>
@@ -135,7 +132,7 @@
             <?php if($name == "modify") { ?>
             <div class="field">
                 <div class="file-upload-wrapper" data-text="Seleccionar imagen">
-                    <input name="file" type="file" class="file-upload-field" value="" required>
+                    <input name="file" type="file" class="file-upload-field" value="<?=$list["portadaPelicula"];?>" required>
                 </div>
             </div>
             <?php } ?>

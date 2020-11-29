@@ -52,6 +52,19 @@ class MovieController //Clase controlador para acciones de Movie
     public function preview() //Metodo para mostrar vista de vista previa
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        if($userType == "Administrador") { //Si el usuario es tipo administrador
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
+        }
+        else { //Si es un cliente
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+        }
+        $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
         $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
         $previewMovie = $movie->preview(); //Obtenemos el nombre de la vista
         require_once "views/$previewMovie"; //Requerimos la vista con la direccion
@@ -68,6 +81,19 @@ class MovieController //Clase controlador para acciones de Movie
     public function modify() //Metodo para mostrar vista de modificar pelicula
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        if($userType == "Administrador") { //Si el usuario es tipo administrador
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
+        }
+        else { //Si es un cliente
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+        }
+        $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
         $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
         $modifyMovie = $movie->form(); //Obtenemos el nombre de la vista
         require_once "views/$modifyMovie"; //Requerimos la vista con la direccion

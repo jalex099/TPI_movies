@@ -113,7 +113,7 @@ class UserController //Clase controlador para acciones de User
         }
     }
 
-    public function cart() //Metodo para mostrar vista de carrito
+    public function return() //Metodo para mostrar vista de devoluciones
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
         $user = new User(); //Instanciamos un nuevo objeto de usuario

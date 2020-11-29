@@ -1,10 +1,6 @@
     <main class="principal">
         <div class="content">
             <?php 
-            //Obtenemos el json desde la url
-            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
-            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
-
             $targetId = $_GET["id"];
             
             foreach($data as $row=>$list){
@@ -22,6 +18,7 @@
             </div>
 
             <div class="content__right">
+                <?php if($userType == "Administrador") { ?>
                 <div class="content-float">
                     <div class="menu">
                         <div class="title" onclick="f()">Opciones<span class="fa fa-bars"></span>
@@ -29,11 +26,12 @@
                         </div>
                         <div class="dropdown">
                             <a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $targetId; ?>"><p>Modificar<span class="fas fa-tools"></span></p></a>
-                            <a href="<?= BASE_DIR; ?>Movie/change&id=<?= $targetId; ?>"><p>Quitar <span class="fas fa-times-circle"></span></p></a>
+                <a href="<?= BASE_DIR; ?>Movie/change&id=<?= $targetId; ?>"><p><?php if($list["disponibilidadPelicula"] == 1) { ?>Quitar<?php } if($list["disponibilidadPelicula"] == 0) { ?>Agregar<?php } ?><span class="fas fa-exchange-alt"></span></p></a>
                             <a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $targetId; ?>"><p>Eliminar <span class="fas fa-trash"></span></p></a>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
 
                 <div class="box-tittle">
                     <div class="box-content">
