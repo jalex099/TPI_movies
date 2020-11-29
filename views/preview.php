@@ -38,7 +38,7 @@
                 <div class="box-tittle">
                     <div class="box-content">
                         <h1 id="res-title"><?=$list["tituloPelicula"];?></h1>
-                        <h3 id="res-subtitle"><?=$list["generoPelicula"];?> / <span>Disponibles: <strong><?=$list["disponibilidadPelicula"];?></strong></span></h3>
+                        <h3 id="res-subtitle"><?=$list["generoPelicula"];?> / <span>Disponibles: <strong><?=$list["stockPelicula"];?></strong></span></h3>
                         <h4 id="res-like"><a class="far fa-heart" id="btn-like"></a> <span>74</span> Me gusta</h4>
                         <div class="btn__actions">
                             <button class="btn-rent">$<?=$list["precioAlquilerPelicula"];?></button>

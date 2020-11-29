@@ -46,9 +46,9 @@
 
         <!-- Formulario, para modificar peliculas o eliminar-->
         <?php if($name == "modify") { ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" target="_blank">
+            <form action="<?= BASE_DIR; ?>Movie/modifyMovie&id=<?= $targetId; ?>" method="post" enctype="multipart/form-data">
         <?php } if($name == "eliminate") { ?>
-            <form action="<?= BASE_DIR; ?>Movie/eliminateMovie" method="post" enctype="multipart/form-data" target="_blank">
+            <form action="<?= BASE_DIR; ?>Movie/eliminateMovie&id=<?= $targetId; ?>" method="post" enctype="multipart/form-data">
         <?php } ?>
             <!-- Input para ingresar titulo de pelicula-->            
             <div class="field">

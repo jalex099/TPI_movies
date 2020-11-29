@@ -27,7 +27,7 @@ class MovieController //Clase controlador para acciones de Movie
                         $idDisponibilidad = "1";
                     }
                     else {
-                        $idDisponibilidad = "2";
+                        $idDisponibilidad = "0";
                     }
                 }
             }
@@ -164,5 +164,59 @@ class MovieController //Clase controlador para acciones de Movie
         $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
         $eliminateMovie = $movie->form(); //Obtenemos el nombre de la vista
         require_once "views/$eliminateMovie"; //Requerimos la vista con la direccion
+    }
+
+    public function eliminateMovie() {
+        if($_GET) {
+            $idPelicula = $_GET["id"];
+
+            $send = array(
+                "idPelicula" => $idPelicula,
+            );
+        
+            $json_data = json_encode($send);
+            $stream = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\n" .
+                                "Accept: application/json\r\n" .
+                                "Connection: close\r\n" .
+                                "Content-length: " . strlen($json_data) . "\r\n",
+                    'protocol_version' => 1.1,
+                    'content' => $json_data
+                ],
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ]);
+        
+            $receive = file_get_contents("http://localhost/TPI_movies/backend/server/deletePelicula.php", false, $stream);
+            echo $receive;
+        
+            if($receive.array("response"=>true)) {
+                echo'<script type="text/javascript">
+                    alert("Pelicula eliminada con éxito");
+                    </script>';
+        
+                echo'<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Movie/showMovies";
+                    </script>';
+            }
+            else {
+                echo'<script type="text/javascript">
+                    alert("No se ha logrado cambiar el estado de la pelicula");
+                    </script>';
+        
+                echo'<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Movie/preview&id='.$idPelicula.'";
+                    </script>';
+            }
+        }
+        else {
+            echo'<script type="text/javascript">
+                    alert("No");
+                    </script>';
+        }
     }
 }
