@@ -26,6 +26,9 @@ class Movie //Modelo de Movie
                 $this->array_sort_by($data, 'tituloPelicula', SORT_DESC);
             }
         }
+        else if($type == "Popularidad") {
+
+        }
 
         return $data; //Retornar nombre del archivo
     }

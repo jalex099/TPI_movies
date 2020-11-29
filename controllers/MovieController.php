@@ -12,12 +12,24 @@ class MovieController //Clase controlador para acciones de Movie
         $data = json_decode($data, true); //Lo decodificamos para hacerlo json
 
         if($_POST) {
-            if($_POST["type"] == "" && $_POST["order"] == "") {
+            $idDisponibilidad;
+
+            if($_POST["type"] == "") {
                 $data = $data;
             }
             else {
                 $data = $data;
-                $data = $movie->getFilter($data, $_POST["type"], $_POST["order"]);
+                if($_POST["type"] != "Disponibilidad") {
+                    $data = $movie->getFilter($data, $_POST["type"], $_POST["orderAD"]);
+                }
+                else {
+                    if($_POST["orderDN"] == "Disponible") {
+                        $idDisponibilidad = "1";
+                    }
+                    else {
+                        $idDisponibilidad = "2";
+                    }
+                }
             }
         }
         else {

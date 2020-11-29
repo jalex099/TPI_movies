@@ -32,6 +32,11 @@ $(document).ready(function () {
     document.getElementById("res-info").style.fontSize = "26px";
     document.getElementById("res-info").style.padding = "5% 10%";
   }
+
+  if(document.getElementById("ordenAD") && document.getElementById("ordenDN")) {
+    document.getElementById("ordenAD").style.display = "initial";
+    document.getElementById("ordenDN").style.display = "none";
+  }
 });
 // ---------ADAPTACION DE ELEMENTOS PARA TABLETAS-----------
 
@@ -154,3 +159,30 @@ $("form").on("change", ".file-upload-field", function () { //Al seleccionar arch
     );
 });
 // ---------ADAPTAR CONTENIDO DEL FILE INPUT, RECIBIR DATOS-----------
+
+
+// ---------MODIFICAR LOS SELECT DE LOS FILTROS SEGUN EL TIPO DE FILTRO-----------
+const selectElement = document.querySelector('.tipo');
+
+if(selectElement) {
+  selectElement.addEventListener('change', (event) => {
+    if(document.getElementById("ordenAD") && document.getElementById("ordenDN")) {
+      if(event.target.value != "Disponibilidad") {
+        document.getElementById("ordenAD").style.display = "initial";
+        document.getElementById("ordenDNS").removeAttribute("required");
+        document.getElementById("ordenDN").style.display = "none";
+      }
+      else if(event.target.value == "" || event.target.value == null) {
+        document.getElementById("ordenAD").style.display = "initial";
+        document.getElementById("ordenDNS").removeAttribute("required");
+        document.getElementById("ordenDN").style.display = "none";
+      }
+      else {
+        document.getElementById("ordenADS").removeAttribute("required");
+        document.getElementById("ordenAD").style.display = "none";
+        document.getElementById("ordenDN").style.display = "initial";
+      }
+    }
+  });
+}
+// ---------MODIFICAR LOS SELECT DE LOS FILTROS SEGUN EL TIPO DE FILTRO-----------
