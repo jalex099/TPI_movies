@@ -37,7 +37,7 @@
                         <div class="picture-slider__title">Compras</div>
                         <div class="picture-slider__text">Si ya eres miembro y tienes compras pendientes pues te
                             dirigiremos hasta tu carrito con tus artículos</div>
-                        <a href="<?= BASE_DIR; ?>User/cart" class="picture-slider__button">Ver Carrito</a>
+                        <a href="<?= BASE_DIR; ?>User/register" class="picture-slider__button">Ver Carrito</a>
                     </div>
                 </div>
 

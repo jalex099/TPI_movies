@@ -1,5 +1,15 @@
 <?php
     $name = $_GET['action']; //Obtenemos el nombre de la accion en la URL
+
+    $dataP = file_get_contents("http://localhost/TPI_movies/backend/server/readCliente.php");
+    echo $dataP;
+    $dataP = json_decode($dataP, true); //Lo decodificamos para hacerlo json
+
+    foreach($dataP as $row=>$list) {
+        echo $list["idCliente"];
+        echo $list["nombreCliente"];
+        echo $list["apellidoCliente"];
+    };
 ?>
 
 <!-- Contenedor principal para el contenido-->
@@ -142,7 +152,13 @@
         ?>
 
         <!-- Formulario, para login, registro y agregar peliculas-->
-        <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post" enctype="multipart/form-data" target="_blank">
+        <?php if($name == "add") { ?>
+        <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post" enctype="multipart/form-data">
+        <?php } if($name == "login") { ?>
+        <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post">
+        <?php } if($name == "register") { ?>
+        <form action="<?= BASE_DIR; ?>User/deleteUser" method="post">
+        <?php } ?>
             <?php
             if($name == "login") { //Si detecta que es un login muestra solo los inputs de usuario y contrasena
             ?>
@@ -155,6 +171,34 @@
             <!-- Input para ingresar contrasena-->
             <div class="field">
                 <input name="pass" type="password" required>
+                <label>Contraseña</label>
+            </div>
+            <!-- /Input para ingresar contrasena-->
+            <?php
+            }
+            else if ($name == "register") {
+            ?>
+            <!-- Input para ingresar nombre de cliente-->
+            <div class="field">
+                <input name="nombreCliente" type="text" required>
+                <label>Nombre</label>
+            </div>
+            <!-- /Input para ingresar nombre de cliente-->
+            <!-- Input para ingresar apellido de cliente-->
+            <div class="field">
+                <input name="apellidoCliente" type="text" required>
+                <label>Apellido</label>
+            </div>
+            <!-- /Input para ingresar apellido de cliente-->
+            <!-- Input para ingresar correo de cliente-->
+            <div class="field">
+                <input name="correoCliente" type="email" required>
+                <label>Correo</label>
+            </div>
+            <!-- /Input para ingresar correo de cliente-->
+            <!-- Input para ingresar contrasena-->
+            <div class="field">
+                <input name="contraseñaCliente" type="password" required>
                 <label>Contraseña</label>
             </div>
             <!-- /Input para ingresar contrasena-->
@@ -239,6 +283,8 @@
             <div class="field-small">
                 <?php if($name == "login") /*Si estamos en el login*/ { ?>
                 <input class="btn-account" type="submit" value="Iniciar Sesión">
+                <?php } if($name == "register") /*Si estamos en el registro*/ { ?>
+                <input class="btn-account" type="submit" value="Registrarse">
                 <?php } if($name == "modify") /*Si estamos en la vista de modificacion*/ { ?>
                 <input class="btn-account" type="submit" value="Actualizar">
                 <?php } if($name == "add") /*Si estamos en la vista de agregar*/ { ?>
