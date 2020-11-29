@@ -268,7 +268,7 @@
                 <select name="disponibilidadPelicula" id="" required>
                     <option disabled selected value=""></option>
                     <option value="1">Disponible</option>
-                    <option value="2">No disponible</option>
+                    <option value="0">No disponible</option>
                 </select>
                 <label>Diponibilidad</label>
             </div>
