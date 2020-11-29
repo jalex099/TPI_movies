@@ -63,7 +63,7 @@ class MovieController //Clase controlador para acciones de Movie
         require_once "views/$modifyMovie"; //Requerimos la vista con la direccion
     }
 
-    public function remove() //Metodo para mostrar vista de quitar pelicula
+    public function change() //Metodo para cambiar estado de la pelicula
     {
         if($_GET) {
             $tituloPelicula = "";
@@ -91,11 +91,11 @@ class MovieController //Clase controlador para acciones de Movie
                     $precioVentaPelicula = $list["precioVentaPelicula"];
                     $precioAlquilerPelicula = $list["precioAlquilerPelicula"];
                     
-                    if($list["disponibilidadPelicula"] == "1") {
-                        $disponibilidadPelicula = "2";
+                    if($list["disponibilidadPelicula"] == 1) {
+                        $disponibilidadPelicula = 0;
                     }
-                    else if($list["disponibilidadPelicula"] == "2") {
-                        $disponibilidadPelicula = "1";
+                    else if($list["disponibilidadPelicula"] == 0) {
+                        $disponibilidadPelicula = 1;
                     }
                 }
             };
@@ -138,7 +138,7 @@ class MovieController //Clase controlador para acciones de Movie
                     </script>';
         
                 echo'<script type="text/javascript">
-                    window.location = "'.BASE_DIR.'Movie/preview&id='.$targetId.'";
+                    window.location = "'.BASE_DIR.'Movie/showMovies";
                     </script>';
             }
             else {
@@ -166,7 +166,7 @@ class MovieController //Clase controlador para acciones de Movie
         require_once "views/$eliminateMovie"; //Requerimos la vista con la direccion
     }
 
-    public function eliminateMovie() {
+    public function eliminateMovie() { //Metodo para eliminar pelicula
         if($_GET) {
             $idPelicula = $_GET["id"];
 

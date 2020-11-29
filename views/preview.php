@@ -29,7 +29,7 @@
                         </div>
                         <div class="dropdown">
                             <a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $targetId; ?>"><p>Modificar<span class="fas fa-tools"></span></p></a>
-                            <a href="<?= BASE_DIR; ?>Movie/remove&id=<?= $targetId; ?>"><p>Quitar <span class="fas fa-times-circle"></span></p></a>
+                            <a href="<?= BASE_DIR; ?>Movie/change&id=<?= $targetId; ?>"><p>Quitar <span class="fas fa-times-circle"></span></p></a>
                             <a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $targetId; ?>"><p>Eliminar <span class="fas fa-trash"></span></p></a>
                         </div>
                     </div>
