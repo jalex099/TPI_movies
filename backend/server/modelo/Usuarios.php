@@ -54,11 +54,10 @@ class Usuarios extends Connect { //Clase de usuarios
         return $this->ok();
     }
 
-    /*--------------------------------------------------------------- */
 
-    public function update($idCliente, $nombreCliente, $apellidoCliente, $correoCliente, $contraseñaCliente){
-        $sql = "UPDATE " . self::TABLE_NAME." SET nombreCliente = '".$nombreCliente."', apellidoCliente = '".$apellidoCliente."',correoCliente='".$correoCliente."',contraseñaCliente = 
-        '".$contraseñaCliente."' WHERE idCliente = ".$idCliente;
+    public function update($idUsuario, $nombreUsuario, $apellidoUsuario, $correoUsuario, $contraseñaUsuario, $rolUsuario){
+        $sql = "UPDATE " . self::TABLE_NAME." SET nombreUsuario = '".$nombreUsuario."', apellidoUsuario = '".$apellidoUsuario."',correoUsuario='".$correoUsuario."',contraseñaUsuario = 
+        '".$contraseñaUsuario."' WHERE idUsuario = ".$idUsuario;
         if (!$result = $this->conn->query($sql)) {
             return $this->error();
         }
@@ -66,8 +65,8 @@ class Usuarios extends Connect { //Clase de usuarios
         return $this->ok();
     }
 
-    public function delete($idCliente){
-        $sql = "DELETE FROM " . self::TABLE_NAME." WHERE idCliente =".$idCliente;
+    public function delete($idUsuario){
+        $sql = "DELETE FROM " . self::TABLE_NAME." WHERE idUsuario =".$idUsuario;
         if (!$result = $this->conn->query($sql)) {
             return $this->error();
         } else{

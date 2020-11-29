@@ -73,7 +73,6 @@ if(!empty($_POST)){
     $precioVentaPelicula = $_POST['precioVentaPelicula'];
     $precioAlquilerPelicula = $_POST['precioAlquilerPelicula'];
     $disponibilidadPelicula = $_POST['disponibilidadPelicula'];
-
     $data = array(
         "tituloPelicula" => $tituloPelicula,
         "descripcionPelicula" => $descripcionPelicula,
@@ -84,7 +83,7 @@ if(!empty($_POST)){
         "precioAlquilerPelicula" => $precioAlquilerPelicula,
         "disponibilidadPelicula" => $disponibilidadPelicula
     );
-
+    var_dump($data);
     $json_data = json_encode($data);
     $stream = stream_context_create([
         'http' => [
@@ -105,7 +104,7 @@ if(!empty($_POST)){
     $receive = file_get_contents("http://localhost/TPI_movies/backend/server/createPelicula.php", false, $stream);
     echo $receive;
 
-    if($receive.array("response"=>true)) {
+    if($receive["response"]) {
         echo'<script type="text/javascript">
             alert("Pelicula ingresada con éxito");
             </script>';
