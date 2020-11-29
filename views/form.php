@@ -1,121 +1,5 @@
 <?php
     $name = $_GET['action']; //Obtenemos el nombre de la accion en la URL
-
-    if($_POST) {
-        $tituloPelicula;
-        $descripcionPelicula;
-        $generoPelicula;
-        $stockPelicula;
-        $precioVentaPelicula;
-        $precioAlquilerPelicula;
-        $disponibilidadPelicula;
-        $portadaPelicula=""; //variable que se mandara al backend como la url de la imagen
-
-        if (!empty($_FILES)) {
-            $url = './img/';
-            $url_temp = $url.basename($_FILES['subirArchivo']['name']);
-
-            $tipoArchivo = strtolower(pathinfo($url_temp, PATHINFO_EXTENSION));
-
-            if ($tipoArchivo == 'jpg' or $tipoArchivo == 'png' or $tipoArchivo or 'jpeg' ) {
-                move_uploaded_file($_FILES['subirArchivo']['tmp_name'], $url_temp);
-                include_once 'API/vendor/autoload.php';
-
-                //configurar variable de entorno
-                putenv('GOOGLE_APPLICATION_CREDENTIALS=credenciales.json');
-
-                $client = new Google_Client();
-                $client->useApplicationDefaultCredentials();
-                $client->setScopes(['https://www.googleapis.com/auth/drive.file']);
-                try{
-                //instanciamos el servicio
-                $service = new Google_Service_Drive($client);
-
-                //ruta al archivo
-                $file_path = "img/".$_FILES['subirArchivo']['name'];
-
-                //instacia de archivo
-                $file = new Google_Service_Drive_DriveFile();
-                $file->setName($_FILES['subirArchivo']['name']);
-
-
-                //id de la carpeta donde hemos dado el permiso a la cuenta de servicio 
-                $file->setParents(array("1V0QLpWARSvnz4F3W_jkqsV5-0UwuF1WR"));
-                $file->setDescription('archivo subido desde php');
-                $file->setMimeType("image/png");
-
-                $result = $service->files->create(
-                    $file,
-                    array(
-                    'data' => file_get_contents($file_path),
-                    'mimeType' => "image/png",
-                    'uploadType' => 'media',
-                    )
-                );
-                var_dump($result);
-                $portadaPelicula = 'https://drive.google.com/uc?export=view&id='.$result->id;
-                }catch(Google_Service_Exception $gs){
-                
-                    $m=json_decode($gs->getMessage());
-                    echo $m->error->message;
-
-                }catch(Exception $e){
-                    echo $e->getMessage();
-                }
-
-            } else{
-                echo "Tipo de archivo no permitido";
-            }
-        }
-
-        $tituloPelicula = $_POST['title'];
-        $descripcionPelicula = $_POST['description'];
-        $generoPelicula = $_POST['genre'];
-        $stockPelicula = $_POST['stock'];
-        $precioVentaPelicula = $_POST['priceBuy'];
-        $precioAlquilerPelicula = $_POST['priceRent'];
-        $disponibilidadPelicula = $_POST['avaliable'];
-
-        $data= array(
-            "tituloPelicula" => $tituloPelicula,
-            "descripcionPelicula" => $descripcionPelicula,
-            "generoPelicula" => $generoPelicula,
-            "portadaPelicula" => $portadaPelicula,
-            "stockPelicula" => $stockPelicula,
-            "precioVentaPelicula" => $precioVentaPelicula,
-            "precioAlquilerPelicula" => $precioAlquilerPelicula,
-            "disponibilidadPelicula" => $disponibilidadPelicula
-        );
-        $json_data = json_encode($send);
-
-        $stream = stream_context_create([
-        'http' => [
-            'method' => 'POST',
-            'header' => "Content-type: application/json\r\n" .
-                        "Accept: application/json\r\n" .
-                        "Connection: close\r\n" .
-                        "Content-length: " . strlen($json_data) . "\r\n",
-            'protocol_version' => 1.1,
-            'content' => $json_data
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false
-        ]
-        ]);
-        $receive = file_get_contents("http://localhost/TPI_movies/Servidor/createPelicula.php", false, $stream);
-        
-        if($receive) {
-            echo'<script type="text/javascript">
-            alert("Pelicula Agregada correctamente");
-            </script>';
-        }
-        else {
-            echo'<script type="text/javascript">
-            alert("No se ha logrado agregar la pelicula");
-            </script>';
-        }
-    }
 ?>
 
 <!-- Contenedor principal para el contenido-->
@@ -258,7 +142,7 @@
         ?>
 
         <!-- Formulario, para login, registro y agregar peliculas-->
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" target="_blank">
+        <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post" enctype="multipart/form-data" target="_blank">
             <?php
             if($name == "login") { //Si detecta que es un login muestra solo los inputs de usuario y contrasena
             ?>
@@ -345,7 +229,7 @@
             <!-- Input para ingresar imagen de pelicula-->
             <div class="field">
                 <div class="file-upload-wrapper" data-text="Seleccionar imagen">
-                    <input name="file" type="file" class="file-upload-field" value="" required>
+                    <input name="subirArchivo" type="file" class="file-upload-field" value="" required>
                 </div>
             </div>
             <!-- /Input para ingresar imagen de pelicula-->

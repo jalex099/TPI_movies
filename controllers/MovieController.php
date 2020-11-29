@@ -17,7 +17,7 @@ class MovieController //Clase controlador para acciones de Movie
             }
             else {
                 $data = $data;
-                //$data = $movie->getFilter($data, $_POST["type"], $_POST["order"]);
+                $data = $movie->getFilter($data, $_POST["type"], $_POST["order"]);
             }
         }
         else {

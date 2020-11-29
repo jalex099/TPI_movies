@@ -42,6 +42,8 @@
             //Recorremos el arreglo por medio de un foreach asociativo
             foreach ($data as $row => $list) {
                 $id = $list["idPelicula"];
+
+                if($list["disponibilidadPelicula"] == "1") {
             ?>
                 <!-- Columna nueva para elemento pelicula-->
                 <div class="col-6 col-md-3 col-xl-2">
@@ -89,7 +91,7 @@
                     <!-- /Tarjeta para mostrar pelicula-->
                 </div>
                 <!-- /Columna nueva para elemento pelicula-->
-            <?php }; ?>
+            <?php } }; ?>
         </div>
         <!-- /Elemento de fila automatizada, con columnas predeterminadas para cada tamano-->
     </div>

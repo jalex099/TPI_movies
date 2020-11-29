@@ -64,15 +64,15 @@ if (!empty($_FILES)) {
     echo "Tipo de archivo no permitido";
   }
 }
-/*
+
 if(!empty($_POST)){
-  $tituloPelicula = $_POST['tituloPelicula'];
-  $descripcionPelicula = $_POST['descripcionPelicula'];
-  $generoPelicula = $_POST['generoPelicula'];
-  $stockPelicula = $_POST['stockPelicula'];
-  $precioVentaPelicula = $_POST['precioVentaPelicula'];
-  $precioAlquilerPelicula = $_POST['precioAlquilerPelicula'];
-  $disponibilidadPelicula = $_POST['disponibilidadPelicula'];
+  $tituloPelicula = $_POST['title'];
+  $descripcionPelicula = $_POST['description'];
+  $generoPelicula = $_POST['genre'];
+  $stockPelicula = $_POST['quantity'];
+  $precioVentaPelicula = $_POST['priceBuy'];
+  $precioAlquilerPelicula = $_POST['priceRent'];
+  $disponibilidadPelicula = $_POST['avaliable'];
 
   $data= array(
     "tituloPelicula" => $tituloPelicula,
@@ -103,6 +103,16 @@ if(!empty($_POST)){
 ]);
 $receive = file_get_contents("http://localhost/TPI_movies/Servidor/createPelicula.php", false, $stream);
 echo $receive;
-}*/
 
+      if($receive == false) {
+        echo'<script type="text/javascript">
+            alert("Tarea Guardada");
+            </script>';
+      }
+      else {
+        echo'<script type="text/javascript">
+            alert("Tarea no Guardada");
+            </script>';
+      }
+}
  ?>
