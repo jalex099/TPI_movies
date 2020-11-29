@@ -110,7 +110,7 @@ if(!empty($_POST)){
             </script>';
 
         echo'<script type="text/javascript">
-            window.location = "'.BASE_DIR.'Movie/showMovies";
+            window.location = "../Movie/showMovies";
             </script>';
     }
     else {
@@ -119,7 +119,7 @@ if(!empty($_POST)){
             </script>';
 
         echo'<script type="text/javascript">
-            window.location = "'.BASE_DIR.'Movie/add";
+            window.location = "../Movie/add";
             </script>';
       }
 }
