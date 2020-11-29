@@ -109,18 +109,18 @@ if(!empty($_POST)){
             alert("Pelicula ingresada con éxito");
             </script>';
 
-        echo'<script type="text/javascript">
+        /*echo'<script type="text/javascript">
             window.location = "'.BASE_DIR.'Movie/showMovies";
-            </script>';
+            </script>';*/
     }
     else {
         echo'<script type="text/javascript">
             alert("No se ha logrado ingresar la pelicula");
             </script>';
 
-        echo'<script type="text/javascript">
+        /*echo'<script type="text/javascript">
             window.location = "'.BASE_DIR.'Movie/add";
-            </script>';
+            </script>';*/
       }
 }
  ?>

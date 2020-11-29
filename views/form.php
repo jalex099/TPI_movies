@@ -242,7 +242,7 @@
 
             <!-- Input para ingresar cantidad de existencias de pelicula-->
             <div class="field">
-                <input name="stockPelicula" type="text" required>
+                <input name="stockPelicula" type="number" required>
                 <label>Cantidad</label>
             </div>
             <!-- /Input para ingresar cantidad de existencias de pelicula-->
@@ -250,14 +250,14 @@
             <div class="field-row">
                 <!-- Input para ingresar precio por alquiler de pelicula-->
                 <div class="field-md">
-                    <input name="precioAlquilerPelicula" type="text" required>
+                    <input name="precioAlquilerPelicula" type="number" step='0.01' value='0.00' required>
                     <label>Precio Alquiler</label>
                 </div>
                 <!-- /Input para ingresar precio por alquiler de pelicula-->
 
                 <!-- Input para ingresar precio por compra de pelicula-->
                 <div class="field-sm">
-                    <input name="precioVentaPelicula" type="text" required>
+                    <input name="precioVentaPelicula" type="number" step='0.01' value='0.00' required>
                     <label>Precio Compra</label>
                 </div>
                 <!-- /Input para ingresar precio por compra de pelicula-->
