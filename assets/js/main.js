@@ -186,3 +186,23 @@ if(selectElement) {
   });
 }
 // ---------MODIFICAR LOS SELECT DE LOS FILTROS SEGUN EL TIPO DE FILTRO-----------
+
+// ---------MODIFICAR LOS SELECT DE LOS FILTROS SEGUN EL TIPO DE FILTRO-----------
+const input = document.querySelector('.quantity');
+
+if(input) {
+  input.addEventListener('change', (event) => {
+    //let params = getAllGetParams();
+    let newUrl;
+    let newI = document.getElementById("idPelicula").value;
+    let newT = document.getElementById("type").value;
+    let newQ = document.getElementById("quantity").value;
+
+    newUrl = "http://localhost/TPI_movies/User/cart&id="+newI+"&type="+newT+"&quantity="+newQ;
+
+    console.log(newUrl);
+
+    document.getElementById("calcular").setAttribute('href', newUrl);
+  });
+}
+// ---------MODIFICAR LOS SELECT DE LOS FILTROS SEGUN EL TIPO DE FILTRO-----------

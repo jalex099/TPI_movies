@@ -102,7 +102,7 @@ if(!isset($name) || empty($name)) {
                         <?php } ?>
                         <a class="nav-link" href="<?= BASE_DIR; ?>Home/showHome"><i class="fas fa-home"></i>Inicio</a>
                     </li>
-                    <?php if ($name == "showMovies" || $name == "preview" || $name == "modify" || $name == "eliminate") /* Activar elemento al estar en vista catalogo*/ { ?>
+                    <?php if ($name == "showMovies" || $name == "cart" || $name == "preview" || $name == "modify" || $name == "eliminate") /* Activar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item">
@@ -112,7 +112,7 @@ if(!isset($name) || empty($name)) {
                     </li>
                     <?php
                     if ($userType == "Administrador") { //Mostrar elemento solo si es administrador
-                    if ($name == "add") /* Activar elemento al estar en vista agregar*/ { ?>
+                        if ($name == "add") /* Activar elemento al estar en vista agregar*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista agregar*/ { ?>
                     <li class="nav-item">
@@ -120,19 +120,30 @@ if(!isset($name) || empty($name)) {
                         <a class="nav-link" href="<?= BASE_DIR; ?>Movie/add"><i
                                 class="fas fa-calendar-plus"></i>Nueva</a>
                     </li>
+                    <?php } ?>
                     <?php
-                    }
                     if ($userType == "Cliente") { //Mostrar elemento solo si es cliente
-                        if ($name == "return") /* Activar elemento al estar en vista devoluciones*/ { ?>
+                        if ($name == "rent") /* Activar elemento al estar en vista devoluciones*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista devoluciones*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
-                        <a class="nav-link" href="<?= BASE_DIR; ?>User/return"><i
+                        <a class="nav-link" href="<?= BASE_DIR; ?>User/rent"><i
                                 class="fas fa-tv"></i>Devoluciones</a>
                     </li>
                     <?php
                     }
+                    if ($userType == "Administrador") { //Mostrar elemento solo si es administrador
+                        if ($name == "record") /* Activar elemento al estar en vista registro*/ { ?>
+                    <li class="nav-item active">
+                        <?php } else /* Desactivar elemento al estar en vista registro*/ { ?>
+                    <li class="nav-item">
+                        <?php } ?>
+                        <a class="nav-link" href="<?= BASE_DIR; ?>Movie/record"><i
+                                class="fas fa-passport"></i>Registro</a>
+                    </li>
+                    <?php } ?>
+                    <?php
                     if($logStatus == "LogOut") {
                         if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
                     <li class="nav-item active">

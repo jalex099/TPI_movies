@@ -70,6 +70,62 @@ class MovieController //Clase controlador para acciones de Movie
         require_once "views/$previewMovie"; //Requerimos la vista con la direccion
     }
 
+    public function sale() //Metodo para mostrar vista de registro de compras
+    {
+        require_once "models/Movie.php"; //Requerimos el modelo de pelicula
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        if($userType == "Administrador") { //Si el usuario es tipo administrador
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readVenta.php");
+            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+            $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
+            $saleMovie = $movie->sale(); //Obtenemos el nombre de la vista
+            require_once "views/$saleMovie"; //Requerimos la vista con la direccion
+        }
+        else if($userType == "Cliente") {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'Home/showHome";
+                </script>';
+        }
+        else {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'User/login";
+                </script>';
+        }
+    }
+
+    public function record() //Metodo para mostrar vista de registro de alquileres
+    {
+        require_once "models/Movie.php"; //Requerimos el modelo de pelicula
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        if($userType == "Administrador") { //Si el usuario es tipo administrador
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAlquiler.php");
+            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+            $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
+            $recordMovie = $movie->record(); //Obtenemos el nombre de la vista
+            require_once "views/$recordMovie"; //Requerimos la vista con la direccion
+        }
+        else if($userType == "Cliente") {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'Home/showHome";
+                </script>';
+        }
+        else {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'User/login";
+                </script>';
+        }
+    }
+
     public function add() //Metodo para mostrar vista de agregar pelicula
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula

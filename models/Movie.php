@@ -6,6 +6,16 @@ class Movie //Modelo de Movie
         $movieDir = "list.php"; //Asignar nombre del archivo
         return $movieDir; //Retornar nombre del archivo
     }
+    public function record() //Metodo para devolver nombre de la vista de registro de alquileres
+    {
+        $movieDir = "rent.php"; //Asignar nombre del archivo
+        return $movieDir; //Retornar nombre del archivo
+    }
+    public function sale() //Metodo para devolver nombre de la vista de registro de ventas
+    {
+        $movieDir = "shopping.php"; //Asignar nombre del archivo
+        return $movieDir; //Retornar nombre del archivo
+    }
     public function array_sort_by(&$arrIni, $col, $order)
     {
         $arrAux = array();
