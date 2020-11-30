@@ -1,6 +1,19 @@
 <?php
 class UserController //Clase controlador para acciones de User
 {
+    public function getSessionStatus() { //Metodo para devolver tipo de usuario segun la sesion
+        $userType = ""; //Para capturar el tipo de usuario
+
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
+
+        return $userType; //Retornamos el estado del usuario
+    }
+
     public function login() //Metodo para mostrar vista de login
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
@@ -369,6 +382,33 @@ class UserController //Clase controlador para acciones de User
         }
     }
 
+    public function return() //Metodo para mostrar vista de devolucion
+    {
+        require_once "models/User.php"; //Requerimos el modelo de usuario
+        $userType = $this->getSessionStatus(); //Para capturar el tipo de usuario
+
+        //Obtenemos el json desde la url
+        $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+        $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+        $id = $_GET["id"];
+        $idAlquiler = $_GET["idAlquiler"];
+
+        if($userType != "Cliente") {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'User/login";
+                </script>';
+        }
+        else {
+            $fechaActual = date("Y-m-d");
+            $fechaRetorno = $_GET["fecha"];
+
+            $user = new User(); //Instanciamos un nuevo objeto de usuario
+            $returnUser = $user->return(); //Obtenemos el nombre de la vista
+            require_once "views/$returnUser"; //Requerimos la vista con la direccion
+        }
+    }
+
     public function cart() //Metodo para mostrar vista de carrito
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
@@ -389,9 +429,9 @@ class UserController //Clase controlador para acciones de User
         $type = $_GET["type"];
         $quantity = $_GET["quantity"];
 
-        if($userType == "") {
+        if($userType != "Cliente") {
             echo '<script type="text/javascript">
-                window.location = "'.BASE_DIR.'User/register";
+                window.location = "'.BASE_DIR.'User/login";
                 </script>';
         }
         else {
@@ -401,6 +441,60 @@ class UserController //Clase controlador para acciones de User
             $user = new User(); //Instanciamos un nuevo objeto de usuario
             $cartUser = $user->cart(); //Obtenemos el nombre de la vista
             require_once "views/$cartUser"; //Requerimos la vista con la direccion
+        }
+    }
+
+    public function checkoutReturn() //Metodo para realizar la devolucion
+    {
+        if($_GET) {
+            $idAlquiler = $_GET["id"];
+            $fechaDevolucionAlquiler = $_GET["fecha"];
+            $totalDetalleAlquiler = $_GET["total"];
+            $multaDetalleAlquiler = $_GET["multa"];
+
+            $send = array(
+                    "idAlquiler" => $idAlquiler,
+                    "fechaDevolucionAlquiler" => $fechaDevolucionAlquiler,
+                    "totalDetalleAlquiler" => $totalDetalleAlquiler,
+                    "multaDetalleAlquiler" => $multaDetalleAlquiler);
+            $json_data = json_encode($send);
+
+            $stream = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\n" .
+                                "Accept: application/json\r\n" .
+                                "Connection: close\r\n" .
+                                "Content-length: " . strlen($json_data) . "\r\n",
+                    'protocol_version' => 1.1,
+                    'content' => $json_data
+                ],
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ]);
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/createDetailAlquiler.php", false, $stream);
+            echo $data;
+
+            if($data != false) {
+                echo '<script type="text/javascript">
+                    alert("Alquiler pagado con éxito");
+                    </script>';
+
+                echo '<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'User/rent";
+                    </script>';
+            }
+            else {
+                echo '<script type="text/javascript">
+                    alert("No se ha logrado completar pago de alquiler");
+                    </script>';
+
+                echo '<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'User/rent";
+                    </script>';
+            }
         }
     }
 

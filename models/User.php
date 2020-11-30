@@ -7,6 +7,12 @@ class User //Modelo de User
         return $formDir; //Retornar nombre del archivo
     }
 
+    public function return() //Metodo para devolver nombre de la vista de devolucion
+    {
+        $retDir = "return.php"; //Asignar nombre del archivo
+        return $retDir; //Retornar nombre del archivo
+    }
+
     public function cart() //Metodo para devolver nombre de la vista de carrito
     {
         $cartDir = "cart.php"; //Asignar nombre del archivo
@@ -18,6 +24,7 @@ class User //Modelo de User
         $cartDir = "shopping.php"; //Asignar nombre del archivo
         return $cartDir; //Retornar nombre del archivo
     }
+
     public function rent() //Metodo para devolver nombre de la vista de registro de alquileres
     {
         $movieDir = "rent.php"; //Asignar nombre del archivo

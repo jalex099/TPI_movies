@@ -14,42 +14,37 @@
                                             <div class="p-2 px-3 text-uppercase">Producto</div>
                                         </th>
                                         <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Precio</div>
+                                            <div class="py-2 text-uppercase">Precio Esperado</div>
                                         </th>
-                                        <?php if($type == 2) { ?>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Cantidad</div>
-                                        </th>
-                                        <?php } ?>
-                                        <?php if($type == 1) { ?>
                                         <th scope="col" class="border-0 bg-light">
                                             <div class="py-2 text-uppercase">Fecha Actual</div>
                                         </th>
                                         <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Fecha Retorno</div>
-                                        </th>
-                                        <?php } ?>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Opciones</div>
+                                            <div class="py-2 text-uppercase">Fecha Esperada</div>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                
+                                <?php
                                 $precioPelicula;
                                 $totalAtraso;
+                                $subTotal;
                                 $total;
                                 //Recorremos el arreglo por medio de un foreach asociativo
                                 foreach ($data as $row => $list) {
                                     if($id == $list["idPelicula"]) {
-                                        if($type == 1) {
-                                            $precioPelicula = $list["precioAlquilerPelicula"];
+                                        $precioPelicula = $list["precioAlquilerPelicula"];
+                                        $subTotal = $precioPelicula;
+
+                                        if($fechaActual > $fechaRetorno) {
+                                            $totalAtraso = ($subTotal * 0.15);
+                                            $total = $subTotal + $totalAtraso;
                                         }
                                         else {
-                                            $precioPelicula = $list["precioVentaPelicula"];
+                                            $totalAtraso = 0;
+                                            $total = $subTotal;
                                         }
-                                        $total = $quantity * $precioPelicula;
-                                        $totalAtraso = ($total * 0.15) + $total;
                                 ?>
                                     <tr class="cart-row">
                                         <th scope="row" class="border-0">
@@ -61,33 +56,16 @@
                                                             href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>"
                                                             class="text-dark d-inline-block align-middle"><?= $list["tituloPelicula"]; ?></a>
                                                     </h5><span
-                                                        class="text-muted font-weight-normal font-italic d-block"><?php if($type == 1) { ?>Alquiler<?php } if($type == 2) { ?>Compra<?php } ?></span>
+                                                        class="text-muted font-weight-normal font-italic d-block">Alquiler</span>
                                                 </div>
                                             </div>
                                         </th>
-                                        <?php if($type == 1) { ?>
                                         <td class="border-0 align-middle">
-                                            <strong>$<?= $list["precioAlquilerPelicula"]; ?></strong></td>
-                                        <?php } else { ?>
-                                        <td class="border-0 align-middle">
-                                            <strong>$<?= $list["precioVentaPelicula"]; ?></strong></td>
-                                        <?php } ?>
-                                        <?php if($type == 2) { ?>
-                                        <td class="border-0 align-middle"><strong>
-                                                <input type="text" id="idPelicula" value="<?= $id; ?>" hidden>
-                                                <input type="text" id="type" value="<?= $type; ?>" hidden>
-                                                <input type="number" class="quantity" id="quantity"
-                                                    value="<?= $quantity; ?>" step="1" min="1"
-                                                    max="<?= $list["stockPelicula"]; ?>" name="cantidad" id="">
-                                            </strong></td>
-                                        <?php } ?>
-                                        <?php if($type == 1) { ?>
+                                            <strong>$<?= $list["precioAlquilerPelicula"]; ?></strong>
+                                        </td>
+
                                         <td class="border-0 align-middle"><strong><?= $fechaActual; ?></strong></td>
                                         <td class="border-0 align-middle"><strong><?= $fechaRetorno; ?></strong></td>
-                                        <?php } ?>
-                                        <td class="border-0 align-middle"><a id="calcular"
-                                                href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=<?= $type; ?>&quantity=1"
-                                                class="text-dark"><i class="fas fa-donate"></i> Calcular</a></td>
                                     </tr>
                                     <?php } }; ?>
                                 </tbody>
@@ -105,24 +83,17 @@
                             <ul class="list-unstyled mb-4">
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">SubTotal de la orden
-                                    </strong><strong>$<?= $total; ?></strong></li>
-                                <?php if($type == 1) { ?>
+                                    </strong><strong>$<?= $subTotal; ?></strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                        class="text-muted">Total en caso de retraso
+                                        class="text-muted">Por retraso
                                     </strong><strong>$<?= $totalAtraso; ?></strong></li>
-                                <?php } ?>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">Total </strong>
                                     <h5 class="font-weight-bold">$<?= $total; ?></h5>
                                 </li>
                             </ul>
-                            <?php if($type == 1) { ?>
-                            <a href="<?= BASE_DIR; ?>User/checkoutRent&id=<?= $id; ?>&fechaI=<?= $fechaActual; ?>&fechaF=<?= $fechaRetorno; ?>"
-                                class="picture-slider__button py-2">Proceder a Alquilar</a>
-                            <?php } if($type == 2) { ?>
-                            <a href="<?= BASE_DIR; ?>User/checkoutBuy&id=<?= $id; ?>&fecha=<?= $fechaActual; ?>&cantidad=<?= $quantity; ?>"
+                            <a href="<?= BASE_DIR; ?>User/checkoutReturn&id=<?= $idAlquiler; ?>&fecha=<?= $fechaActual; ?>&total=<?= $subTotal; ?>&multa=<?= $totalAtraso; ?>"
                                 class="picture-slider__button py-2">Proceder a Pago</a>
-                            <?php } ?>
                         </div>
                     </div>
                 </div>

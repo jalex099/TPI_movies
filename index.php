@@ -44,6 +44,6 @@ else { //Si no existe el metodo
 }
 
 //Mostrar el footer de la pagina solo en el catalogo y el carrito
-if($action == "showMovies" || $action == "cart") {
+if($action == "showMovies" || $action == "cart" || $action == "return") {
     BaseLayout::renderFoot();
 }

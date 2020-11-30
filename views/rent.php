@@ -52,8 +52,28 @@
                                         </td>
                                         <td class="border-0 align-middle"><strong><?= $list["idPelicula"]; ?></strong>
                                         </td>
+                                        <?php
+                                        if($userType == "Cliente") {
+                                            if($list["estadoAlquiler"] == 1) { 
+                                        ?>
+                                        <td class="border-0 align-middle">
+                                            <a href="<?= BASE_DIR; ?>User/return&id=<?= $list["idPelicula"]; ?>&idAlquiler=<?= $list["idAlquiler"]; ?>&fecha=<?= $list["fechaEsperadaAlquiler"]; ?>"><strong>Devolver</strong></a></td>
+                                        <?php
+                                            }
+                                            else { 
+                                        ?>
+                                        <td class="border-0 align-middle">
+                                            <strong>Devuelto</strong></td>
+                                        <?php
+                                            }
+                                        }
+                                        else {
+                                        ?>
                                         <td class="border-0 align-middle">
                                             <strong><?= $list["estadoAlquiler"]; ?></strong></td>
+                                            <?php
+                                        }
+                                        ?>
                                     </tr>
                                     <?php }; ?>
                                 </tbody>

@@ -130,7 +130,7 @@ if(!isset($name) || empty($name)) {
                     <?php } ?>
                     <?php
                     if ($userType == "Cliente" || $userType == "") { //Mostrar elemento solo si es cliente
-                        if ($name == "rent" || $name == "sale" || $name == "cart") /* Activar elemento al estar en vista transacciones*/ { ?>
+                        if ($name == "return" || $name == "rent" || $name == "sale" || $name == "cart") /* Activar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item">
