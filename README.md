@@ -20,15 +20,15 @@ INTEGRANTES:
 
 VISTA GENERAL DE LAS CARPETAS
 
-./assets {Contiene los archivos de estilos css, los js utilizados y las imagenes}
-./backend {Contiene los directorios y archivos que conectan los datos del backend}
-./config {Contiene los archivos de configuracione para la base y directorios}
-./controllers {Contiene los archivos de controladores para las acciones de las vistas}
-./db {Contiene el sql de la base de datos utilizada}
-./docs {Contiene los documentos de algunas funcionalidades realizadas por parte del backend}
-./models {Contiene los modelos de las vistas}
-./render {Contiene el baseLayout con los elementos por defecto a renderizar}
-./views {Contiene las vistas utilizadas para la pagina web}
+    ./assets {Contiene los archivos de estilos css, los js utilizados y las imagenes}
+    ./backend {Contiene los directorios y archivos que conectan los datos del backend}
+    ./config {Contiene los archivos de configuracione para la base y directorios}
+    ./controllers {Contiene los archivos de controladores para las acciones de las vistas}
+    ./db {Contiene el sql de la base de datos utilizada}
+    ./docs {Contiene los documentos de algunas funcionalidades realizadas por parte del backend}
+    ./models {Contiene los modelos de las vistas}
+    ./render {Contiene el baseLayout con los elementos por defecto a renderizar}
+    ./views {Contiene las vistas utilizadas para la pagina web}
 
 
 
