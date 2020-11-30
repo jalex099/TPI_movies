@@ -123,13 +123,13 @@ if(!isset($name) || empty($name)) {
                     <?php } ?>
                     <?php
                     if ($userType == "Cliente") { //Mostrar elemento solo si es cliente
-                        if ($name == "rent") /* Activar elemento al estar en vista devoluciones*/ { ?>
+                        if ($name == "rent") /* Activar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item active">
-                        <?php } else /* Desactivar elemento al estar en vista devoluciones*/ { ?>
+                        <?php } else /* Desactivar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
                         <a class="nav-link" href="<?= BASE_DIR; ?>User/rent"><i
-                                class="fas fa-tv"></i>Devoluciones</a>
+                                class="fas fa-tv"></i>Transacciones</a>
                     </li>
                     <?php
                     }

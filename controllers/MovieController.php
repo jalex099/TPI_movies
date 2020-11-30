@@ -201,7 +201,7 @@ class MovieController //Clase controlador para acciones de Movie
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
             echo $receive;
         
-            if($receive.array("response"=>true)) {
+            if($receive != false) {
                 echo'<script type="text/javascript">
                     alert("Pelicula modificada con éxito");
                     </script>';
@@ -296,7 +296,7 @@ class MovieController //Clase controlador para acciones de Movie
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
             echo $receive;
         
-            if($receive.array("response"=>true)) {
+            if($receive != false) {
                 echo'<script type="text/javascript">
                     alert("Estado de pelicula cambiado con éxito");
                     </script>';
@@ -362,7 +362,7 @@ class MovieController //Clase controlador para acciones de Movie
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/deletePelicula.php", false, $stream);
             echo $receive;
         
-            if($receive.array("response"=>true)) {
+            if($receive != false) {
                 echo'<script type="text/javascript">
                     alert("Pelicula eliminada con éxito");
                     </script>';

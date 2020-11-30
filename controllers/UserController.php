@@ -51,7 +51,7 @@ class UserController //Clase controlador para acciones de User
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/createCliente.php", false, $stream);
             echo $data;
 
-            if($data.array("response"=>true)) {
+            if($data != false) {
                 echo'<script type="text/javascript">
                     alert("Usuario registrado");
                     </script>';
@@ -100,29 +100,139 @@ class UserController //Clase controlador para acciones de User
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/deleteCliente.php", false, $stream);
             echo $data;
 
-            if($data.array("response"=>true)) {
-                echo'<script type="text/javascript">
+            if($data != false) {
+                echo '<script type="text/javascript">
                     alert("Usuario eliminado con éxito");
                     </script>';
 
-                    echo'<script type="text/javascript">
+                    echo '<script type="text/javascript">
                     window.location = "'.BASE_DIR.'User/register";
                     </script>';
             }
             else {
-                echo'<script type="text/javascript">
+                echo '<script type="text/javascript">
                     alert("Usuario no eliminado");
                     </script>';
             }
         }
     }
 
-    public function rent() //Metodo para mostrar vista de devoluciones
+    public function sale() //Metodo para mostrar vista de registro de compras
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
-        $user = new User(); //Instanciamos un nuevo objeto de usuario
-        $rentUser = $user->rent(); //Obtenemos el nombre de la vista
-        require_once "views/$rentUser"; //Requerimos la vista con la direccion
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        if($userType == "Administrador") { //Si el usuario es tipo administrador
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'Home/showHome";
+                </script>';
+        }
+        else if($userType == "Cliente") {
+            $idCliente = "1";
+
+            $send = array(
+                "idCliente" => $idCliente,
+            );
+        
+            $json_data = json_encode($send);
+            $stream = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\n" .
+                                "Accept: application/json\r\n" .
+                                "Connection: close\r\n" .
+                                "Content-length: " . strlen($json_data) . "\r\n",
+                    'protocol_version' => 1.1,
+                    'content' => $json_data
+                ],
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ]);
+        
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneVenta.php", false, $stream);
+        
+            if($data != false) {
+                $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+                $user = new User(); //Instanciamos un nuevo objeto de usuario
+                $shopUser = $user->shopping(); //Obtenemos el nombre de la vista
+                require_once "views/$shopUser"; //Requerimos la vista con la direccion
+            }
+            else {        
+                echo '<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Home/showHome";
+                    </script>';
+            }
+        }
+        else {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'User/login";
+                </script>';
+        }
+    }
+
+    public function rent() //Metodo para mostrar vista de registro de alquileres
+    {
+        require_once "models/User.php"; //Requerimos el modelo de usuario
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        if($userType == "Administrador") { //Si el usuario es tipo administrador
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'Home/showHome";
+                </script>';
+        }
+        else if($userType == "Cliente") {
+            $idCliente = "2";
+
+            $send = array(
+                "idCliente" => $idCliente,
+            );
+        
+            $json_data = json_encode($send);
+            $stream = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\n" .
+                                "Accept: application/json\r\n" .
+                                "Connection: close\r\n" .
+                                "Content-length: " . strlen($json_data) . "\r\n",
+                    'protocol_version' => 1.1,
+                    'content' => $json_data
+                ],
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ]);
+        
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneAlquiler.php", false, $stream);
+        
+            if($data != false) {
+                $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+                $user = new User(); //Instanciamos un nuevo objeto de usuario
+                $rentUser = $user->rent(); //Obtenemos el nombre de la vista
+                require_once "views/$rentUser"; //Requerimos la vista con la direccion
+            }
+            else {        
+                echo '<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Home/showHome";
+                    </script>';
+            }
+        }
+        else {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'User/login";
+                </script>';
+        }
     }
 
     public function cart() //Metodo para mostrar vista de carrito
@@ -142,7 +252,7 @@ class UserController //Clase controlador para acciones de User
         $quantity = $_GET["quantity"];
 
         if($userType == "") {
-            echo'<script type="text/javascript">
+            echo '<script type="text/javascript">
                 window.location = "'.BASE_DIR.'User/register";
                 </script>';
         }
@@ -161,7 +271,7 @@ class UserController //Clase controlador para acciones de User
         if($_GET) {
             $fechaAlquiler = $_GET["fechaI"];
             $fechaEsperadaAlquiler = $_GET["fechaF"];
-            $idCliente = 1;
+            $idCliente = "2";
             $idPelicula = $_GET["id"];
 
             $send = array(
@@ -189,21 +299,21 @@ class UserController //Clase controlador para acciones de User
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/createAlquiler.php", false, $stream);
             echo $data;
 
-            if($data.array("response"=>true)) {
-                echo'<script type="text/javascript">
+            if($data != false) {
+                echo '<script type="text/javascript">
                     alert("Alquiler realizado con éxito");
                     </script>';
 
-                echo'<script type="text/javascript">
+                echo '<script type="text/javascript">
                     window.location = "'.BASE_DIR.'Movie/showMovies";
                     </script>';
             }
             else {
-                echo'<script type="text/javascript">
+                echo '<script type="text/javascript">
                     alert("El alquiler no se ha logrado realizar");
                     </script>';
 
-                echo'<script type="text/javascript">
+                echo '<script type="text/javascript">
                     window.location = "'.BASE_DIR.'User/cart&id='.$idPelicula.'&type=1&quantity=1";
                     </script>';
             }
@@ -215,7 +325,7 @@ class UserController //Clase controlador para acciones de User
         if($_GET) {
             $cantidadVenta = $_GET["cantidad"];
             $fechaVenta = $_GET["fecha"];
-            $idCliente = 1;
+            $idCliente = "2";
             $idPelicula = $_GET["id"];
 
             $send = array(
@@ -243,7 +353,7 @@ class UserController //Clase controlador para acciones de User
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/createVenta.php", false, $stream);
             echo $data;
 
-            if($data.array("response"=>true)) {
+            if($data != false) {
                 echo'<script type="text/javascript">
                     alert("Compra realizada con éxito");
                     </script>';

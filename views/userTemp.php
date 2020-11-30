@@ -1,8 +1,8 @@
 <?php
 class UserTemp {
     public function getUserType() {
-        $userType = "Administrador";
-        //$userType = "Cliente";
+        //$userType = "Administrador";
+        $userType = "Cliente";
 
         return $userType;
     }

@@ -167,7 +167,7 @@
         <?php } if($name == "login") { ?>
         <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post">
         <?php } if($name == "register") { ?>
-        <form action="<?= BASE_DIR; ?>User/deleteUser" method="post">
+        <form action="<?= BASE_DIR; ?>User/registerUser" method="post">
         <?php } ?>
             <?php
             if($name == "login") { //Si detecta que es un login muestra solo los inputs de usuario y contrasena

@@ -7,9 +7,12 @@
 
                         <!-- Shopping cart table -->
                         <div class="table-responsive">
-                        <a href="<?= BASE_DIR; ?>Movie/record" class="picture-slider__button py-2">Alquileres</a>
+                        <?php if($_GET["action"] == "Movie") { ?>
                         <a href="<?= BASE_DIR; ?>Movie/sale" class="picture-slider__button py-2">Compras</a>
-                        </br></br>
+                        <?php } else { ?>
+                        <a href="<?= BASE_DIR; ?>User/sale" class="picture-slider__button py-2">Compras</a>
+                        <?php } ?>
+                        <br><br>
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
@@ -57,3 +60,8 @@
         </div>
     </div>
 </div>
+
+<script src="<?=BASE_DIR;?>assets/js/main.js"></script>
+</body>
+
+</html>
