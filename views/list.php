@@ -108,17 +108,29 @@
                         <!-- /Tarjeta para mostrar pelicula, precio de venta y alquiler-->
                     </div>
                     <!-- /Tarjeta para mostrar pelicula, contenedor de informacion-->
-                    
+
                     <!-- Tarjeta para mostrar pelicula, botones de acciones-->
                     <ul class="social">
                         <li><a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
+                        
+                        <?php if($userType == "Administrador") { ?>
+                        <li><a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $id; ?>" data-toggle="tooltip" data-placement="top" title="Modificar"><i
+                                    class="fas fa-tools"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>Movie/change&id=<?= $id; ?>" data-toggle="tooltip"
+                                data-placement="top" title="Cambiar Estado"><i class="fas fa-exchange-alt"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $id; ?>" data-toggle="tooltip"
+                                data-placement="top" title="Eliminar"><i class="fas fa-trash"></i></a></li>
+                        
+                        <?php } else { ?>
+
                         <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i
                                     class="fa fa-heart"></i></a></li>
-                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=2&quantity=1" data-toggle="tooltip" data-placement="top" title="Comprar"><i
-                                    class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=1&quantity=1" data-toggle="tooltip" data-placement="top" title="Alquilar"><i
-                                    class="fas fa-video"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=2&quantity=1" data-toggle="tooltip"
+                                data-placement="top" title="Comprar"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=1&quantity=1" data-toggle="tooltip"
+                                data-placement="top" title="Alquilar"><i class="fas fa-video"></i></a></li>
+                        <?php } ?>
                     </ul>
                     <!-- /Tarjeta para mostrar pelicula, botones de acciones-->
                 </div>
@@ -169,12 +181,24 @@
                     <ul class="social">
                         <li><a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
+                        
+                        <?php if($userType == "Administrador") { ?>
+                        <li><a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $id; ?>" data-toggle="tooltip" data-placement="top" title="Modificar"><i
+                                    class="fas fa-tools"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>Movie/change&id=<?= $id; ?>" data-toggle="tooltip"
+                                data-placement="top" title="Cambiar Estado"><i class="fas fa-exchange-alt"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $id; ?>" data-toggle="tooltip"
+                                data-placement="top" title="Eliminar"><i class="fas fa-trash"></i></a></li>
+                        
+                        <?php } else { ?>
+
                         <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i
                                     class="fa fa-heart"></i></a></li>
-                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=2&quantity=1" data-toggle="tooltip" data-placement="top" title="Comprar"><i
-                                    class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=1&quantity=1" data-toggle="tooltip" data-placement="top" title="Alquilar"><i
-                                    class="fas fa-video"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=2&quantity=1" data-toggle="tooltip"
+                                data-placement="top" title="Comprar"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=1&quantity=1" data-toggle="tooltip"
+                                data-placement="top" title="Alquilar"><i class="fas fa-video"></i></a></li>
+                        <?php } ?>
                     </ul>
                     <!-- /Tarjeta para mostrar pelicula, botones de acciones-->
                 </div>
