@@ -7,7 +7,7 @@
 
                         <!-- Shopping cart table -->
                         <div class="table-responsive">
-                            <?php if($_GET["action"] == "Movie") { ?>
+                            <?php if($_GET["controller"] == "Movie") { ?>
                             <a href="<?= BASE_DIR; ?>Movie/record" class="picture-slider__button py-2">Alquileres</a>
                             <?php } else { ?>
                             <a href="<?= BASE_DIR; ?>User/rent" class="picture-slider__button py-2">Alquileres</a>
@@ -41,7 +41,8 @@
                                     <tr class="cart-row">
                                         <td class="border-0 align-middle"><strong><?= $list["idVenta"]; ?></strong></td>
                                         <td class="border-0 align-middle">
-                                            <strong><?= $list["cantidadVenta"]; ?></strong></td>
+                                            <strong><?= $list["cantidadVenta"]; ?></strong>
+                                        </td>
                                         <td class="border-0 align-middle"><strong><?= $list["fechaVenta"]; ?></strong>
                                         </td>
                                         <td class="border-0 align-middle"><strong><?= $list["idCliente"]; ?></strong>

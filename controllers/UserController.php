@@ -372,10 +372,15 @@ class UserController //Clase controlador para acciones de User
     public function cart() //Metodo para mostrar vista de carrito
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
+        $userType; //Para capturar el tipo de usuario
 
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+            $userId = $_COOKIE["sessionID"]; //Definimos el id de usuario
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
 
         //Obtenemos el json desde la url
         $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");

@@ -7,12 +7,12 @@
 
                         <!-- Shopping cart table -->
                         <div class="table-responsive">
-                        <?php if($_GET["action"] == "Movie") { ?>
-                        <a href="<?= BASE_DIR; ?>Movie/sale" class="picture-slider__button py-2">Compras</a>
-                        <?php } else { ?>
-                        <a href="<?= BASE_DIR; ?>User/sale" class="picture-slider__button py-2">Compras</a>
-                        <?php } ?>
-                        <br><br>
+                            <?php if($_GET["controller"] == "Movie") { ?>
+                            <a href="<?= BASE_DIR; ?>Movie/sale" class="picture-slider__button py-2">Compras</a>
+                            <?php } else { ?>
+                            <a href="<?= BASE_DIR; ?>User/sale" class="picture-slider__button py-2">Compras</a>
+                            <?php } ?>
+                            <br><br>
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
@@ -37,19 +37,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
                                 //Recorremos el arreglo por medio de un foreach asociativo
                                 foreach ($data as $row => $list) {
                                 ?>
                                     <tr class="cart-row">
-                                        <td class="border-0 align-middle"><strong><?= $list["idAlquiler"]; ?></strong></td>
-                                        <td class="border-0 align-middle"><strong><?= $list["fechaAlquiler"]; ?></strong></td>
-                                        <td class="border-0 align-middle"><strong><?= $list["fechaEsperadaAlquiler"]; ?></strong></td>
-                                        <td class="border-0 align-middle"><strong><?= $list["idCliente"]; ?></strong></td>
-                                        <td class="border-0 align-middle"><strong><?= $list["idPelicula"]; ?></strong></td>
-                                        <td class="border-0 align-middle"><strong><?= $list["estadoAlquiler"]; ?></strong></td>
+                                        <td class="border-0 align-middle"><strong><?= $list["idAlquiler"]; ?></strong>
+                                        </td>
+                                        <td class="border-0 align-middle">
+                                            <strong><?= $list["fechaAlquiler"]; ?></strong></td>
+                                        <td class="border-0 align-middle">
+                                            <strong><?= $list["fechaEsperadaAlquiler"]; ?></strong></td>
+                                        <td class="border-0 align-middle"><strong><?= $list["idCliente"]; ?></strong>
+                                        </td>
+                                        <td class="border-0 align-middle"><strong><?= $list["idPelicula"]; ?></strong>
+                                        </td>
+                                        <td class="border-0 align-middle">
+                                            <strong><?= $list["estadoAlquiler"]; ?></strong></td>
                                     </tr>
-                                <?php }; ?>
+                                    <?php }; ?>
                                 </tbody>
                             </table>
                         </div>

@@ -46,6 +46,6 @@
     </main>
 
     <script src="<?=BASE_DIR;?>assets/js/main.js"></script>
-    </body>
+</body>
 
-    </html>
+</html>

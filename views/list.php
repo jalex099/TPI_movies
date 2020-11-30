@@ -113,15 +113,15 @@
                     <ul class="social">
                         <li><a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
-                        
+
                         <?php if($userType == "Administrador") { ?>
-                        <li><a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $id; ?>" data-toggle="tooltip" data-placement="top" title="Modificar"><i
-                                    class="fas fa-tools"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $id; ?>" data-toggle="tooltip"
+                                data-placement="top" title="Modificar"><i class="fas fa-tools"></i></a></li>
                         <li><a href="<?= BASE_DIR; ?>Movie/change&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Cambiar Estado"><i class="fas fa-exchange-alt"></i></a></li>
                         <li><a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Eliminar"><i class="fas fa-trash"></i></a></li>
-                        
+
                         <?php } else { ?>
 
                         <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i
@@ -181,15 +181,15 @@
                     <ul class="social">
                         <li><a href="<?= BASE_DIR; ?>Movie/preview&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
-                        
+
                         <?php if($userType == "Administrador") { ?>
-                        <li><a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $id; ?>" data-toggle="tooltip" data-placement="top" title="Modificar"><i
-                                    class="fas fa-tools"></i></a></li>
+                        <li><a href="<?= BASE_DIR; ?>Movie/modify&id=<?= $id; ?>" data-toggle="tooltip"
+                                data-placement="top" title="Modificar"><i class="fas fa-tools"></i></a></li>
                         <li><a href="<?= BASE_DIR; ?>Movie/change&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Cambiar Estado"><i class="fas fa-exchange-alt"></i></a></li>
                         <li><a href="<?= BASE_DIR; ?>Movie/eliminate&id=<?= $id; ?>" data-toggle="tooltip"
                                 data-placement="top" title="Eliminar"><i class="fas fa-trash"></i></a></li>
-                        
+
                         <?php } else { ?>
 
                         <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i

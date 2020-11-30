@@ -115,9 +115,14 @@ class MovieController //Clase controlador para acciones de Movie
     public function record() //Metodo para mostrar vista de registro de alquileres
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+        $userType; //Para capturar el tipo de usuario
+
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
 
         //Obtenemos el json desde la url
         if($userType == "Administrador") { //Si el usuario es tipo administrador
@@ -130,7 +135,7 @@ class MovieController //Clase controlador para acciones de Movie
         }
         else if($userType == "Cliente") {
             echo '<script type="text/javascript">
-                window.location = "'.BASE_DIR.'Home/showHome";
+                window.location = "'.BASE_DIR.'Movie/showMovies";
                 </script>';
         }
         else {

@@ -9,19 +9,19 @@
                     <?php
                             foreach($this->alfabeto as $lyric){
                                 ?>
-                                <option value="<?= $lyric?>"><?= $lyric?></option>
-                                <?php
+                    <option value="<?= $lyric?>"><?= $lyric?></option>
+                    <?php
                             }
                             ?>
                 </select>
 
                 <select name="rol" id="rol">
                     <option value="">Roles</option>
-                        <?php
+                    <?php
                         foreach($roles as $row=>$rol){
                             ?>
-                            <option value="<?= $rol['rol_usuario']?>"><?= $rol['rol_usuario']?></option>
-                            <?php
+                    <option value="<?= $rol['rol_usuario']?>"><?= $rol['rol_usuario']?></option>
+                    <?php
                         }
                         ?>
                 </select>
@@ -32,19 +32,19 @@
                     <?php
                     foreach($departamentos as $row=>$depa){
                         ?>
-                        <option value="<?= $depa['nombre_departamento']?>"><?= $depa['nombre_departamento']?></option>
-                        <?php
+                    <option value="<?= $depa['nombre_departamento']?>"><?= $depa['nombre_departamento']?></option>
+                    <?php
                     }
                     ?>
                 </select>
 
                 <select name="municipio" id="municipio">
                     <option value="">Municipio</option>
-                        <?php
+                    <?php
                         foreach($municipios as $row=>$muni){
                             ?>
-                            <option value="<?= $muni['nombre_municipio']?>"><?= $muni['nombre_municipio']?></option>
-                            <?php
+                    <option value="<?= $muni['nombre_municipio']?>"><?= $muni['nombre_municipio']?></option>
+                    <?php
                         }
                         ?>
                 </select>
@@ -64,7 +64,7 @@
                     <?php
                     foreach($listado as $row=>$list){
                     ?>
-                        <tr>
+                    <tr>
                         <td><?=$list['id_usuario']?></td>
                         <td><?=$list['nombre_usuario']?></td>
                         <td><?=$list['apellido_usuario']?></td>

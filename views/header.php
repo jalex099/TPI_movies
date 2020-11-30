@@ -135,13 +135,12 @@ if(!isset($name) || empty($name)) {
                         <?php } else /* Desactivar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
-                        <a class="nav-link" href="<?= BASE_DIR; ?>User/rent"><i
-                                class="fas fa-tv"></i>Transacciones</a>
+                        <a class="nav-link" href="<?= BASE_DIR; ?>User/rent"><i class="fas fa-tv"></i>Transacciones</a>
                     </li>
                     <?php
                     }
                     if ($userType == "Administrador") { //Mostrar elemento solo si es administrador
-                        if ($name == "record") /* Activar elemento al estar en vista registro*/ { ?>
+                        if ($name == "record" || $name == "sale") /* Activar elemento al estar en vista registro*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista registro*/ { ?>
                     <li class="nav-item">
