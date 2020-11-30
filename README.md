@@ -38,6 +38,7 @@ VISTA GENERAL DE LAS CARPETAS
 FUNCIONAMIENTO POR PARTE DEL FRONT
 
 @CONTROLADORES
+
     #HomeController
         Método showHome
         Nos permite mostrar la vista de la pantalla de inicio, obteneiendo su nombre del modelo Home
