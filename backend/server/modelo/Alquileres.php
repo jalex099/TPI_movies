@@ -101,7 +101,7 @@ class Alquileres extends Connect { //Clase de alquileres
     }
 
     public function detailAlquiler($idAlquiler, $fechaDevolucionAlquiler, $totalDetalleAlquiler, $multaDetalleAlquiler){
-        $sql = "INSERT INTO " . self::TABLE_NAME_DETAIL. " (`idAlquiler`,  `fechaDevolucionAlquiler`,
+        $sql = "INSERT INTO " . self::TABLE_NAME_DETAIL. " (`idAlquiler`,  `fechaDevolucionDetalleAlquiler`,
         `totalDetalleAlquiler`, `multaDetalleAlquiler`) 
         VALUES (".$idAlquiler.",'".$fechaDevolucionAlquiler."',".$totalDetalleAlquiler.",".$multaDetalleAlquiler.")";
         if ($result = $this->conn->query($sql)) {
