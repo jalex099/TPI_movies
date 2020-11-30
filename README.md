@@ -2,6 +2,7 @@
 Proyecto final de TPI que respecta a la web de peliculas
 
 INTEGRANTES:
+
     -Javier Alexander Morales Melara MM18014
     -Brian Steve Rodas Hernández RH18031
     -Oscar Alexis Palacios Flores PF18008
