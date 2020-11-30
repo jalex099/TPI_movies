@@ -7,6 +7,12 @@ class UserTemp {
         return $userType;
     }
 
+    public function getUserId() {
+        $userId = 1;
+
+        return $userId;
+    }
+
     public function getLogStatus() {
         //$logStatus = "LogIn";
         $logStatus = "LogOut";

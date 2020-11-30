@@ -42,13 +42,15 @@
 
         <!-- Formulario, para modificar peliculas o eliminar-->
         <?php if($name == "modify") { ?>
-            <form action="<?= BASE_DIR; ?>Movie/modifyMovie&id=<?= $targetId; ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= BASE_DIR; ?>Movie/modifyMovie" method="post" enctype="multipart/form-data">
         <?php } if($name == "eliminate") { ?>
             <form action="<?= BASE_DIR; ?>Movie/eliminateMovie&id=<?= $targetId; ?>" method="post" enctype="multipart/form-data">
         <?php } ?>
+            <input type="text" name="idPelicula" value="<?=$list["idPelicula"];?>" hidden>
+
             <!-- Input para ingresar titulo de pelicula-->            
             <div class="field">
-                <input name="title" type="text"
+                <input name="tituloPelicula" type="text"
                 value="<?=$list["tituloPelicula"];?>"
                 <?php if($name == "eliminate") { ?>
                     readonly
@@ -59,7 +61,7 @@
             <!-- /Input para ingresar titulo de pelicula-->
             <!-- Input para ingresar descripcion de pelicula-->
             <div class="field-auto">
-                <textarea name="description" cols="30" rows="2"
+                <textarea name="descripcionPelicula" cols="30" rows="2"
                 <?php if($name == "eliminate") { ?>
                     readonly
                 <?php } ?>
@@ -73,7 +75,7 @@
             ?>
             <!-- Select para ingresar genero de pelicula-->
             <div class="field">
-                <select name="genre" id="" required>
+                <select name="generoPelicula" id="" required>
                     <option disabled <?php if($select == "") { ?> selected <?php } ?> value=""></option>
                     <option <?php if($select == "Drama") { ?> selected <?php } ?> value="Drama">Drama</option>
                     <option <?php if($select == "Romance") { ?> selected <?php } ?> value="Romance">Romance</option>
@@ -88,14 +90,14 @@
             <?php } else { //Si es un formulario para eliminar muestra el genero como input?>
             <!-- Input para ingresar genero de pelicula-->
             <div class="field">
-                <input name="genre" value="<?=$list["generoPelicula"];?>" type="text" readonly required>
+                <input name="generoPelicula" value="<?=$list["generoPelicula"];?>" type="text" readonly required>
                 <label>Género</label>
             </div>
             <!-- /Input para ingresar genero de pelicula-->
             <?php } ?>
             <!-- Input para ingresar cantidad de existencias de pelicula-->
             <div class="field">
-                <input name="quantity" type="text"
+                <input name="stockPelicula" type="number" step="1"
                 value="<?=$list["stockPelicula"];?>"
                 <?php if($name == "eliminate") { ?>
                     readonly
@@ -107,7 +109,7 @@
             <div class="field-row">
                 <!-- Input para ingresar precio por alquiler de pelicula-->
                 <div class="field-md">
-                    <input name="priceRent" type="text"
+                    <input name="precioAlquilerPelicula" type="number" step="0.01"
                     value="<?=$list["precioAlquilerPelicula"];?>"
                     <?php if($name == "eliminate") { ?>
                         readonly
@@ -118,7 +120,7 @@
                 <!-- /Input para ingresar precio por alquiler de pelicula-->
                 <!-- Input para ingresar precio por compra de pelicula-->
                 <div class="field-sm">
-                    <input name="priceBuy" type="text" 
+                    <input name="precioVentaPelicula" type="number" step="0.01" 
                     value="<?=$list["precioVentaPelicula"];?>"
                     <?php if($name == "eliminate") { ?>
                         readonly
@@ -128,15 +130,22 @@
                 </div>
                 <!-- /Input para ingresar precio por compra de pelicula-->
             </div>
-            <!-- Input para ingresar imagen de pelicula-->
-            <?php if($name == "modify") { ?>
+
+            <?php
+            if($name != "eliminate") { //Muestra el genero como un select en caso que no sea la vista para eliminar
+                $avaliable = $list["disponibilidadPelicula"];
+            ?>
+            <!-- Input para ingresar disponibilidad de pelicula-->
             <div class="field">
-                <div class="file-upload-wrapper" data-text="Seleccionar imagen">
-                    <input name="file" type="file" class="file-upload-field" value="<?=$list["portadaPelicula"];?>" required>
-                </div>
+                <select name="disponibilidadPelicula" id="" required>
+                    <option disabled <?php if($avaliable == "") { ?> selected <?php } ?> value=""></option>
+                    <option <?php if($avaliable == 1) { ?> selected <?php } ?> value="1">Disponible</option>
+                    <option <?php if($avaliable == 0) { ?> selected <?php } ?> value="0">No disponible</option>
+                </select>
+                <label>Diponibilidad</label>
             </div>
             <?php } ?>
-            <!-- /Input para ingresar imagen de pelicula-->
+            <!-- /Input para ingresar disponibilidad de pelicula-->
 
             <!-- Submit para realizar accion de formulario-->
             <div class="field-small">
@@ -239,7 +248,7 @@
 
             <!-- Input para ingresar cantidad de existencias de pelicula-->
             <div class="field">
-                <input name="stockPelicula" type="number" required>
+                <input name="stockPelicula" type="number" step="1" required>
                 <label>Cantidad</label>
             </div>
             <!-- /Input para ingresar cantidad de existencias de pelicula-->

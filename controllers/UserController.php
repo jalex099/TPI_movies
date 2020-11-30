@@ -56,13 +56,17 @@ class UserController //Clase controlador para acciones de User
                     alert("Usuario registrado");
                     </script>';
 
-                    echo'<script type="text/javascript">
-                    window.location = "'.BASE_DIR.'User/register";
+                echo'<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'User/login";
                     </script>';
             }
             else {
                 echo'<script type="text/javascript">
                     alert("Usuario no registrado");
+                    </script>';
+
+                echo'<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Home/showHome";
                     </script>';
             }
         }
@@ -119,5 +123,35 @@ class UserController //Clase controlador para acciones de User
         $user = new User(); //Instanciamos un nuevo objeto de usuario
         $cartUser = $user->cart(); //Obtenemos el nombre de la vista
         require_once "views/$cartUser"; //Requerimos la vista con la direccion
+    }
+
+    public function cart() //Metodo para mostrar vista de carrito
+    {
+        require_once "models/User.php"; //Requerimos el modelo de usuario
+
+        require_once "./views/userTemp.php"; //Requerimos el php verificador
+        $superUser = new UserTemp(); //Instanciamos el objeto
+        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+
+        //Obtenemos el json desde la url
+        $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
+        $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+        $id = $_GET["id"];
+        $type = $_GET["type"];
+
+        if($userType == "") {
+            echo'<script type="text/javascript">
+                window.location = "'.BASE_DIR.'User/register";
+                </script>';
+        }
+        else {
+            $fechaActual = date("Y-m-d");
+            $fechaRetorno = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+
+            $user = new User(); //Instanciamos un nuevo objeto de usuario
+            $cartUser = $user->cart(); //Obtenemos el nombre de la vista
+            require_once "views/$cartUser"; //Requerimos la vista con la direccion
+        }
     }
 }

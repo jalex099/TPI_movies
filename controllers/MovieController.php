@@ -81,22 +81,94 @@ class MovieController //Clase controlador para acciones de Movie
     public function modify() //Metodo para mostrar vista de modificar pelicula
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
 
-        //Obtenemos el json desde la url
-        if($userType == "Administrador") { //Si el usuario es tipo administrador
-            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
-        }
-        else { //Si es un cliente
-            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
-        }
+        $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
         $data = json_decode($data, true); //Lo decodificamos para hacerlo json
 
         $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
         $modifyMovie = $movie->form(); //Obtenemos el nombre de la vista
         require_once "views/$modifyMovie"; //Requerimos la vista con la direccion
+    }
+
+    public function modifyMovie() //Metodo para modificar pelicula
+    {
+        if($_POST) {
+            $idPelicula = $_POST["idPelicula"];
+            $tituloPelicula = $_POST["tituloPelicula"];
+            $descripcionPelicula = $_POST["descripcionPelicula"];
+            $generoPelicula = $_POST["generoPelicula"];
+            $stockPelicula = $_POST["stockPelicula"];
+            $precioVentaPelicula = $_POST["precioVentaPelicula"];
+            $precioAlquilerPelicula = $_POST["precioAlquilerPelicula"];
+            $disponibilidadPelicula = $_POST["disponibilidadPelicula"];
+            $portadaPelicula = "";
+
+            //Obtenemos el json desde la url
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
+            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
+            foreach ($data as $row => $list) {
+                if($list["idPelicula"] == $idPelicula) {
+                    $portadaPelicula = $list["portadaPelicula"];
+                }
+            };
+
+            $send = array(
+                "idPelicula" => $idPelicula,
+                "tituloPelicula" => $tituloPelicula,
+                "descripcionPelicula" => $descripcionPelicula,
+                "generoPelicula" => $generoPelicula,
+                "portadaPelicula" => $portadaPelicula,
+                "stockPelicula" => $stockPelicula,
+                "precioVentaPelicula" => $precioVentaPelicula,
+                "precioAlquilerPelicula" => $precioAlquilerPelicula,
+                "disponibilidadPelicula" => $disponibilidadPelicula
+            );
+        
+            $json_data = json_encode($send);
+            $stream = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\n" .
+                                "Accept: application/json\r\n" .
+                                "Connection: close\r\n" .
+                                "Content-length: " . strlen($json_data) . "\r\n",
+                    'protocol_version' => 1.1,
+                    'content' => $json_data
+                ],
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ]);
+        
+            $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
+            echo $receive;
+        
+            if($receive.array("response"=>true)) {
+                echo'<script type="text/javascript">
+                    alert("Pelicula modificada con éxito");
+                    </script>';
+        
+                echo'<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Movie/preview&id='.$idPelicula.'";
+                    </script>';
+            }
+            else {
+                echo'<script type="text/javascript">
+                    alert("No se ha logrado modificar la pelicula");
+                    </script>';
+        
+                echo'<script type="text/javascript">
+                    window.location = "'.BASE_DIR.'Movie/modify&id='.$idPelicula.'";
+                    </script>';
+            }
+        }
+        else {
+            echo'<script type="text/javascript">
+                    alert("No");
+                    </script>';
+        }
     }
 
     public function change() //Metodo para cambiar estado de la pelicula
@@ -197,6 +269,10 @@ class MovieController //Clase controlador para acciones de Movie
     public function eliminate() //Metodo para mostrar vista de eliminar pelicula
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
+
+        $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
+        $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+
         $movie = new Movie(); //Instanciamos un nuevo objeto de pelicula
         $eliminateMovie = $movie->form(); //Obtenemos el nombre de la vista
         require_once "views/$eliminateMovie"; //Requerimos la vista con la direccion

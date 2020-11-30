@@ -39,8 +39,8 @@
                         <h3 id="res-subtitle"><?=$list["generoPelicula"];?> / <span>Disponibles: <strong><?=$list["stockPelicula"];?></strong></span></h3>
                         <h4 id="res-like"><a class="far fa-heart" id="btn-like"></a> <span>74</span> Me gusta</h4>
                         <div class="btn__actions">
-                            <button class="btn-rent">$<?=$list["precioAlquilerPelicula"];?></button>
-                            <button class="btn-buy">$<?=$list["precioVentaPelicula"];?></button>
+                            <a href="<?= BASE_DIR; ?>User/cart&id=<?= $targetId; ?>&type=1"><button class="btn-rent">$<?=$list["precioAlquilerPelicula"];?></button></a>
+                            <a href="<?= BASE_DIR; ?>User/cart&id=<?= $targetId; ?>&type=2"><button class="btn-buy">$<?=$list["precioVentaPelicula"];?></button></a>
                         </div>
                     </div>
                 </div>
