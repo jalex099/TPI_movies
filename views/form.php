@@ -170,6 +170,10 @@
                             <label>Contraseña</label>
                         </div>
                         <!-- /Input para ingresar contrasena-->
+
+                        <div class="field">
+                            <a href="<?= BASE_DIR; ?>User/register">Registrarse</a>
+                        </div>
                         <?php
             }
             else if ($name == "register") {

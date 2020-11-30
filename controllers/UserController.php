@@ -376,7 +376,6 @@ class UserController //Clase controlador para acciones de User
 
         if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
             $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
-            $userId = $_COOKIE["sessionID"]; //Definimos el id de usuario
         }
         else { //Si no existen cookies
             $userType = ""; //Se pone como vacio para usuario sin registro
@@ -410,7 +409,7 @@ class UserController //Clase controlador para acciones de User
         if($_GET) {
             $fechaAlquiler = $_GET["fechaI"];
             $fechaEsperadaAlquiler = $_GET["fechaF"];
-            $idCliente = "2";
+            $idCliente = $_COOKIE["sessionID"];
             $idPelicula = $_GET["id"];
 
             $send = array(
@@ -464,7 +463,7 @@ class UserController //Clase controlador para acciones de User
         if($_GET) {
             $cantidadVenta = $_GET["cantidad"];
             $fechaVenta = $_GET["fecha"];
-            $idCliente = "2";
+            $idCliente = $_COOKIE["sessionID"];
             $idPelicula = $_GET["id"];
 
             $send = array(

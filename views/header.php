@@ -109,7 +109,7 @@ if(!isset($name) || empty($name)) {
                         <?php } ?>
                         <a class="nav-link" href="<?= BASE_DIR; ?>Home/showHome"><i class="fas fa-home"></i>Inicio</a>
                     </li>
-                    <?php if ($name == "showMovies" || $name == "cart" || $name == "preview" || $name == "modify" || $name == "eliminate") /* Activar elemento al estar en vista catalogo*/ { ?>
+                    <?php if ($name == "showMovies" || $name == "preview" || $name == "modify" || $name == "eliminate") /* Activar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista catalogo*/ { ?>
                     <li class="nav-item">
@@ -130,7 +130,7 @@ if(!isset($name) || empty($name)) {
                     <?php } ?>
                     <?php
                     if ($userType == "Cliente" || $userType == "") { //Mostrar elemento solo si es cliente
-                        if ($name == "rent" || $name == "sale") /* Activar elemento al estar en vista transacciones*/ { ?>
+                        if ($name == "rent" || $name == "sale" || $name == "cart") /* Activar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item">
@@ -151,7 +151,7 @@ if(!isset($name) || empty($name)) {
                     <?php } ?>
                     <?php
                     if($logStatus == "off") {
-                        if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
+                        if ($name == "login" || $name == "register") /* Activar elemento al estar en vista login*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista login*/ { ?>
                     <li class="nav-item">
@@ -167,7 +167,7 @@ if(!isset($name) || empty($name)) {
                         <?php } else /* Desactivar elemento al estar en sesion activa*/ { ?>
                     <li class="nav-item">
                         <?php } ?>
-                        <a class="nav-link" href="<?= BASE_DIR; ?>User/logout"><i class="fas fa-door-open"></i>Cerrar
+                        <a class="nav-link" href="<?= BASE_DIR; ?>controllers/logout.php"><i class="fas fa-door-open"></i>Cerrar
                             Sesión</a>
                     </li>
                     <?php } ?>
