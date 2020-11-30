@@ -6,7 +6,7 @@ require_once("Database/Connect.php");
 class Alquileres extends Connect { //Clase de alquileres
 
     const TABLE_NAME = 'tblalquileres';
-    const TABLE_NAME_DETAIL = 'tbldetallealquileres';
+    const TABLE_NAME_DETAIL = 'tbldetallealquiler';
     const TABLE_NAME_PELICULAS = 'tblpeliculas';
 
 
@@ -105,7 +105,6 @@ class Alquileres extends Connect { //Clase de alquileres
         `totalDetalleAlquiler`, `multaDetalleAlquiler`) 
         VALUES (".$idAlquiler.",'".$fechaDevolucionAlquiler."',".$totalDetalleAlquiler.",".$multaDetalleAlquiler.")";
         if ($result = $this->conn->query($sql)) {
-            $this->add($idPelicula);
             $this->estadoAlquiler($idAlquiler);
             return $this->ok();
         } else{
