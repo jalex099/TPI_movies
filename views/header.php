@@ -1,16 +1,23 @@
 <?php
-require_once "userTemp.php";
-$superUser = new UserTemp();
-$userType = $superUser->getUserType();
-$logStatus = $superUser->getLogStatus();
+$userType;
+$logStatus;
+
+if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) {
+    $userType = $_COOKIE["sessionRol"];
+    $logStatus = "on";
+}
+else {
+    $userType = "";
+    $logStatus = "off";
+}
 
 $name = $_GET['action']; //Obtenemos el nombre del controlador
 
 if(!isset($name) || empty($name)) {
-    if($logStatus == "logIn") {
+    if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) {
         $name = "logout";
     }
-    else if($logStatus == "logOut") {
+    else {
         $name = "login";
     }
 }
@@ -122,8 +129,8 @@ if(!isset($name) || empty($name)) {
                     </li>
                     <?php } ?>
                     <?php
-                    if ($userType == "Cliente") { //Mostrar elemento solo si es cliente
-                        if ($name == "rent") /* Activar elemento al estar en vista transacciones*/ { ?>
+                    if ($userType == "Cliente" || $userType == "") { //Mostrar elemento solo si es cliente
+                        if ($name == "rent" || $name == "sale") /* Activar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista transacciones*/ { ?>
                     <li class="nav-item">
@@ -144,7 +151,7 @@ if(!isset($name) || empty($name)) {
                     </li>
                     <?php } ?>
                     <?php
-                    if($logStatus == "LogOut") {
+                    if($logStatus == "off") {
                         if ($name == "login") /* Activar elemento al estar en vista login*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en vista login*/ { ?>
@@ -155,7 +162,7 @@ if(!isset($name) || empty($name)) {
                     </li>
                     <?php
                     } 
-                    else if($logStatus == "LogIn") {
+                    else if($logStatus == "on") {
                         if ($name == "logout") /* Activar elemento al cerrar sesion*/ { ?>
                     <li class="nav-item active">
                         <?php } else /* Desactivar elemento al estar en sesion activa*/ { ?>

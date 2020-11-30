@@ -115,9 +115,9 @@
                                 data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
                         <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i
                                     class="fa fa-heart"></i></a></li>
-                        <li><a href="" data-toggle="tooltip" data-placement="top" title="Comprar"><i
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=2&quantity=1" data-toggle="tooltip" data-placement="top" title="Comprar"><i
                                     class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="" data-toggle="tooltip" data-placement="top" title="Alquilar"><i
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=1&quantity=1" data-toggle="tooltip" data-placement="top" title="Alquilar"><i
                                     class="fas fa-video"></i></a></li>
                     </ul>
                     <!-- /Tarjeta para mostrar pelicula, botones de acciones-->
@@ -171,9 +171,9 @@
                                 data-placement="top" title="Ver"><i class="fa fa-eye"></i></a></li>
                         <li><a href="" data-toggle="tooltip" data-placement="top" title="Me gusta"><i
                                     class="fa fa-heart"></i></a></li>
-                        <li><a href="" data-toggle="tooltip" data-placement="top" title="Comprar"><i
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=2&quantity=1" data-toggle="tooltip" data-placement="top" title="Comprar"><i
                                     class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="" data-toggle="tooltip" data-placement="top" title="Alquilar"><i
+                        <li><a href="<?= BASE_DIR; ?>User/cart&id=<?= $id; ?>&type=1&quantity=1" data-toggle="tooltip" data-placement="top" title="Alquilar"><i
                                     class="fas fa-video"></i></a></li>
                     </ul>
                     <!-- /Tarjeta para mostrar pelicula, botones de acciones-->

@@ -9,6 +9,126 @@ class UserController //Clase controlador para acciones de User
         require_once "views/$loginUser"; //Requerimos la vista con la direccion
     }
 
+    public function verifyLogin() {
+        require_once "models/User.php"; //Requerimos el modelo de usuario
+
+        if($_POST && !empty($_POST)) {
+            $user = $_POST["user"];
+            $pass = $_POST["pass"];
+            $valido = false;
+            $nameUser;
+            $idUser;
+            $msgError;
+
+            $send = array(
+                    "correoUsuario" => $user);
+            $json_data = json_encode($send);
+
+            $stream = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\n" .
+                                "Accept: application/json\r\n" .
+                                "Connection: close\r\n" .
+                                "Content-length: " . strlen($json_data) . "\r\n",
+                    'protocol_version' => 1.1,
+                    'content' => $json_data
+                ],
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false
+                ]
+            ]);
+
+            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneUsuario.php", false, $stream);
+            echo $data;
+            $data = json_decode($data, true); //Lo decodificamos para hacerlo arreglo
+
+            if($data["response"] != false) {
+                foreach($data as $row => $list) {
+                    if($list["contraseñaUsuario"] == $pass) {
+                        $valido = true;
+                        $nameUser = $list["nombreUsuario"];
+                        $idUser = $list["idUsuario"];
+                    }
+                    else {
+                        $msgError = "Contraseña incorrecta";
+                    }
+                };
+
+                if(!$valido) {
+                    echo '<script type="text/javascript">
+                        alert("'.$msgError.', intente de nuevo");
+                        </script>';
+
+                    echo '<script type="text/javascript">
+                        window.location = "'.BASE_DIR.'User/login";
+                        </script>';
+                }
+                else {
+                    echo '<script type="text/javascript">
+                        alert("Bienvenido '.$user.'");
+                        </script>';
+                    
+                    $_SESSION["id"] = $idUser; //Obtenemos del id
+                    setcookie("sessionID", true, strtotime('+30 minutes'), "/"); //Creamos la cookie de la sesion
+                    setcookie("sessionRol", "Administrador", strtotime('+30 minutes'), "/"); //Creamos la cookie de rol
+
+                    echo '<script type="text/javascript">
+                        window.location = "'.BASE_DIR.'Home/showHome";
+                        </script>';
+                }
+            }
+            else {
+                $data = file_get_contents("http://localhost/TPI_movies/backend/server/readCliente.php");
+                $data = json_decode($data, true); //Lo decodificamos para hacerlo arreglo
+
+                foreach($data as $row => $list) {
+                    if($user == $list["correoCliente"]) {
+                        if($pass == $list["contraseñaCliente"]) {
+                            $valido = true;
+                            $nameUser = $list["nombreCliente"];
+                            $idUser = $list["idCliente"];
+                        }
+                        else {
+                            $msgError = "Contraseña incorrecta";
+                        }
+                    }
+                    else {
+                        $msgError = "Usuario incorrecto";
+                    }
+                };
+
+                if(!$valido) {
+                    echo '<script type="text/javascript">
+                        alert("'.$msgError.', intente de nuevo");
+                        </script>';
+
+                    echo '<script type="text/javascript">
+                        window.location = "'.BASE_DIR.'User/login";
+                        </script>';
+                }
+                else {
+                    echo '<script type="text/javascript">
+                        alert("Bienvenido '.$nameUser.'");
+                        </script>';
+                    
+                    $_SESSION["id"] = $idUser; //Obtenemos del id
+                    setcookie("sessionID", $idUser, strtotime('+30 minutes'), "/"); //Creamos la cookie de la sesion
+                    setcookie("sessionRol", "Administrador", strtotime('+30 minutes'), "/"); //Creamos la cookie de rol
+
+                    echo '<script type="text/javascript">
+                        window.location = "'.BASE_DIR.'Home/showHome";
+                        </script>';
+                }
+            }
+        }
+
+        $user = new User(); //Instanciamos un nuevo objeto de usuario
+        $loginUser = $user->login(); //Obtenemos el nombre de la vista
+        require_once "views/$loginUser"; //Requerimos la vista con la direccion
+    }
+
     public function register() //Metodo para mostrar vista de registro
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
@@ -120,9 +240,16 @@ class UserController //Clase controlador para acciones de User
     public function sale() //Metodo para mostrar vista de registro de compras
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+        $userType; //Para capturar el tipo de usuario
+        $userId; //Para el id de usuario
+
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+            $userId = $_COOKIE["sessionID"]; //Definimos el id de usuario
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
 
         //Obtenemos el json desde la url
         if($userType == "Administrador") { //Si el usuario es tipo administrador
@@ -131,7 +258,7 @@ class UserController //Clase controlador para acciones de User
                 </script>';
         }
         else if($userType == "Cliente") {
-            $idCliente = "1";
+            $idCliente = $userId;
 
             $send = array(
                 "idCliente" => $idCliente,
@@ -157,7 +284,7 @@ class UserController //Clase controlador para acciones de User
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneVenta.php", false, $stream);
         
             if($data != false) {
-                $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+                $data = json_decode($data, true); //Lo decodificamos para hacerlo arreglo
 
                 $user = new User(); //Instanciamos un nuevo objeto de usuario
                 $shopUser = $user->shopping(); //Obtenemos el nombre de la vista
@@ -179,9 +306,16 @@ class UserController //Clase controlador para acciones de User
     public function rent() //Metodo para mostrar vista de registro de alquileres
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+        $userType; //Para capturar el tipo de usuario
+        $userId; //Para el id de usuario
+
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+            $userId = $_COOKIE["sessionID"]; //Definimos el id de usuario
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
 
         //Obtenemos el json desde la url
         if($userType == "Administrador") { //Si el usuario es tipo administrador
@@ -189,8 +323,8 @@ class UserController //Clase controlador para acciones de User
                 window.location = "'.BASE_DIR.'Home/showHome";
                 </script>';
         }
-        else if($userType == "Cliente") {
-            $idCliente = "2";
+        else if($userType == "Cliente") { //Si esl usuario es un cliente
+            $idCliente = $userId;
 
             $send = array(
                 "idCliente" => $idCliente,

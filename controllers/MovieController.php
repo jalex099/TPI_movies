@@ -52,9 +52,14 @@ class MovieController //Clase controlador para acciones de Movie
     public function preview() //Metodo para mostrar vista de vista previa
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+        $userType; //Para capturar el tipo de usuario
+
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
 
         //Obtenemos el json desde la url
         if($userType == "Administrador") { //Si el usuario es tipo administrador
@@ -73,9 +78,14 @@ class MovieController //Clase controlador para acciones de Movie
     public function sale() //Metodo para mostrar vista de registro de compras
     {
         require_once "models/Movie.php"; //Requerimos el modelo de pelicula
-        require_once "./views/userTemp.php"; //Requerimos el php verificador
-        $superUser = new UserTemp(); //Instanciamos el objeto
-        $userType = $superUser->getUserType(); //Obtenemos el tipo de usuario
+        $userType; //Para capturar el tipo de usuario
+
+        if(isset($_COOKIE["sessionID"]) && isset($_COOKIE["sessionRol"])) { //Si las cookies no estan vacias
+            $userType = $_COOKIE["sessionRol"]; //Definimos el tipo de usuario con el valor de la cookie
+        }
+        else { //Si no existen cookies
+            $userType = ""; //Se pone como vacio para usuario sin registro
+        }
 
         //Obtenemos el json desde la url
         if($userType == "Administrador") { //Si el usuario es tipo administrador
@@ -201,7 +211,7 @@ class MovieController //Clase controlador para acciones de Movie
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
             echo $receive;
         
-            if($receive != false) {
+            if($receive["response"] != false) {
                 echo'<script type="text/javascript">
                     alert("Pelicula modificada con éxito");
                     </script>';
@@ -296,7 +306,7 @@ class MovieController //Clase controlador para acciones de Movie
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
             echo $receive;
         
-            if($receive != false) {
+            if($receive["response"] != false) {
                 echo'<script type="text/javascript">
                     alert("Estado de pelicula cambiado con éxito");
                     </script>';
@@ -362,7 +372,7 @@ class MovieController //Clase controlador para acciones de Movie
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/deletePelicula.php", false, $stream);
             echo $receive;
         
-            if($receive != false) {
+            if($receive["response"] != false) {
                 echo'<script type="text/javascript">
                     alert("Pelicula eliminada con éxito");
                     </script>';

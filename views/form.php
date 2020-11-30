@@ -165,7 +165,7 @@
         <?php if($name == "add") { ?>
         <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post" enctype="multipart/form-data">
         <?php } if($name == "login") { ?>
-        <form action="<?= BASE_DIR; ?>controllers/uploadData.php" method="post">
+        <form action="<?= BASE_DIR; ?>controllers/verifyLogin.php" method="post">
         <?php } if($name == "register") { ?>
         <form action="<?= BASE_DIR; ?>User/registerUser" method="post">
         <?php } ?>
@@ -174,8 +174,8 @@
             ?>
             <!-- Input para ingresar usuario-->
             <div class="field">
-                <input name="user" type="text" required>
-                <label>Usuario</label>
+                <input name="user" type="email" required>
+                <label>Correo</label>
             </div>
             <!-- /Input para ingresar usuario-->
             <!-- Input para ingresar contrasena-->
