@@ -174,7 +174,8 @@ class MovieController //Clase controlador para acciones de Movie
 
     public function modifyMovie() //Metodo para modificar pelicula
     {
-        if($_POST) { //Si hay datos capturados po r medio del post
+        if($_POST) { //Si hay datos capturados por medio del post
+            //Asignamos a cada variable el valor obtenido por medio del post
             $idPelicula = $_POST["idPelicula"];
             $tituloPelicula = $_POST["tituloPelicula"];
             $descripcionPelicula = $_POST["descripcionPelicula"];
@@ -187,14 +188,15 @@ class MovieController //Clase controlador para acciones de Movie
 
             //Obtenemos el json desde la url
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/readAllPelicula.php");
-            $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+            $data = json_decode($data, true); //Lo decodificamos para hacerlo array
 
-            foreach ($data as $row => $list) {
-                if($list["idPelicula"] == $idPelicula) {
-                    $portadaPelicula = $list["portadaPelicula"];
+            foreach ($data as $row => $list) { //Recorremos el arreglo
+                if($list["idPelicula"] == $idPelicula) { //Buscamos si coincide la pelicula
+                    $portadaPelicula = $list["portadaPelicula"]; //Obtenemos la portada con este
                 }
             };
 
+            //Pasamos los valores que obtuvimos al array
             $send = array(
                 "idPelicula" => $idPelicula,
                 "tituloPelicula" => $tituloPelicula,
@@ -207,8 +209,8 @@ class MovieController //Clase controlador para acciones de Movie
                 "disponibilidadPelicula" => $disponibilidadPelicula
             );
         
-            $json_data = json_encode($send);
-            $stream = stream_context_create([
+            $json_data = json_encode($send); //Convertimos los datos a tipo json
+            $stream = stream_context_create([ //Creamos el contexto para ejecutar consulta con el json
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-type: application/json\r\n" .
@@ -224,9 +226,10 @@ class MovieController //Clase controlador para acciones de Movie
                 ]
             ]);
         
+            //Realizamos la consulta con el link
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
-            echo $receive;
         
+            //Si el response es verdadero se ha realizado con exito
             if($receive["response"] != false) {
                 echo'<script type="text/javascript">
                     alert("Pelicula modificada con éxito");
@@ -236,7 +239,7 @@ class MovieController //Clase controlador para acciones de Movie
                     window.location = "'.BASE_DIR.'Movie/preview&id='.$idPelicula.'";
                     </script>';
             }
-            else {
+            else { //Si el response en falso es que no se pudo realizar
                 echo'<script type="text/javascript">
                     alert("No se ha logrado modificar la pelicula");
                     </script>';
@@ -260,6 +263,7 @@ class MovieController //Clase controlador para acciones de Movie
             $userType = $this->getSessionStatus(); //Para capturar el tipo de usuario
 
             if($userType == "Administrador") { //Permitimos acceso solo al administrador
+                //Instanciamos las variables con valor nulo
                 $tituloPelicula = "";
                 $descripcionPelicula = "";
                 $generoPelicula = "";
@@ -272,10 +276,12 @@ class MovieController //Clase controlador para acciones de Movie
 
                 //Obtenemos el json desde la url
                 $data = file_get_contents("http://localhost/TPI_movies/backend/server/readPelicula.php");
-                $data = json_decode($data, true); //Lo decodificamos para hacerlo json
+                $data = json_decode($data, true); //Lo decodificamos para hacerlo array
 
+                //Recorremos el arreglo en busca de coincidencias
                 foreach ($data as $row => $list) {
-                    if($list["idPelicula"] == $targetId) {
+                    if($list["idPelicula"] == $targetId) { //Si encontramos coincidencia con la pelicula
+                        //Pasamos todos los valores
                         $idPelicula = $targetId;
                         $tituloPelicula = $list["tituloPelicula"];
                         $descripcionPelicula = $list["descripcionPelicula"];
@@ -285,15 +291,17 @@ class MovieController //Clase controlador para acciones de Movie
                         $precioVentaPelicula = $list["precioVentaPelicula"];
                         $precioAlquilerPelicula = $list["precioAlquilerPelicula"];
                         
-                        if($list["disponibilidadPelicula"] == 1) {
-                            $disponibilidadPelicula = 0;
+                        //Comprobamos la disponibilidad para poder cambiar
+                        if($list["disponibilidadPelicula"] == 1) { //Si esta disponible
+                            $disponibilidadPelicula = 0; //Se cambia a no disponible
                         }
-                        else if($list["disponibilidadPelicula"] == 0) {
-                            $disponibilidadPelicula = 1;
+                        else if($list["disponibilidadPelicula"] == 0) { //Si no esta disponible
+                            $disponibilidadPelicula = 1; //Se cambia a disponible
                         }
                     }
                 };
 
+                //Elaboramos el array con todos los valores encontrados
                 $send = array(
                     "idPelicula" => $idPelicula,
                     "tituloPelicula" => $tituloPelicula,
@@ -306,8 +314,8 @@ class MovieController //Clase controlador para acciones de Movie
                     "disponibilidadPelicula" => $disponibilidadPelicula
                 );
             
-                $json_data = json_encode($send);
-                $stream = stream_context_create([
+                $json_data = json_encode($send); //Convertimos el array a json
+                $stream = stream_context_create([ //Creamos el contexto para hacer la consulta
                     'http' => [
                         'method' => 'POST',
                         'header' => "Content-type: application/json\r\n" .
@@ -323,10 +331,12 @@ class MovieController //Clase controlador para acciones de Movie
                     ]
                 ]);
             
+                //Realizamos la conulta por medio del json
                 $receive = file_get_contents("http://localhost/TPI_movies/backend/server/updatePelicula.php", false, $stream);
-                echo $receive;
             
+                //Si el response es verdadero
                 if($receive["response"] != false) {
+                    //Confirmamos cambio
                     echo'<script type="text/javascript">
                         alert("Estado de pelicula cambiado con éxito");
                         </script>';
@@ -335,7 +345,8 @@ class MovieController //Clase controlador para acciones de Movie
                         window.location = "'.BASE_DIR.'Movie/showMovies";
                         </script>';
                 }
-                else {
+                else { //Si el response es falso
+                    //No se logro hacer el cambio
                     echo'<script type="text/javascript">
                         alert("No se ha logrado cambiar el estado de la pelicula");
                         </script>';
@@ -381,14 +392,15 @@ class MovieController //Clase controlador para acciones de Movie
 
     public function eliminateMovie() { //Metodo para eliminar pelicula
         if($_GET) { //Si se han capturado los datos
-            $idPelicula = $_GET["id"];
+            $idPelicula = $_GET["id"]; //Obtenemos el id de pelicula por el get
 
+            //Creamos el array con el id de pelicula
             $send = array(
                 "idPelicula" => $idPelicula,
             );
         
-            $json_data = json_encode($send);
-            $stream = stream_context_create([
+            $json_data = json_encode($send); //Convertimos el array a json
+            $stream = stream_context_create([ //Creamos el contexto para poder hacer la consulta
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-type: application/json\r\n" .
@@ -404,10 +416,11 @@ class MovieController //Clase controlador para acciones de Movie
                 ]
             ]);
         
+            //Realozamos la consulta obteniendo datos del json
             $receive = file_get_contents("http://localhost/TPI_movies/backend/server/deletePelicula.php", false, $stream);
-            echo $receive;
         
-            if($receive["response"] != false) {
+            if($receive["response"] != false) { //Si esl responde es verdadero
+                //Confirmamos accion de eliminar
                 echo'<script type="text/javascript">
                     alert("Pelicula eliminada con éxito");
                     </script>';
@@ -416,7 +429,8 @@ class MovieController //Clase controlador para acciones de Movie
                     window.location = "'.BASE_DIR.'Movie/showMovies";
                     </script>';
             }
-            else {
+            else { //Si el response es falso
+                //No se logro realizar la eliminacion
                 echo'<script type="text/javascript">
                     alert("No se ha logrado cambiar el estado de la pelicula");
                     </script>';
