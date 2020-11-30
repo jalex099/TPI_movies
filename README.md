@@ -2,17 +2,24 @@
 Proyecto final de TPI que respecta a la web de peliculas
 
 INTEGRANTES:
+
 -Javier Alexander Morales Melara MM18014
+
 -Brian Steve Rodas Hernández RH18031
+
 -Oscar Alexis Palacios Flores PF18008
+
 -Enrique Antonio Méndez Cáceres MC18082
+
 -Nelson Vladimir Argueta Marroquin AM16079
 
 
 
 
 //////////////////////////////////////////////////////////////////////
+
 VISTA GENERAL DE LAS CARPETAS
+
 ./assets {Contiene los archivos de estilos css, los js utilizados y las imagenes}
 ./backend {Contiene los directorios y archivos que conectan los datos del backend}
 ./config {Contiene los archivos de configuracione para la base y directorios}
@@ -27,7 +34,9 @@ VISTA GENERAL DE LAS CARPETAS
 
 
 //////////////////////////////////////////////////////////////////////
+
 FUNCIONAMIENTO POR PARTE DEL FRONT
+
 @CONTROLADORES
     #HomeController
         Método showHome
