@@ -17,129 +17,18 @@ class UserController //Clase controlador para acciones de User
     public function login() //Metodo para mostrar vista de login
     {
         require_once "models/User.php"; //Requerimos el modelo de usuario
-        $user = new User(); //Instanciamos un nuevo objeto de usuario
-        $loginUser = $user->login(); //Obtenemos el nombre de la vista
-        require_once "views/$loginUser"; //Requerimos la vista con la direccion
-    }
+        $userType = $this->getSessionStatus(); //Obtenemos la sesion
 
-    public function verifyLogin() {
-        require_once "models/User.php"; //Requerimos el modelo de usuario
-
-        if($_POST && !empty($_POST)) {
-            $user = $_POST["user"];
-            $pass = $_POST["pass"];
-            $valido = false;
-            $nameUser;
-            $idUser;
-            $msgError;
-
-            $send = array(
-                    "correoUsuario" => $user);
-            $json_data = json_encode($send);
-
-            $stream = stream_context_create([
-                'http' => [
-                    'method' => 'POST',
-                    'header' => "Content-type: application/json\r\n" .
-                                "Accept: application/json\r\n" .
-                                "Connection: close\r\n" .
-                                "Content-length: " . strlen($json_data) . "\r\n",
-                    'protocol_version' => 1.1,
-                    'content' => $json_data
-                ],
-                'ssl' => [
-                    'verify_peer' => false,
-                    'verify_peer_name' => false
-                ]
-            ]);
-
-            $data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneUsuario.php", false, $stream);
-            echo $data;
-            $data = json_decode($data, true); //Lo decodificamos para hacerlo arreglo
-
-            if($data["response"] != false) {
-                foreach($data as $row => $list) {
-                    if($list["contraseñaUsuario"] == $pass) {
-                        $valido = true;
-                        $nameUser = $list["nombreUsuario"];
-                        $idUser = $list["idUsuario"];
-                    }
-                    else {
-                        $msgError = "Contraseña incorrecta";
-                    }
-                };
-
-                if(!$valido) {
-                    echo '<script type="text/javascript">
-                        alert("'.$msgError.', intente de nuevo");
-                        </script>';
-
-                    echo '<script type="text/javascript">
-                        window.location = "'.BASE_DIR.'User/login";
-                        </script>';
-                }
-                else {
-                    echo '<script type="text/javascript">
-                        alert("Bienvenido '.$user.'");
-                        </script>';
-                    
-                    $_SESSION["id"] = $idUser; //Obtenemos del id
-                    setcookie("sessionID", true, strtotime('+30 minutes'), "/"); //Creamos la cookie de la sesion
-                    setcookie("sessionRol", "Administrador", strtotime('+30 minutes'), "/"); //Creamos la cookie de rol
-
-                    echo '<script type="text/javascript">
-                        window.location = "'.BASE_DIR.'Home/showHome";
-                        </script>';
-                }
-            }
-            else {
-                $data = file_get_contents("http://localhost/TPI_movies/backend/server/readCliente.php");
-                $data = json_decode($data, true); //Lo decodificamos para hacerlo arreglo
-
-                foreach($data as $row => $list) {
-                    if($user == $list["correoCliente"]) {
-                        if($pass == $list["contraseñaCliente"]) {
-                            $valido = true;
-                            $nameUser = $list["nombreCliente"];
-                            $idUser = $list["idCliente"];
-                        }
-                        else {
-                            $msgError = "Contraseña incorrecta";
-                        }
-                    }
-                    else {
-                        $msgError = "Usuario incorrecto";
-                    }
-                };
-
-                if(!$valido) {
-                    echo '<script type="text/javascript">
-                        alert("'.$msgError.', intente de nuevo");
-                        </script>';
-
-                    echo '<script type="text/javascript">
-                        window.location = "'.BASE_DIR.'User/login";
-                        </script>';
-                }
-                else {
-                    echo '<script type="text/javascript">
-                        alert("Bienvenido '.$nameUser.'");
-                        </script>';
-                    
-                    $_SESSION["id"] = $idUser; //Obtenemos del id
-                    setcookie("sessionID", $idUser, strtotime('+30 minutes'), "/"); //Creamos la cookie de la sesion
-                    setcookie("sessionRol", "Administrador", strtotime('+30 minutes'), "/"); //Creamos la cookie de rol
-
-                    echo '<script type="text/javascript">
-                        window.location = "'.BASE_DIR.'Home/showHome";
-                        </script>';
-                }
-            }
+        if($userType == "") {
+            $user = new User(); //Instanciamos un nuevo objeto de usuario
+            $loginUser = $user->login(); //Obtenemos el nombre de la vista
+            require_once "views/$loginUser"; //Requerimos la vista con la direccion
         }
-
-        $user = new User(); //Instanciamos un nuevo objeto de usuario
-        $loginUser = $user->login(); //Obtenemos el nombre de la vista
-        require_once "views/$loginUser"; //Requerimos la vista con la direccion
+        else {
+            echo '<script type="text/javascript">
+                window.location = "'.BASE_DIR.'Movie/showMovies";
+                </script>';
+        }
     }
 
     public function register() //Metodo para mostrar vista de registro
@@ -150,23 +39,25 @@ class UserController //Clase controlador para acciones de User
         require_once "views/$registerUser"; //Requerimos la vista con la direccion
     }
 
-    public function registerUser()
+    public function registerUser() //Metodo para registrar un nuevo usuario
     {
-        if($_POST) {
+        if($_POST) { //Si el post esta activo y tiene valores
+            //Capturamos los valores ingresados en el input
             $nombreCliente = $_POST["nombreCliente"];
             $apellidoCliente = $_POST["apellidoCliente"];
             $correoCliente = $_POST["correoCliente"];
             $contraseñaCliente = $_POST["contraseñaCliente"];
 
+            //LLenamos un array asociativo con los valores que capturamos
             $send = array(
                     "nombreCliente" => $nombreCliente,
                     "apellidoCliente" => $apellidoCliente,
                     "correoCliente" => $correoCliente,
                     "contraseñaCliente" => $contraseñaCliente);
-            $json_data = json_encode($send);
+            $json_data = json_encode($send); //Convertimos a json
 
 
-            $stream = stream_context_create([
+            $stream = stream_context_create([ //Creamos el contexto para la consulta
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-type: application/json\r\n" .
@@ -181,10 +72,11 @@ class UserController //Clase controlador para acciones de User
                     'verify_peer_name' => false
                 ]
             ]);
+            //Hacemos la consulta obteniendo el json con el que hacemos la consulta
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/createCliente.php", false, $stream);
-            echo $data;
 
-            if($data != false) {
+            if($data != false) { //Si nos retorna verdadero
+                //Se muestra que se ha registrado el usuario
                 echo'<script type="text/javascript">
                     alert("Usuario registrado");
                     </script>';
@@ -193,7 +85,8 @@ class UserController //Clase controlador para acciones de User
                     window.location = "'.BASE_DIR.'User/login";
                     </script>';
             }
-            else {
+            else { //Si no se ha logrado registrar
+                //Entonces nos retorna error
                 echo'<script type="text/javascript">
                     alert("Usuario no registrado");
                     </script>';
@@ -205,17 +98,18 @@ class UserController //Clase controlador para acciones de User
         }
     }
 
-    public function deleteUser()
+    public function deleteUser() //Metodo para eliminar usuario de la base de datos
     {
-        if($_POST) {
+        if($_POST) { //Si se han obtenido los valores por el post
+            //Agregamos el id de cliente a la variable
             $idCliente = $_POST["nombreCliente"];
 
+            //Hacemos el array con estos valores
             $send = array(
                     "idCliente" => $idCliente);
-            $json_data = json_encode($send);
+            $json_data = json_encode($send); //Convertimos a json
 
-
-            $stream = stream_context_create([
+            $stream = stream_context_create([ //Creamos el contexto para la consulta
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-type: application/json\r\n" .
@@ -230,10 +124,12 @@ class UserController //Clase controlador para acciones de User
                     'verify_peer_name' => false
                 ]
             ]);
+            //Obtenemos el json con el resultado de eliminar
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/deleteCliente.php", false, $stream);
-            echo $data;
 
+            //Si es vedadero
             if($data != false) {
+                //Mostramos que se ha realizado correctamente
                 echo '<script type="text/javascript">
                     alert("Usuario eliminado con éxito");
                     </script>';
@@ -242,7 +138,8 @@ class UserController //Clase controlador para acciones de User
                     window.location = "'.BASE_DIR.'User/register";
                     </script>';
             }
-            else {
+            else { //Si es falso, no se realizo la consulta
+                //Se muestra que no se pudo eliminar
                 echo '<script type="text/javascript">
                     alert("Usuario no eliminado");
                     </script>';
@@ -270,15 +167,15 @@ class UserController //Clase controlador para acciones de User
                 window.location = "'.BASE_DIR.'Home/showHome";
                 </script>';
         }
-        else if($userType == "Cliente") {
-            $idCliente = $userId;
+        else if($userType == "Cliente") { //Si es un cliente el que lo realiza
+            $idCliente = $userId; //Obtenoms el id
 
-            $send = array(
+            $send = array( //Se lo pasamos al array
                 "idCliente" => $idCliente,
             );
-        
-            $json_data = json_encode($send);
-            $stream = stream_context_create([
+            $json_data = json_encode($send); //Convertimos a json
+
+            $stream = stream_context_create([ //Creamos el contexto para luego hacer la consulta
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-type: application/json\r\n" .
@@ -293,9 +190,10 @@ class UserController //Clase controlador para acciones de User
                     'verify_peer_name' => false
                 ]
             ]);
-        
+            //Obtenemos el json con el resultado de la consulta
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/readOneVenta.php", false, $stream);
         
+            //Si nos arroja resultados que no sean false
             if($data != false) {
                 $data = json_decode($data, true); //Lo decodificamos para hacerlo arreglo
 
@@ -303,7 +201,7 @@ class UserController //Clase controlador para acciones de User
                 $shopUser = $user->shopping(); //Obtenemos el nombre de la vista
                 require_once "views/$shopUser"; //Requerimos la vista con la direccion
             }
-            else {        
+            else { //Si es falso es porque no se ha logrado obtener el listado
                 echo '<script type="text/javascript">
                     window.location = "'.BASE_DIR.'Home/showHome";
                     </script>';
@@ -446,20 +344,22 @@ class UserController //Clase controlador para acciones de User
 
     public function checkoutReturn() //Metodo para realizar la devolucion
     {
-        if($_GET) {
+        if($_GET) { //Revisamos que se envien los datos por el get
+            //LLenamos las variables con los valores enviados
             $idAlquiler = $_GET["id"];
             $fechaDevolucionAlquiler = $_GET["fecha"];
             $totalDetalleAlquiler = $_GET["total"];
             $multaDetalleAlquiler = $_GET["multa"];
 
+            //Llenamos el array asociativo
             $send = array(
                     "idAlquiler" => $idAlquiler,
                     "fechaDevolucionAlquiler" => $fechaDevolucionAlquiler,
                     "totalDetalleAlquiler" => $totalDetalleAlquiler,
                     "multaDetalleAlquiler" => $multaDetalleAlquiler);
-            $json_data = json_encode($send);
+            $json_data = json_encode($send); //Convertimos a json
 
-            $stream = stream_context_create([
+            $stream = stream_context_create([ //Creamos el contexto para poder realizar la consulta
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-type: application/json\r\n" .
@@ -474,10 +374,12 @@ class UserController //Clase controlador para acciones de User
                     'verify_peer_name' => false
                 ]
             ]);
+            //Obtenemos el resultado de la consulta por medio del json
             $data = file_get_contents("http://localhost/TPI_movies/backend/server/createDetailAlquiler.php", false, $stream);
-            echo $data;
+            //echo $data;
 
-            if($data != false) {
+            if($data != false) { //Si es verdadero
+                //Entonces se logro realizar la transaccion
                 echo '<script type="text/javascript">
                     alert("Alquiler pagado con éxito");
                     </script>';
@@ -486,7 +388,8 @@ class UserController //Clase controlador para acciones de User
                     window.location = "'.BASE_DIR.'User/rent";
                     </script>';
             }
-            else {
+            else { //Si es falso
+                //No se ha logrado realizar la transaccion
                 echo '<script type="text/javascript">
                     alert("No se ha logrado completar pago de alquiler");
                     </script>';
@@ -498,7 +401,7 @@ class UserController //Clase controlador para acciones de User
         }
     }
 
-    public function checkoutRent()
+    public function checkoutRent() //Metodo para realizar la renta
     {
         if($_GET) {
             $fechaAlquiler = $_GET["fechaI"];
@@ -552,7 +455,7 @@ class UserController //Clase controlador para acciones de User
         }
     }
 
-    public function checkoutBuy()
+    public function checkoutBuy() //Metodo para realizar la compra
     {
         if($_GET) {
             $cantidadVenta = $_GET["cantidad"];

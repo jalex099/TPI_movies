@@ -19,8 +19,7 @@ class Movie //Modelo de Movie
     public function array_sort_by(&$arrIni, $col, $order)
     {
         $arrAux = array();
-        foreach ($arrIni as $key=> $row)
-        {
+        foreach ($arrIni as $key => $row) {
             $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
             $arrAux[$key] = strtolower($arrAux[$key]);
         }
@@ -28,16 +27,18 @@ class Movie //Modelo de Movie
     }
     public function getFilter($data, $type, $order) //Metodo para devolver nombre de la vista de catalogo con filtro
     {
-        if($type == "Albabéticamente") { //Si es por orden alfabetico
-            if($order == "Ascendente") { //Si es por orden ascendente
+        if ($type == "Albabéticamente") { //Si es por orden alfabetico
+            if ($order == "Ascendente") { //Si es por orden ascendente
                 $this->array_sort_by($data, 'tituloPelicula', SORT_ASC);
-            }
-            else { //Si no por orden descendente
+            } else { //Si no por orden descendente
                 $this->array_sort_by($data, 'tituloPelicula', SORT_DESC);
             }
-        }
-        else if($type == "Popularidad") {
-
+        } else if ($type == "Popularidad") {
+            if ($order == "Ascendente") { //Si es por orden ascendente
+                $this->array_sort_by($data, 'tituloPelicula', SORT_ASC);
+            } else { //Si no por orden descendente
+                $this->array_sort_by($data, 'tituloPelicula', SORT_DESC);
+            }
         }
 
         return $data; //Retornar nombre del archivo

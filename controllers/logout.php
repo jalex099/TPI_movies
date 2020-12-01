@@ -15,4 +15,3 @@
     echo '<script type="text/javascript">
         window.location = "../User/login";
         </script>';
-?>

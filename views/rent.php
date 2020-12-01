@@ -45,9 +45,11 @@
                                         <td class="border-0 align-middle"><strong><?= $list["idAlquiler"]; ?></strong>
                                         </td>
                                         <td class="border-0 align-middle">
-                                            <strong><?= $list["fechaAlquiler"]; ?></strong></td>
+                                            <strong><?= $list["fechaAlquiler"]; ?></strong>
+                                        </td>
                                         <td class="border-0 align-middle">
-                                            <strong><?= $list["fechaEsperadaAlquiler"]; ?></strong></td>
+                                            <strong><?= $list["fechaEsperadaAlquiler"]; ?></strong>
+                                        </td>
                                         <td class="border-0 align-middle"><strong><?= $list["idCliente"]; ?></strong>
                                         </td>
                                         <td class="border-0 align-middle"><strong><?= $list["idPelicula"]; ?></strong>
@@ -57,21 +59,34 @@
                                             if($list["estadoAlquiler"] == 1) { 
                                         ?>
                                         <td class="border-0 align-middle">
-                                            <a href="<?= BASE_DIR; ?>User/return&id=<?= $list["idPelicula"]; ?>&idAlquiler=<?= $list["idAlquiler"]; ?>&fecha=<?= $list["fechaEsperadaAlquiler"]; ?>"><strong>Devolver</strong></a></td>
+                                            <a
+                                                href="<?= BASE_DIR; ?>User/return&id=<?= $list["idPelicula"]; ?>&idAlquiler=<?= $list["idAlquiler"]; ?>&fecha=<?= $list["fechaEsperadaAlquiler"]; ?>"><strong>Devolver</strong></a>
+                                        </td>
                                         <?php
                                             }
                                             else { 
                                         ?>
                                         <td class="border-0 align-middle">
-                                            <strong>Devuelto</strong></td>
+                                            <strong>Devuelto</strong>
+                                        </td>
                                         <?php
                                             }
                                         }
                                         else {
+                                            if($list["estadoAlquiler"] == 1) {
                                         ?>
                                         <td class="border-0 align-middle">
-                                            <strong><?= $list["estadoAlquiler"]; ?></strong></td>
-                                            <?php
+                                            <strong>Activo</strong>
+                                        </td>
+                                        <?php
+                                            }
+                                            else {
+                                        ?>
+                                        <td class="border-0 align-middle">
+                                            <strong>Devuelto</strong>
+                                        </td>
+                                        <?php
+                                            }
                                         }
                                         ?>
                                     </tr>

@@ -133,4 +133,3 @@ if(!empty($_POST)){ //Si el post no esta vacio
             </script>';
       }
 }
- ?>
