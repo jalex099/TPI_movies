@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2020 a las 02:42:52
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.2.32
+-- Tiempo de generación: 01-12-2020 a las 01:39:34
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_peliculas`
 --
-CREATE DATABASE IF NOT EXISTS `db_peliculas` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `db_peliculas`;
 
 -- --------------------------------------------------------
 
@@ -44,7 +42,7 @@ CREATE TABLE `tblalquileres` (
 
 INSERT INTO `tblalquileres` (`idAlquiler`, `fechaAlquiler`, `fechaEsperadaAlquiler`, `idCliente`, `idPelicula`, `estadoAlquiler`) VALUES
 (1, '2020-08-25', '2020-11-28', 1, 5, 0),
-(6, '2020-08-25', '2020-11-26', 1, 5, 1),
+(6, '2020-08-25', '2020-11-26', 1, 5, 0),
 (7, '2020-08-25', '2020-11-30', 1, 5, 1),
 (8, '2020-08-25', '2020-11-30', 1, 5, 1),
 (9, '2020-08-25', '2020-11-22', 1, 5, 1);
@@ -68,7 +66,9 @@ CREATE TABLE `tblclientes` (
 --
 
 INSERT INTO `tblclientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `correoCliente`, `contraseñaCliente`) VALUES
-(1, 'Enrique', 'Mendez', 'mendez@gmail.com', '1234');
+(1, 'Enrique', 'Mendez', 'mendez@gmail.com', '1234'),
+(2, 'Sophie', 'Aguilar', 'soph@gmail.com', '123'),
+(3, 'Ernesto', 'Herrera', 'errh@gmail.com', '1234');
 
 -- --------------------------------------------------------
 
@@ -83,6 +83,13 @@ CREATE TABLE `tbldetallealquiler` (
   `totalDetalleAlquiler` decimal(10,2) NOT NULL,
   `multaDetalleAlquiler` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbldetallealquiler`
+--
+
+INSERT INTO `tbldetallealquiler` (`idDetalleAlquiler`, `idAlquiler`, `fechaDevolucionDetalleAlquiler`, `totalDetalleAlquiler`, `multaDetalleAlquiler`) VALUES
+(1, 6, '2020-12-01', '15.00', '2.25');
 
 -- --------------------------------------------------------
 
@@ -128,7 +135,7 @@ INSERT INTO `tblpeliculas` (`idPelicula`, `tituloPelicula`, `descripcionPelicula
 (7, 'Manhattan Sin Salida', 'André Davis (Chadwick Boseman) es un policía de Nueva York que ve la oportunidad de redimir su pasado cuando ocho oficiales de la policía son asesinados durante un robo. Con ayuda de su compañera Frankie (Sienna Miller), inicia una brutal persecución con el fin de encontrar a los culpables y, por primera vez en la historia de Manhattan, la ciudad quedará blindada y en las próximas 24 horas nadie podrá entrar ni salir de la isla.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=12dJPKlWXMDtn2umbdcD83Tt8LgKafqWM', 38, '39.00', '16.00', 1),
 (8, 'La Posesión de Mary', 'David (Gary Oldman) es un humilde, luchador y experto marino que busca una vida mejor para su familia – su mujer, Sarah (Emily Mortiner) y sus dos hijas, la adolescente Lindsey (Stefanie Scott) y la pequeña Mary (Chloe Perrin). Tras quedar extrañamente prendado de un viejo barco de vela, cuya historia está sumida en el misterio, David convence a Sarah de que comprar el velero puede ser su billete a la tan ansiada prosperidad. Pero poco después de hacerse a la mar con él, extraños e inquietantes sucesos comienzan a aterrorizar a David y su familia, haciendo que se vuelvan unos contra otros. Cuando el barco se hace ingobernable, comienza a quedar terriblemente claro que la familia está siendo atraída hacia un mal aún mayor que les aguarda en la oscuridad del mar abierto.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1XJneh6EjrkIkZqAlQ7h1BohpTQLlCPIB', 35, '41.00', '18.00', 1),
 (9, 'Mortal (2020)', 'Erik es un joven mochilero estadounidense qye ha pasado toda su vida luchando contra unos extraordinarios poderes que nunca ha conseguido entender. Cuando es detenido por el estraño asesinato de un joven, su destino estará en manos de la psicóloga Christine, Erick se da cuenta de que ella es su única esperanza para poder escapar en busca de venganza. Mientras es perseguido, el joven entenderá cómo dominar y utilizar su magnífico don, a la vez que comienza a asumir la razón de su existencia.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=15MeXB-vttZ4IcaIn-5bMCkIGEOxYIX2Y', 37, '39.00', '15.00', 1),
-(10, 'El Vicio del Poder', 'El vicio del poder explora la historia real jamás revelada sobre cómo Dick Cheney (Christian Bale) un callado burócrata de Washington, acabó convirtiéndose en el hombre más poderoso del mundo como vicepresidente de los Estados Unidos durante el mandato de George W. Bush, con consecuencias en su país y el resto del mundo que aún se dejan sentir hoy en día', 'Drama', 'https://drive.google.com/uc?export=view&id=1lz6lhIKnArbj_DA_cwiLx3WeOf8AFNW4', 34, '38.00', '16.00', 1),
+(10, 'El Vicio del Poder', 'El vicio del poder explora la historia real jamás revelada sobre cómo Dick Cheney (Christian Bale) un callado burócrata de Washington, acabó convirtiéndose en el hombre más poderoso del mundo como vicepresidente de los Estados Unidos durante el mandato de George W. Bush, con consecuencias en su país y el resto del mundo que aún se dejan sentir hoy en día', 'Drama', 'https://drive.google.com/uc?export=view&id=1lz6lhIKnArbj_DA_cwiLx3WeOf8AFNW4', 34, '38.00', '16.00', 0),
 (11, 'Cómo Entrenar a tu Dragón 3', 'De DreamWorks Animation, llega una sorprendente historia de crecimiento, de cómo encontrar el coraje para enfrentar lo desconocido ... y sobre cómo, a pesar de todo, nunca debes rendirte.  Lo que comenzó como una difícil y estraña amistad entre un joven vikingo y un temible dragón Furia Nocturna se ha convertido en una épica aventura que ha recorrido sus vidas. Un nuevo capítulo de \"Cómo entrenar a tu dragón\",  en la que Hipo y Desdentao descubrirán finalmente su verdadero destino.', 'Accion', 'https://drive.google.com/uc?export=view&id=1IHQcpueZ3VrLdrMbNgvoOssw6tky5RXI', 33, '37.00', '15.00', 1),
 (12, 'Capitana Marvel', 'Ambientada en los años noventa, \"Capitana Marvel\" de Marvel Studios es una nueva aventura de una etapa nunca antes vista en la cronología del universo cinematográfico de Marvel.  Los Kree y los Skrulls, una raza de matamórficos, llevan en guerra durante generaciones. Carol Danvers \"Capitana Marvel\" forma parte de un grupo de élite de soldados Kree llamado \"Fuerza Estellar\" y no recuerda nada sobre su pasado. Durante una incursión de la \"Fuerza Estellar\", Carol es capturada y hecha prisionera por los Skrulls, que mediante una sofisticada tecnología obtinen una valiosa información de Carol que puede cambiar el curso de la guerra y que pone a la Tierra centro de la contienda.', 'Accion', 'https://drive.google.com/uc?export=view&id=1slauG0UlSO6pH7cvng8OWcze10QWxAFk', 29, '36.00', '14.00', 1),
 (13, 'La Llorona', 'La Llorona es una aparición aterradora. Está atrapada entre el Cielo y el Infierno en un destino terrible que ha sellado de su propia mano. Desde hace generaciones, la mera mención de su nombre causa terror en todo el mundo.  En vida, ahogó a sus propios hijos en un ataque de celos y se tiró al río después de ellos, mientras se retorcía de dolor.', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1XTf1enUEZqpmVzz8qwZUutY2AQL2-VvS', 31, '35.00', '15.00', 1),
@@ -148,7 +155,7 @@ INSERT INTO `tblpeliculas` (`idPelicula`, `tituloPelicula`, `descripcionPelicula
 (27, 'Los Últimos Días del Crimen', 'En un futuro no muy lejano, como respuesta final al terrorismo y al crimen, el gobierno de los Estados Unidos planea emitir una señal que haga imposible que alguien cometa actos ilegales a sabiendas. Graham Brick, un delincuente de poca monta, decide unirse a un famoso gánster y a una hacker de la Dark Web, para cometer un último gran golpe que pasará a la historia.  ‘Los últimos días del crimen’ está basada en la novela gráfica de Rick Remender y Greg Tocchini (Radical Publishing)', 'Accion', 'https://drive.google.com/uc?export=view&id=1LBgmBJjqJ9n34rZCImNk6yR_9HzEcgdd', 37, '35.00', '15.00', 2),
 (28, 'Voces (2020)', 'Sara, Daniel y su hijo de 9 años llegan a la casa en la que pretenden comenzar una nueva vida, sin saber que esa propiedad ha sido conocida desde siempre en los alrededores como \"la casa de las voces\". El niño, Eric, es el primero en advertir que tras cada puerta se ocultan extraños sonidos y se intuyen voces que parece que intentan comunicarse con la familia. Lo que achacan en principio a un producto de la imaginación de Eric se convierte rápidamente en una inquietante realidad también para sus padres. ¿Hay realmente voces en la casa? Y de ser así, ¿De dónde vienen? ¿Quiénes son? ¿Qué quieren?', 'Suspenso', 'https://drive.google.com/uc?export=view&id=1tddGnCwNMCw2pglNqiOEM2oAxzqD68U7', 36, '41.00', '18.00', 1),
 (29, 'Tyler Rake', 'Tyler Rake, un temerario mercenario del mercado negro, se embarca en la extracción más mortal de su carrera cuando se alista para rescatar al hijo secuestrado de un señor del crimen internacional encarcelado. Secuestrado por un capo de la mafia tailandesa, una misión ya de por sí complicada, se convierte en un desafío casi imposible que cambiará para siempre las vidas de Tyler y el chico.', 'Accion', 'https://drive.google.com/uc?export=view&id=13CIcpp3l4T5FK9O-wfF5lxr42mshVtAF', 39, '35.00', '17.00', 2),
-(30, 'La Bala Perdida (2020)', 'Un mecánico brillante con un pasado criminal de poca monta es acusado de homicidio, cuando su mentor es asesinado por policías corruptos. Ahora, deberá dar con el coche que contiene la única prueba de su inocencia: una bala.', 'Accion', 'https://drive.google.com/uc?export=view&id=1xjgyhkWEljLuW0vIhTWrAiM9Y476WQOL', 42, '39.00', '19.00', 1);
+(30, 'La Bala Perdida (2020)', 'Un mecánico brillante con un pasado criminal de poca monta es acusado de homicidio, cuando su mentor es asesinado por policías corruptos. Ahora, deberá dar con el coche que contiene la única prueba de su inocencia: una bala.', 'Accion', 'https://drive.google.com/uc?export=view&id=1xjgyhkWEljLuW0vIhTWrAiM9Y476WQOL', 41, '39.00', '19.00', 0);
 
 -- --------------------------------------------------------
 
@@ -165,6 +172,15 @@ CREATE TABLE `tblusuarios` (
   `rolUsuario` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tblusuarios`
+--
+
+INSERT INTO `tblusuarios` (`idUsuario`, `nombreUsuario`, `apellidoUsuario`, `correoUsuario`, `contraseñaUsuario`, `rolUsuario`) VALUES
+(1, 'Steve', 'Hernández', 'bsrh@gmail.com', '123', 'Administrador'),
+(2, 'Javier', 'Morales', 'jalex@gmail.com', '1234', 'Administrador'),
+(3, 'Vladimir', 'Argueta', 'vlad@gmail.com', '123', 'Administrador');
+
 -- --------------------------------------------------------
 
 --
@@ -173,11 +189,18 @@ CREATE TABLE `tblusuarios` (
 
 CREATE TABLE `tblventas` (
   `idVenta` int(11) NOT NULL,
-  `catidadVenta` int(11) NOT NULL,
+  `cantidadVenta` int(11) NOT NULL,
   `fechaVenta` date NOT NULL,
   `idCliente` int(11) NOT NULL,
   `idPelicula` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tblventas`
+--
+
+INSERT INTO `tblventas` (`idVenta`, `cantidadVenta`, `fechaVenta`, `idCliente`, `idPelicula`) VALUES
+(1, 2, '2020-11-29', 2, 5);
 
 --
 -- Índices para tablas volcadas
@@ -247,13 +270,13 @@ ALTER TABLE `tblalquileres`
 -- AUTO_INCREMENT de la tabla `tblclientes`
 --
 ALTER TABLE `tblclientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbldetallealquiler`
 --
 ALTER TABLE `tbldetallealquiler`
-  MODIFY `idDetalleAlquiler` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalleAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbllikes`
@@ -265,19 +288,19 @@ ALTER TABLE `tbllikes`
 -- AUTO_INCREMENT de la tabla `tblpeliculas`
 --
 ALTER TABLE `tblpeliculas`
-  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `tblusuarios`
 --
 ALTER TABLE `tblusuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tblventas`
 --
 ALTER TABLE `tblventas`
-  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
